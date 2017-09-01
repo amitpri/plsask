@@ -1,0 +1,279 @@
+@extends('layouts.mr.manage')
+
+@section('formname')
+
+<h2>Manage Group Profiles</h2>
+
+@stop
+
+@section('content_pagecss')
+
+<link rel="stylesheet" href="/admin/assets/vendor/select2/css/select2.css" />
+<link rel="stylesheet" href="/admin/assets/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
+ 
+@stop
+
+@section('content_pagejs')
+
+<script src="/admin/assets/vendor/select2/js/select2.js"></script>  
+
+@stop
+
+@section('content_examplejs')
+ 
+<script src="/toastr/toastr.min.js"></script> 
+<link href="/toastr/toastr.min.css" rel="stylesheet" type="text/css">
+
+@stop
+
+@section('content_page')
+
+<div id="mraddclinicdoctor">
+	<div class="row">
+
+		<div class="col-md-12">
+			<div class="row">
+
+				<div class="col-md-12 col-lg-12 col-xl-12">
+					<section class="panel">
+						<div class="panel-body">
+
+							<h2 class="text-weight-semibold mt-none text-center">{{ $groups->name }}</h2> 					 			
+						</div>
+					</section>
+				</div> 
+
+			</div>
+		</div>
+	</div>	 
+
+	<div class="row">
+		<div class="col-lg-12 col-md-12">
+			<section class="panel"> 
+				<header class="panel-heading">
+					<div class="panel-actions">
+						<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a> 
+					</div>
+			
+					<h2 class="panel-title">Available Profiles</h2>
+				</header>
+				<div class="panel-body">
+
+					<div class="row"> 
+						<div class="col-sm-3 pull-right">							
+							 <form id="search">
+							    <input type="text" class="form-control " placeholder="Search Available Profiles" name="query" v-model="searchquery1" @keyup="filteredprofiles1" >
+							  </form>
+						</div>
+					</div>
+					<table class="table table-bordered table-striped mb-none" id="datatable-editable">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Phone</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody> 
+							<tr v-for="groupprofile_avail in groupprofile_avails" data-item-id="">
+								<td class="id">@{{ groupprofile_avail.id }}</td>
+								
+								<td class="doctor">@{{ groupprofile_avail.name }}</td>
+								 
+								<td class="speciality">@{{ groupprofile_avail.emailid }}</td> 
+								
+								<td class="details">@{{ groupprofile_avail.phone }}</td>	
+								 
+								<td class="actions">									
+									<a @click="addprofile(groupprofile_avail)" href="#" class="on-default edit-row"><i class="fa fa-plus"></i></a> 
+
+								</td>
+							</tr> 
+						</tbody>
+					</table>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-12 col-md-12">
+			<section class="panel">
+				<header class="panel-heading">
+					<div class="panel-actions">
+						<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a> 
+					</div>
+			
+					<h2 class="panel-title">Profiles added group<b> {{ $groups->name }}</b></h2>
+				</header>
+				<div class="panel-body">
+
+					<div class="row"> 
+						<div class="col-sm-3 pull-right">							
+							 <form id="search">
+							    <input type="text" class="form-control " placeholder="Search Added Profiles" name="query" v-model="searchquery2"  @keyup="filteredprofiles2" >
+							  </form>
+						</div>
+					</div>
+					<table class="table table-bordered table-striped mb-none" id="datatable-editable">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Phone</th> 
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>  
+							<tr v-for="groupprofile in groupprofiles">
+								<td class="id">@{{ groupprofile.id }}</td>
+								
+								<td  class="doctor">@{{ groupprofile.name }}</td> 
+								
+								<td  class="details">@{{ groupprofile.emailid }}</td>	
+								 
+								<td  class="details">@{{ groupprofile.phone }}</td>	
+								 
+								<td class="actions">	 			 
+									<a  @click="deleteprofile(groupprofile)" href="#" class="on-editing cancel-row"><i class="fa fa-times"></i></a> 
+								</td>
+							</tr> 
+						</tbody>
+					</table>
+				</div>
+			</section> 
+		</div>
+	</div>
+</div>	
+
+<script>
+	
+new Vue({
+
+	el : '#mraddclinicdoctor',
+	data : {
+		id:"",
+		groupprofile: "",
+		groupprofiles: [],
+		groupprofile_avail: "",
+		groupprofile_avails: [],
+		doctor: "",
+		doctors: [],
+		disableaddbutton: false,
+		inpId: "",
+		inpGroupId: "{!! $groups->id !!}",
+		inpDoctorid: "",
+		inpDoctor: "",
+		inpSpeciality: "",
+		inpDetails: "",  
+		inpeditname: "", 
+		searchquery1: "",
+		searchquery2: "",
+	},
+	mounted:function(){
+
+		axios.get('/groups/' +  this.inpGroupId + '/addprofile/defaultavailable').then(response => {this.groupprofile_avails = response.data});
+
+		axios.get('/groups/' +  this.inpGroupId + '/addprofile/defaultadded').then(response => {this.groupprofiles = response.data});
+
+
+	},
+	methods:{
+
+		addprofile:function(profile){
+
+			var index = this.groupprofile_avails.indexOf(profile);
+				
+				axios.get('/groups/' +  this.inpGroupId + '/addprofile/add' ,{
+					params: {
+
+				      	id: this.groupprofile_avails[index].id, 
+				      	name: this.groupprofile_avails[index].name, 
+				      	 
+				    	}
+
+					})
+					.then(respose => { 
+
+						this.groupprofile_avails.splice(index,1);					
+
+						this.groupprofiles.unshift({ 
+
+							id: respose.data.id,
+							name : respose.data.name, 
+							phone : respose.data.phone,
+							emailid : respose.data.emailid, 
+
+						});   
+
+			});
+
+		}, 
+		deleteprofile:function(row){
+			var rowdelete = this.groupprofiles.indexOf(row);  
+
+			axios.get('/groups/' +  this.inpGroupId + '/addprofile/delete' ,{
+					params: {
+
+				      		deleteid: this.groupprofiles[rowdelete].id, 
+				      	 
+				    	}
+					}).then(respose => { 
+
+						this.groupprofiles.splice(rowdelete,1);
+
+						this.groupprofile_avails.unshift({ 
+
+							id: respose.data.id,
+							name : respose.data.name, 
+							phone : respose.data.phone,
+							emailid : respose.data.emailid, 
+
+						});
+ 
+				});
+ 
+
+		}, 
+		filteredprofiles1:function(){
+
+			axios.get('/groups/' +  this.inpGroupId + '/addprofile/filtered1' ,{
+
+					params: {
+
+				      	profile : this.searchquery1, 
+
+				    	}
+
+					})
+				.then(response => {this.groupprofile_avails = response.data});
+		
+ 
+		},
+		filteredprofiles2:function(){
+
+			axios.get('/groups/' +  this.inpGroupId + '/addprofile/filtered2' ,{
+
+					params: {
+
+				      	profile : this.searchquery2, 
+
+				    	}
+
+					})
+				.then(response => {this.groupprofiles = response.data});
+		
+ 
+		},
+	}
+
+})
+
+
+</script>
+
+ 
+@stop
