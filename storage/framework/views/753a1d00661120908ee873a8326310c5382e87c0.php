@@ -64,9 +64,10 @@
 					</header>
 					<div class="panel-body">
 						<div class="table-responsive">
-							<div v-show="showFeedbackSpinner" class="text-center"><p><b>Feedback Loading. Please Wait......</b></p></div>
+							<div v-show="showFeedbackSpinner" class="text-center"><img src="/images/ajax_loader.gif"></div>
 							<table v-show="showFeedback" class="table table-striped mb-none">
-								<thead>
+								<p v-if="reviews.length < 1" class="text-center"><b>No Feedback</b></p>
+								<thead v-if="reviews.length > 0">
 									<tr>
 										<th>#</th>
 										<th>Feedbacks</th> 

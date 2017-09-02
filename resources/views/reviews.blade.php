@@ -6,7 +6,11 @@
 
 @stop 
  
-
+<style>
+	[v-cloak] {
+	  display: none;
+	}
+</style>
 @section('content_page')
 
 
@@ -16,9 +20,9 @@
 			<div class="col-md-12 col-lg-12 col-xl-12">
 				<section class="panel">
 
-					<div class="panel-body">
+					<div class="panel-body" v-cloak>
 						<div class="row"> 
-							<div class="col-sm-3 pull-right">							
+							<div class="col-sm-3 pull-right" v-if="reviews.length > 0">							
 								 <form id="search">
 								    <input type="text" class="form-control " placeholder="Search Topics" name="query" v-model="searchquery"  @keyup="filteredtopics" >
 								  </form>
@@ -27,7 +31,8 @@
 						<div class="table-responsive">
 
 							<table class="table table-striped mb-none">
-								<thead>
+								<p v-if="reviews.length < 1" class="text-center"><b>No Review receieved</b></p>
+								<thead v-if="reviews.length >= 1">
 									<tr>
 										<th class="col-md-1">#</th>
 										<th class="col-md-9">Messages</th> 

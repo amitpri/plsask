@@ -140,9 +140,7 @@
 
 			</div> 
 
-		</section>
-
- 
+		</section> 
 
  
  		<script>

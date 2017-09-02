@@ -13,8 +13,12 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content_page'); ?>
-
-<div class="row" id="mrforum">
+<style>
+	[v-cloak] {
+	  display: none;
+	}
+</style>
+<div class="row" id="topics">
 	<div class="col-lg-12 col-md-12">
 
 		<section class="panel">
@@ -25,7 +29,7 @@
 
 			</header>
 
-			<div v-if="showNew" class="panel-body">
+			<div v-if="showNew" class="panel-body" v-cloak>
 				<div class="panel-actions">
 					<a href="#" class="panel-action panel-action-dismiss" @click="showNewTopic"></a>
 				</div>
@@ -74,7 +78,7 @@
 
 			</div> 
 
-			<div v-if="showEdit" class="panel-body">
+			<div v-if="showEdit" class="panel-body" v-cloak>
 				<div class="panel-actions">
 					<a href="#" class="panel-action panel-action-dismiss" @click="showEditTopic"></a>
 				</div>
@@ -126,7 +130,7 @@
 
 			<h4 v-if="showMy && myTopics.length > 0" class="center text-color-light "><strong>My Topics</strong></h4>
 
-			<div v-if="showMy && myTopics.length > 0" class="panel-body">
+			<div v-if="showMy && myTopics.length > 0" class="panel-body" v-cloak>
 
 				<div class="panel-actions">
 					<a href="#" class="panel-action panel-action-dismiss" @click="showMyTopic"></a>
@@ -164,9 +168,15 @@
 				</div>
 			</div>
 
-			<h4 v-if="myTopics.length < 1" class="center text-color-light ">No Topics Available. Please create one</h4>
+			<div class="panel-body" v-if="myTopics.length < 1"  v-cloak> 	 
 
-		</section> 	
+				<h5 v-if="myTopics.length < 1" class="center text-color-light " v-cloak>No Topic Available. Please create one</h4>
+	 
+			</div>	
+
+		</section> 
+
+		
 
 	</div>
 </div>
@@ -174,7 +184,7 @@
 <script>
 	
 	new Vue({
-		el: '#mrforum',
+		el: '#topics',
 		data: {
 
 			showNew : false,

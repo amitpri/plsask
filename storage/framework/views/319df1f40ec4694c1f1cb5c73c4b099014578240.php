@@ -31,12 +31,16 @@
 
 
 <?php $__env->stopSection(); ?>
-
+<style>
+	[v-cloak] {
+	  display: none;
+	}
+</style>
 <?php $__env->startSection('content_page'); ?>
 
 <div id="groups">   
 
-	<div class="row">
+	<div class="row" >
 		<div class="col-lg-12 col-md-12">
 			<section class="panel">
 				<header class="panel-heading">
@@ -46,17 +50,23 @@
 						
 					</div>	
 				</header>
-				<div class="panel-body">
+				<div class="panel-body" v-cloak>
 
 					<div class="row"> 
-						<div class="col-sm-3 pull-right">							
+						<div v-if="flg_name" class="col-sm-6">	
+							<p class="text-center bg-danger" v-cloak><b>Please enter Name</b></p>
+						</div>
+						<div class="col-sm-3 pull-right" v-if="groups.length > 0">							
 							 <form id="search">
 							    <input type="text" class="form-control " placeholder="Search Groups" name="query" v-model="searchquery"  @keyup="filteredgroups" >
 							  </form>
 						</div>
 					</div>
-					<table class="table table-bordered table-striped mb-none" id="datatable-editable">
-						<thead>
+					<table class="table table-bordered table-striped mb-none" >
+
+						<p v-if="groups.length < 1" class="text-center"><b>No Group Added</b></p>
+
+						<thead v-if="groups.length >= 1">
 							<tr>
 								<th>Id</th>
 								<th>Name</th>
@@ -102,6 +112,7 @@
 			group: "",	
 			disableaddbutton: false, 
 			searchquery: "",
+			flg_name: false,
 		},
 		mounted :function(){
 
@@ -167,22 +178,31 @@
 			
 				roweditsave = this.groups.indexOf(row);
 
-				axios.get('/groups/groupsave' ,{
-						params: {
+				if( this.groups[roweditsave].name == null ){
+					
+					this.flg_name = true; 
 
-				      		id: this.groups[roweditsave].id, 
-				      		name: this.groups[roweditsave].name, 
-				      		notes: this.groups[roweditsave].notes, 
-				      	 
-					    	}
-						}).then(response => { 
+				}else{
 
-							row.edittrue = !row.edittrue;
-							row.editfalse = !row.editfalse;
+					this.flg_name = false;
 
-					})
-				
-				this.disableaddbutton= false;
+					axios.get('/groups/groupsave' ,{
+							params: {
+
+					      		id: this.groups[roweditsave].id, 
+					      		name: this.groups[roweditsave].name, 
+					      		notes: this.groups[roweditsave].notes, 
+					      	 
+						    	}
+							}).then(response => { 
+
+								row.edittrue = !row.edittrue;
+								row.editfalse = !row.editfalse;
+
+						})
+					
+					this.disableaddbutton= false;
+				}
 
 			},
 			canceleditrow:function(row){

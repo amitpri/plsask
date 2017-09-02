@@ -42,18 +42,27 @@ class ShowtopicsController extends Controller
     public function show($id)
     {
  
-        $topic = Topic::where('id','=',$id)->first(['id','topic','details','type']);
+        $topic = Topic::where('id','=',$id)->where('type','=','public')->first(['id','topic']);
 
         return view('showtopic',compact('topic'));
    
     } 
 
+    public function showdetails(Request $request)
+    {
+ 
+        $id = $request->id; 
+
+        $topic = Topic::where('id','=',$id)->where('type','=','public')->first(['id','topic','details','type']);
+        
+        return $topic;
+    }
+
     public function messages(Request $request)
     {   
-        $inpid = $request->id;
-        $inptopic = $request->topic;
+        $inpid = $request->id; 
 
-        $topic = Feedback::where('topic_id','=',$inpid)->where('topic','=',$inptopic)->get(['id','topic','review','created_at']); 
+        $topic = Feedback::where('topic_id','=',$inpid)->get(['id','topic','review','created_at']); 
 
         return $topic;
    

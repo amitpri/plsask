@@ -35,14 +35,17 @@
 @stop
 
 @section('content_page')
-
+<style>
+	[v-cloak] {
+	  display: none;
+	}
+</style>
 <div id="mrprofiles">   
 
 	<div class="row">
 		<div class="col-lg-12 col-md-12">
 			<section class="panel">
-				<header class="panel-heading">
-					
+				<header class="panel-heading">					
 					 <div class="mb-md">
 						<button @click="addprofilerow" :disabled="disableaddbutton" id="addToTable" class="btn btn-primary">Add Profile <i class="fa fa-plus"></i></button>
 
@@ -50,20 +53,23 @@
 						
 					</div>	
 				</header>
-				<div class="panel-body">
+				<div class="panel-body" v-cloak>
 
 					<div class="row"> 
 						<div v-if="flg_email" class="col-sm-6">	
-							<p class="text-center bg-danger"><b>Please enter email id</b></p>
+							<p class="text-center bg-danger" v-cloak><b>Please enter email id</b></p>
 						</div>
-						<div class="col-sm-3 pull-right">							
+						<div class="col-sm-3 pull-right" v-if="profiles.length > 0">							
 							 <form id="search">
-							    <input type="text" class="form-control " placeholder="Search Profiles" name="query" v-model="searchquery"  @keyup="filteredprofiles" >
+							    <input type="text" class="form-control " placeholder="Search Profiles" name="query" v-model="searchquery" @keyup="filteredprofiles" >
 							  </form>
 						</div>
 					</div>
-					<table class="table table-bordered table-striped mb-none" id="datatable-editable">
-						<thead>
+					<table class="table table-bordered table-striped mb-none"  > 
+						 
+						<p v-if="profiles.length < 1" class="text-center"><b>No Profile Added</b></p>
+					 
+						<thead v-if="profiles.length >= 1">
 							<tr>
 								<th>Id</th>
 								<th>Name</th>
@@ -192,7 +198,9 @@
 					this.flg_email = true; 
 
 				}else{
+					
 					this.flg_email = false;
+					
 					axios.get('/profiles/profilesave' ,{
 							params: {
 

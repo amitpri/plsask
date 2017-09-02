@@ -41,6 +41,7 @@
 					<input type="file" id="upload2">
 					<br/>
 					<button class="btn btn-success upload-result2">Upload Image</button>
+					<a class="btn btn-success upload-result2" href="/profile">Done</a>
 		  		</div>
 		  		<meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 		  		<div class="col-md-4" style="">

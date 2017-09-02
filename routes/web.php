@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'HomeController@dashboard'); 
 
 Route::get('/profile', 'HomeController@profile');
-Route::get('/profile/default', 'HomeController@profiledefault');
+Route::get('/profile/profiledefault', 'HomeController@profiledefault');
 Route::get('/profile/editprofile/{param}', 'HomeController@editprofile'); 
 Route::post('/profile/imageupload', 'HomeController@imageupload'); 
 
@@ -86,6 +86,7 @@ Route::get('/showtopics/default', 'ShowtopicsController@default');
 Route::get('/showtopics/filtered', 'ShowtopicsController@filtered');
 Route::get('/showtopics/messages', 'ShowtopicsController@messages');
 Route::get('/showtopics/postfeedback', 'ShowtopicsController@postfeedback'); 
+Route::get('/showtopics/showdetails', 'ShowtopicsController@showdetails'); 
 Route::get('/showtopics/{id}', 'ShowtopicsController@show');
 
 Route::get('/confirm/{key}', 'IndexController@confirm');

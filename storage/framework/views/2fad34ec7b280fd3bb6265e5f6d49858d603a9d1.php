@@ -46,8 +46,12 @@
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
-            } 
-        </style>
+            }  
+
+			[v-cloak] {
+			  display: none;
+			}
+		</style>
 
 	</head>
 	<body>
@@ -74,17 +78,21 @@
 
 				<section role="main" class="content-body">
 					<div class="row">
-						<div class="col-lg-12 col-md-12">
+						<div class="col-lg-12 col-md-12" v-cloak>
 						
-							 <h2 class="center text-color-light "><strong><?php echo e($topic->topic); ?></strong></h2>
-							 <h4 class="center text-color-light "><?php echo e($topic->details); ?></h4>
+							 <h2 class="center text-color-light "><strong>{{ inpTopic }}</strong></h2>
+							 <h4 class="center text-color-light ">{{ inpDetail }}</h4>
 
 							 <button @click="addfeedback"  id="addToTable" class="btn btn-primary">Add Feedback <i class="fa fa-plus"></i></button>
 
 						</div>
 					</div>
-					<div v-if="shownewfeedback"   class="panel-body"> 
+					<div v-if="shownewfeedback"   class="panel-body" v-cloak> 
 						<h4 class="center text-color-light"><strong>Your Feedback</strong></h4>
+
+						<div v-if="flg_name" class="col-sm-6">	
+							<p class="text-center bg-danger" v-cloak><b>Please enter email id</b></p>
+						</div>
 
 						<div class="panel-body">
 							<form>  					
@@ -171,21 +179,37 @@
 				data : {
 					id:"", 
 					inpId: "<?php echo $topic->id; ?>",
-					inpTopic: "<?php echo $topic->topic; ?>",
-					inpTopics: "",
+					inpTopic: "",
+					inpDetail: "", 
 					feedback: "",
 					feedbacks: [],
 					inpKey:"", 
 					shownewfeedback: false,
 					inpFeedback : "",
+					flg_name : false,
 				},
 				mounted:function(){
+
+					axios.get('/showtopics/showdetails',{
+					params: {
+
+				      	id: this.inpId, 
+				      	 
+				    	}
+
+					})
+					.then(response => {
+
+						this.inpTopic  = response.data.topic;
+						this.inpId = response.data.id;
+						this.inpDetail = response.data.details;
+
+					});
 
 					axios.get('/showtopics/messages',{
 					params: {
 
-				      	id: this.inpId,
-				      	topic:  this.inpTopic,
+				      	id: this.inpId, 
 				      	 
 				    	}
 
@@ -213,37 +237,56 @@
 					savefeedback:function(e){
 
 
-						var c = confirm("Sure to Submit? Please recheck the content!!");
+						if( this.inpFeedback == null ){
+					
+							this.flg_name = true; 
 
-						if( c == true){
+						}else{
 
-							axios.get('/showtopics/postfeedback' ,{
-								params: {
+							alert(this.inpFeedback);
+							
+							this.flg_name = false;
 
-							      		feedback: this.inpFeedback,
-							      		topicid : this.inpId,
-							      		topicname : this.inpTopic, 
-							      	 
-							    	}
-								}).then(response => { 
+							var c = confirm("Sure to Submit? Please recheck the content!!");
 
-									this.feedbacks.unshift({
- 
-										review : response.data.review, 
-										created_at : response.data.created_at, 
+							if( c == true){
 
-									})
+								axios.get('/showtopics/postfeedback' ,{
+									params: {
 
-									toastr.options = {
-					            
-							            "timeOut": "1000",
-							        };
+								      		feedback: this.inpFeedback,
+								      		topicid : this.inpId,
+								      		topicname : this.inpTopic, 
+								      	 
+								    	}
+									}).then(response => { 
 
-									toastr.success('Thank You!!Your Feedback is Posted!!',{ fadeAway: 1 });	
-			 
-							});
+										this.feedbacks.unshift({
+	 
+											review : response.data.review, 
+											created_at : response.data.created_at, 
+
+										})
+
+										this.feedback = "";
+										this.shownewfeedback = false; 
+
+
+										toastr.options = {
+						            
+								            "timeOut": "1000",
+								        };
+
+										toastr.success('Thank You!!Your Feedback is Posted!!',{ fadeAway: 1 });	
+				 
+								});
+
+							}
 
 						}
+
+
+					
 
 
 

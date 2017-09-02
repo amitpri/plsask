@@ -141,9 +141,7 @@
 
 			</div> 
 
-		</section>
-
- 
+		</section> 
 
  
  		<script>

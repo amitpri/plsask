@@ -18,7 +18,11 @@
 
 @stop
 
-
+<style>
+	[v-cloak] {
+	  display: none;
+	}
+</style>
 @section('content_page')
  
  
@@ -27,7 +31,7 @@
 
 		<section class="panel">
 			<div class="panel-body">
-				<div class="thumb-info mb-md">
+				<div class="thumb-info mb-md" v-cloak>
 					<img :src="'/uploadimage/' + inpId + '-' + inpEmail + '-profile.png'" class="rounded img-responsive"  >
 					<div class="thumb-info-title">
 						<span class="thumb-info-inner">@{{ inpName }}</span>
@@ -37,8 +41,8 @@
 
 
 				<hr class="dotted short">
-
-				<h6 class="text-muted">About</h6>
+ 
+				<a href="/mypictures">Image Upload</a>
 				<p>@{{ inpDetails}}</p>
 				<div class="clearfix">
 					<a class="text-uppercase text-muted pull-right" href="#">(View Profile)</a>
@@ -139,8 +143,8 @@
 							</div>
 							<div class="panel-footer">
 								<div class="row">
-									<div class="col-md-12 col-md-offset-3">
-										<button type="submit" class="btn btn-primary">Submit</button> 
+									<div class="col-md-12 col-md-offset-3"> 
+										<a href="/dashboard" class="btn btn-primary">Submit</a>
 									</div>
 								</div>
 							</div>								
