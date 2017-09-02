@@ -73,7 +73,7 @@ class RegisterController extends Controller
         $name = $data['name'];
         $confirmation_code = str_random(30);
           
-        $this->dispatch(new Newregistration($tomail, $name, $confirmation_code));
+    //    $this->dispatch(new Newregistration($tomail, $name, $confirmation_code));
 
         return User::create([
             'name' => $name,
