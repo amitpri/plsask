@@ -19,11 +19,10 @@
 
 <?php $__env->startSection('content_page'); ?>
   
-  <script src="http://demo.itsolutionstuff.com/plugin/croppie.js"></script> 
-  <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/croppie.css">
+  <script src="js/croppie.js"></script> 
+  <link rel="stylesheet" href="css/croppie.css">
 
  
-
 <div id="mainprofile">
 
 	<h4 class="mb-xlg">Main Profile Picture Upload</h4>							 	 
