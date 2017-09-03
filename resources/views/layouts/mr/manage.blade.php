@@ -115,7 +115,7 @@
 						</li>
 						<script>
 
-								var socket = io();	
+								var socket = io('http://212.47.247.43:3000');	
 								notifications = new Vue({
 									el:'#notifications',
 									data:{
