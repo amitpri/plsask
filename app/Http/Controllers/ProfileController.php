@@ -116,13 +116,13 @@ class ProfileController extends Controller
     public function filtered(Request $request)
     {
 
-        $profileinput = $request->profile;
+        $profileinput = $request->emailid;
         $loggedinid = Auth::user()->id;
         
         $profiles = Profile::
                 where('user_id', '=' , $loggedinid)->
                 where('status', '=' , 1)-> 
-                where('name', 'like' , "%$profileinput%")->
+                where('emailid', 'like' , "%$profileinput%")->
                 get(['id','name', 'emailid', 'phone', 'notes']);
  
         foreach ($profiles as $profile) {

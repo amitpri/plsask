@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('/topicname', 'HomeController@topicname'); 
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -71,6 +74,8 @@ Route::get('/topics/senddefault', 'TopicController@senddefault');
 Route::get('/reviews', 'HomeController@reviews');
 Route::get('/reviews/default', 'HomeController@reviewsdefault');
 Route::get('/reviews/filtered', 'HomeController@reviewsfiltered');
+Route::get('/reviews/topics/{id}', 'HomeController@reviewstopics'); 
+Route::get('/reviewstopics/default', 'HomeController@reviewstopicsdefault');
 
 Route::get('/feedback/default', 'FeedbackController@feedbackdefault');
 Route::get('/feedback/draftfeedback', 'FeedbackController@draftfeedback');
@@ -87,6 +92,7 @@ Route::get('/showtopics/filtered', 'ShowtopicsController@filtered');
 Route::get('/showtopics/messages', 'ShowtopicsController@messages');
 Route::get('/showtopics/postfeedback', 'ShowtopicsController@postfeedback'); 
 Route::get('/showtopics/showdetails', 'ShowtopicsController@showdetails'); 
+
 Route::get('/showtopics/{id}', 'ShowtopicsController@show');
 
 Route::get('/confirm/{key}', 'IndexController@confirm');

@@ -6,18 +6,7 @@
 
 @stop
 
-@section('content_pagecss')
-
-<link rel="stylesheet" href="/admin/assets/vendor/select2/css/select2.css" />
-<link rel="stylesheet" href="/admin/assets/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
  
-@stop
-
-@section('content_pagejs')
-
-<script src="/admin/assets/vendor/select2/js/select2.js"></script>  
-
-@stop
 
 @section('content_examplejs')
  
@@ -38,7 +27,8 @@
 					<section class="panel">
 						<div class="panel-body">
 
-							<h2 class="text-weight-semibold mt-none text-center">{{ $groups->name }}</h2> 					 			
+							<h2 class="text-weight-semibold mt-none text-center">{{ $groups->name }}</h2> 
+							<h4 class="text-weight-semibold mt-none text-center">{{ $groups->notes }}</h4> 					 			
 						</div>
 					</section>
 				</div> 
@@ -46,6 +36,11 @@
 			</div>
 		</div>
 	</div>	 
+
+	<div class="row text-center">
+		<p>You need to add all the profiles to this group whom you want feedback from for this topic. Please click on <i class="fa fa-plus"></i> to add the profile to your group</p>
+		 
+	</div>
 
 	<div class="row">
 		<div class="col-lg-12 col-md-12">
@@ -55,21 +50,20 @@
 						<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a> 
 					</div>
 			
-					<h2 class="panel-title">Available Profiles</h2>
+					<h2 class="panel-title">Available Profiles to Add</h2>
 				</header>
 				<div class="panel-body">
 
 					<div class="row"> 
 						<div class="col-sm-3 pull-right">							
 							 <form id="search">
-							    <input type="text" class="form-control " placeholder="Search Available Profiles" name="query" v-model="searchquery1" @keyup="filteredprofiles1" >
+							    <input type="text" class="form-control " placeholder="Search Available Profiles using Email" name="query" v-model="searchquery1" @keyup="filteredprofiles1" >
 							  </form>
 						</div>
 					</div>
 					<table class="table table-bordered table-striped mb-none" id="datatable-editable">
 						<thead>
-							<tr>
-								<th>Id</th>
+							<tr> 
 								<th>Name</th>
 								<th>Email</th>
 								<th>Phone</th>
@@ -77,8 +71,7 @@
 							</tr>
 						</thead>
 						<tbody> 
-							<tr v-for="groupprofile_avail in groupprofile_avails" data-item-id="">
-								<td class="id">@{{ groupprofile_avail.id }}</td>
+							<tr v-for="groupprofile_avail in groupprofile_avails" data-item-id=""> 
 								
 								<td class="doctor">@{{ groupprofile_avail.name }}</td>
 								 
@@ -113,14 +106,13 @@
 					<div class="row"> 
 						<div class="col-sm-3 pull-right">							
 							 <form id="search">
-							    <input type="text" class="form-control " placeholder="Search Added Profiles" name="query" v-model="searchquery2"  @keyup="filteredprofiles2" >
+							    <input type="text" class="form-control " placeholder="Search Added Profiles using Email" name="query" v-model="searchquery2"  @keyup="filteredprofiles2" >
 							  </form>
 						</div>
 					</div>
 					<table class="table table-bordered table-striped mb-none" id="datatable-editable">
 						<thead>
-							<tr>
-								<th>Id</th>
+							<tr> 
 								<th>Name</th>
 								<th>Email</th>
 								<th>Phone</th> 
@@ -128,8 +120,7 @@
 							</tr>
 						</thead>
 						<tbody>  
-							<tr v-for="groupprofile in groupprofiles">
-								<td class="id">@{{ groupprofile.id }}</td>
+							<tr v-for="groupprofile in groupprofiles"> 
 								
 								<td  class="doctor">@{{ groupprofile.name }}</td> 
 								
@@ -146,6 +137,10 @@
 				</div>
 			</section> 
 		</div>
+	</div>
+
+	<div class="row  text-center">
+		<a href="/groups" class="btn btn-primary">Done Adding</a>
 	</div>
 </div>	
 
@@ -244,7 +239,7 @@ new Vue({
 
 					params: {
 
-				      	profile : this.searchquery1, 
+				      	emailid : this.searchquery1, 
 
 				    	}
 
@@ -259,7 +254,7 @@ new Vue({
 
 					params: {
 
-				      	profile : this.searchquery2, 
+				      	emailid : this.searchquery2, 
 
 				    	}
 

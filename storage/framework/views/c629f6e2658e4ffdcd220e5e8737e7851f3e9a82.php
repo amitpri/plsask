@@ -4,34 +4,6 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php $__env->startSection('content_pagecss'); ?>
-
-<link rel="stylesheet" href="/admin/assets/vendor/select2/css/select2.css" />
-<link rel="stylesheet" href="/admin/assets/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" /> 
-
-
-<?php $__env->stopSection(); ?>
-
-<?php $__env->startSection('content_pagejs'); ?>
-
-
-<script src="/admin/assets/vendor/jquery-validation/jquery.validate.js"></script>
-<script src="/admin/assets/vendor/select2/js/select2.js"></script> 
-<script src="https://cdn.jsdelivr.net/vee-validate/2.0.0-rc.3/vee-validate.min.js"></script>
-
-
-<?php $__env->stopSection(); ?>
-
-<?php $__env->startSection('content_examplejs'); ?>
-
-<script src="/admin/assets/javascripts/forms/examples.validation.js"></script>
-
-<script src="/toastr/toastr.min.js"></script> 
-<link href="/toastr/toastr.min.css" rel="stylesheet" type="text/css">
-
-
-<?php $__env->stopSection(); ?>
-
 <?php $__env->startSection('content_page'); ?>
 <style>
 	[v-cloak] {
@@ -47,7 +19,7 @@
 					 <div class="mb-md">
 						<button @click="addprofilerow" :disabled="disableaddbutton" id="addToTable" class="btn btn-primary">Add Profile <i class="fa fa-plus"></i></button>
 
-						<a href="/profiles/upload" class="btn btn-primary">Upload Profile <i class="fa fa-plus"></i></a>
+						<a href="/profiles/upload" class="btn btn-primary">Upload Profile <i class="fa fa-upload"></i></a>
 						
 					</div>	
 				</header>
@@ -57,19 +29,18 @@
 						<div v-if="flg_email" class="col-sm-6">	
 							<p class="text-center bg-danger" v-cloak><b>Please enter email id</b></p>
 						</div>
-						<div class="col-sm-3 pull-right" v-if="profiles.length > 0">							
+						<div class="col-sm-3 pull-right"  >							
 							 <form id="search">
-							    <input type="text" class="form-control " placeholder="Search Profiles" name="query" v-model="searchquery" @keyup="filteredprofiles" >
+							    <input type="text" class="form-control " placeholder="Search Profiles by Email" name="query" v-model="searchquery" @keyup="filteredprofiles" >
 							  </form>
 						</div>
 					</div>
 					<table class="table table-bordered table-striped mb-none"  > 
 						 
-						<p v-if="profiles.length < 1" class="text-center"><b>No Profile Added</b></p>
+						<p v-if="profiles.length < 1" class="text-center"><b>No Profile Available</b></p>
 					 
 						<thead v-if="profiles.length >= 1">
-							<tr>
-								<th>Id</th>
+							<tr> 
 								<th>Name</th>
 								<th>Email Id</th>
 								<th>Phone</th>
@@ -78,8 +49,7 @@
 							</tr>
 						</thead>
 						<tbody>  
-							<tr v-for="profile in profiles">
-								<td class="id">{{ profile.id }}</td>
+							<tr v-for="(profile,index) in profiles"> 
 								
 								<td v-show="profile.editfalse" class="doctor">{{ profile.name }}</td>
 								<td v-show="profile.edittrue" class="doctor">
@@ -252,7 +222,7 @@
 
 						params: {
 
-					      	profile : this.searchquery, 
+					      	emailid : this.searchquery, 
 
 					    	}
 

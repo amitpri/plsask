@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\User;
 use App\Setting;
+use App\Topic;
 use App\Feedback;
 use App\Dashboard;
 use App\Jobs\Dashboardupdate;
@@ -31,6 +32,18 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function topicname(Request $request)
+    {
+
+        $topic_id =  $request->topic_id;
+
+        $loggedinid = Auth::user()->id;  
+
+        $topic = Topic::where('id','=',$topic_id)->where('user_id','=',$loggedinid)->first(['id','topic','created_at']);
+
+        return $topic;
     }
 
     public function profile()
@@ -164,6 +177,30 @@ class HomeController extends Controller
                 where('topic', 'like' , "%$topicsinput%")->
                 get(['id','topic_id','topic','review', 'updated_at']);
                   
+        return $feedbacks;
+   
+    } 
+
+    public function reviewstopics($id)
+    {
+
+        $loggedinid = Auth::user()->id;
+        $currentmenu = 'reviews';
+        
+        $topic = Topic::where('id','=',$id)->where('user_id','=',$loggedinid)->first(['id','topic','created_at']); 
+
+        return view('reviewstopics',compact('currentmenu','topic'));
+   
+    } 
+
+    public function reviewstopicsdefault(Request $request)
+    {
+
+        $loggedinid = Auth::user()->id;
+        $topic_id  = $request->topic_id;
+        
+        $feedbacks = Feedback::where('topic_id','=',$topic_id)->where('user_id','=',$loggedinid)->get(['id','topic','review','created_at']); 
+
         return $feedbacks;
    
     } 

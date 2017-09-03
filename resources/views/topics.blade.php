@@ -159,7 +159,7 @@
 								</td> 
 								<td class="actions">
 									<h6>										 
-										<a :href="'/topics/' + myTopic.id + '/send'" class="on-default add-doctor-row"><i class="fa fa-paper-plane"></i></a> 
+										<a :href="'/topics/' + myTopic.id + '/send'" class="on-default add-doctor-row"><i class="fa fa-envelope-o"></i></a> 
 										<a  @click="edittopic(myTopic)" href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a> 
 										<a @click="deletetopic(myTopic)" href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
 									</h6>

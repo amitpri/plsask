@@ -7,25 +7,23 @@
 @stop
 
 @section('content_pagecss')
-
-<link rel="stylesheet" href="/admin/assets/vendor/select2/css/select2.css" />
-<link rel="stylesheet" href="/admin/assets/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
+ 
  
 @stop
 
 @section('content_pagejs')
-
-<script src="/admin/assets/vendor/select2/js/select2.js"></script>  
-
+ 
 @stop
 
 @section('content_examplejs')
- 
-<script src="/toastr/toastr.min.js"></script> 
-<link href="/toastr/toastr.min.css" rel="stylesheet" type="text/css">
+  
 
 @stop
-
+<style>
+	[v-cloak] {
+	  display: none;
+	}
+</style>
 @section('content_page')
 
 <div id="send">
@@ -47,7 +45,10 @@
 			</div>
 		</div>
 	</div>	 
-
+	<div class="row text-center">
+		<p>Please select a group where you want this topic to be sent as mail. Just enter the group name and click on Send Mails. You can check this area later to find out who all recieved the mails</p>
+		 
+	</div>
 	<div class="row">
 		<div class="col-lg-12 col-md-12">
 			<section class="panel"> 				
@@ -66,13 +67,13 @@
 						</div>
 					</div>						
 				</div>
-				<div class="row text-center" v-if="displaymessage">
+				<div class="row text-center" v-if="displaymessage" v-cloak>
 
-					<h4 class="text-danger">Mails sent.</h4>	
+					<h4 class="text-danger"><b>Mails being sent. You can check back at the <a href="/reviews">review</a> section to find out the responses</b></h4>	
 
 				</div>
 				
-				<div v-if="topicprofiles.length > 0" class="panel-body">
+				<div v-if="topicprofiles.length > 0" class="panel-body" v-cloak>
 					<table class="table table-bordered table-striped mb-none" id="datatable-editable">
 						<thead>
 							<tr>
@@ -152,20 +153,24 @@ new Vue({
 		},
 		topicsend:function(){
 
-			
-			axios.get('/topics/sendmail' ,{
+			var c = confirm("Sure to send? Please make sure you are not spamming anyone.");				 
 
-					params: {
+				if( c == true){
 
-				      	group : this.searchquery,
-				      	topicid: this.inpId,
+					axios.get('/topics/sendmail' ,{
 
-				    	}
+							params: {
 
-					})
-				.then(response => {this.groups = response.data});
+						      	group : this.searchquery,
+						      	topicid: this.inpId,
 
-			this.displaymessage = true;
+						    	}
+
+							})
+						.then(response => {this.groups = response.data});
+
+					this.displaymessage = true;
+				}
 
 		},
 	}

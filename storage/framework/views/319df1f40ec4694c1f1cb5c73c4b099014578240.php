@@ -5,26 +5,19 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content_pagecss'); ?>
-
-<link rel="stylesheet" href="/admin/assets/vendor/select2/css/select2.css" />
-<link rel="stylesheet" href="/admin/assets/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" /> 
+ 
 
 
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content_pagejs'); ?>
-
-
-<script src="/admin/assets/vendor/jquery-validation/jquery.validate.js"></script>
-<script src="/admin/assets/vendor/select2/js/select2.js"></script> 
-<script src="https://cdn.jsdelivr.net/vee-validate/2.0.0-rc.3/vee-validate.min.js"></script>
+ 
 
 
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content_examplejs'); ?>
-
-<script src="/admin/assets/javascripts/forms/examples.validation.js"></script>
+ 
 
 <script src="/toastr/toastr.min.js"></script> 
 <link href="/toastr/toastr.min.css" rel="stylesheet" type="text/css">
@@ -47,6 +40,7 @@
 					
 					 <div class="mb-md">
 						<button @click="addgrouprow" :disabled="disableaddbutton" id="addToTable" class="btn btn-primary">Add Group <i class="fa fa-plus"></i></button>
+						<h6>After a new group is created, You need to click on <i class="fa fa-user-md"></i> and add profiles to newly created group	 </h6>
 						
 					</div>	
 				</header>
@@ -56,27 +50,25 @@
 						<div v-if="flg_name" class="col-sm-6">	
 							<p class="text-center bg-danger" v-cloak><b>Please enter Name</b></p>
 						</div>
-						<div class="col-sm-3 pull-right" v-if="groups.length > 0">							
+						<div class="col-sm-3 pull-right" >							
 							 <form id="search">
-							    <input type="text" class="form-control " placeholder="Search Groups" name="query" v-model="searchquery"  @keyup="filteredgroups" >
+							    <input type="text" class="form-control " placeholder="Search for Groups" name="query" v-model="searchquery"  @keyup="filteredgroups" >
 							  </form>
 						</div>
 					</div>
 					<table class="table table-bordered table-striped mb-none" >
 
-						<p v-if="groups.length < 1" class="text-center"><b>No Group Added</b></p>
+						<p v-if="groups.length < 1" class="text-center"><b>No Group Found</b></p>
 
 						<thead v-if="groups.length >= 1">
-							<tr>
-								<th>Id</th>
-								<th>Name</th>
+							<tr> 
+								<th>Group</th>
 								<th>Notes</th>
 								<th>Actions</th>
 							</tr>
 						</thead>
 						<tbody>  
-							<tr v-for="group in groups">
-								<td class="id">{{ group.id }}</td>
+							<tr v-for="group in groups"> 
 								
 								<td v-show="group.editfalse" class="doctor">{{ group.name }}</td>
 								<td v-show="group.edittrue" class="doctor">
@@ -89,7 +81,7 @@
 								</td>
 
 								<td class="actions">
-									<a v-show="group.editfalse" :href="'/groups/' + group.id  + '/addprofile'" class="on-default add-doctor-row"><i class="fa fa-user-md"></i></a>	 		
+									<a alt="Hi" v-show="group.editfalse" :href="'/groups/' + group.id  + '/addprofile'" class="on-default add-doctor-row"><i class="fa fa-user-md"></i></a>	 		
 									<a v-show="group.editfalse" @click="editrow(group)" href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a> 
 									<a v-show="group.editfalse" @click="deleterow(group)" href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
 									<a v-show="group.edittrue" @click="saveeditrow(group)" href="#" class="on-editing save-row"><i class="fa fa-save"></i></a>
@@ -234,7 +226,7 @@
 
 						params: {
 
-					      	profile : this.searchquery, 
+					      	group : this.searchquery, 
 
 					    	}
 

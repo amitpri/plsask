@@ -103,12 +103,12 @@ class GroupProfileController extends Controller
     public function filtered1(Request $request)
     {
 
-        $profileinput = $request->profile;
+        $emailinput = $request->emailid;
         $loggedinid = Auth::user()->id;
         
         $groups = Profile::
                 where('user_id', '=' , $loggedinid)-> 
-                where('emailid', 'like' , "%$profileinput%")->
+                where('emailid', 'like' , "%$emailinput%")->
                 get(['id','name',  'emailid' , 'phone']);
  
                   
@@ -119,12 +119,12 @@ class GroupProfileController extends Controller
     public function filtered2(Request $request)
     {
 
-        $profileinput = $request->profile;
+        $emailinput = $request->emailid;
         $loggedinid = Auth::user()->id;
         
         $groups = GroupProfile::
                 where('user_id', '=' , $loggedinid)-> 
-                where('emailid', 'like' , "%$profileinput%")->
+                where('emailid', 'like' , "%$emailinput%")->
                 get(['id','name',  'emailid' , 'phone']);
  
                   

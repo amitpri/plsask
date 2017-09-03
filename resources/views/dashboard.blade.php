@@ -70,15 +70,13 @@
 							<table v-show="showFeedback" class="table table-striped mb-none">
 								<p v-if="reviews.length < 1" class="text-center"><b>No Feedback</b></p>
 								<thead v-if="reviews.length > 0">
-									<tr>
-										<th>#</th>
+									<tr> 
 										<th>Feedbacks</th> 
 									</tr>
 								</thead>
 								<tbody>
-									<tr v-for="(review,index) in reviews">
-										<td>@{{index + 1}}</td>
-										<td><a href="">@{{ review.review }}</a></td> 
+									<tr v-for="(review,index) in reviews"> 
+										<td><a href="/reviews">@{{ review.review }}</a></td> 
 									</tr> 
 								</tbody>
 							</table>

@@ -12,39 +12,37 @@
 <?php $__env->startSection('content_page'); ?>
 
 
-<div class="row"> 
-	<div id="messages" class="col-md-12 col-lg-12 col-xl-12">
+<div class="row"  id="messages" > 
+	<div class="row">
+		<section class="panel">
+
+			<div class="panel-body" > 
+			 	<h4 class="text-center">{{ topicname }}</h4>
+			</div>
+		</section>
+	</div>
+	<div class="col-md-12 col-lg-12 col-xl-12">
 		<div class="row"> 
 			<div class="col-md-12 col-lg-12 col-xl-12">
 				<section class="panel">
 
-					<div class="panel-body" v-cloak>
-						<div class="row"> 
-							<div class="col-sm-3 pull-right" v-if="reviews.length > 0">							
-								 <form id="search">
-								    <input type="text" class="form-control " placeholder="Search Topics" name="query" v-model="searchquery"  @keyup="filteredtopics" >
-								  </form>
-							</div>
-						</div>
+					<div class="panel-body" v-cloak> 
 						<div class="table-responsive">
 
 							<table class="table table-striped mb-none">
 								<p v-if="reviews.length < 1" class="text-center"><b>No Review receieved</b></p>
 								<thead v-if="reviews.length >= 1">
-									<tr>
-										<th class="col-md-1">#</th>
+									<tr> 
 										<th class="col-md-9">Messages</th> 
 										<th class="col-md-2">Date</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr v-for="(review,index) in reviews">
-										<td>{{index + 1}}</td>
+									<tr v-for="(review,index) in reviews"> 
 										<td>
-											<h5>{{ review.review }}</h5>
-											<h6><a :href="'reviews/topics/' + review.topic_id">{{ review.topic }}</h6></a>
+											<h5>{{ review.review }}</h5> 
 										</td>
-										<td><span class="">{{ review.updated_at }}</span></td>
+										<td><span class="">{{ review.created_at }}</span></td>
 									</tr>
 								</tbody>
 							</table>
@@ -63,19 +61,44 @@ new Vue({
 	data : {
 		id:"",
 		review: "",
-		reviews: [],
-		inpDoctorid: "",
-		inpDoctor: "",
-		inpSpeciality: "",
-		inpDetails: "",  
-		inpeditname: "", 
+		reviews: [],   
 		searchquery: "",
+		topicname : "",
 		inpId : "",
+		inpTopicId: "<?php echo $topic->id; ?>",
 	},
 	mounted:function(){
  
-		axios.get('/reviews/default' )
-							.then(response => {this.reviews = response.data});
+		axios.get('/topicname' ,{
+
+					params: {
+
+				      	topic_id : this.inpTopicId, 
+
+				    	}
+
+					})
+			.then(response => {
+
+				this.topicname = response.data.topic;				 
+
+			});
+
+		axios.get('/reviewstopics/default' ,{
+
+					params: {
+
+				      	topic_id : this.inpTopicId, 
+
+				    	}
+
+					})
+			.then(response => {
+				this.reviews = response.data;
+				this.showFeedbackSpinner = false; 
+				this.showFeedback = true;
+
+			});
 	},
 	methods:{
 
