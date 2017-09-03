@@ -99,7 +99,7 @@
 											<p class="clearfix mb-xs">
 
 												<span class="message pull-left">
-													<a target="_blank" :href="'/profile/' + allStatus.id">{{ allStatus.data}}</a></span>
+													<a  href="/reviews">{{ allStatus.review}}</a></span>
 													
 											</p>
 										</li>
@@ -108,7 +108,7 @@
 									<hr />
 			
 									<div class="text-right">
-										<a href="/notifications" class="view-more">View All</a>
+										<a href="/reviews" class="view-more">View All</a>
 									</div>
 								</div>
 							</div>
@@ -124,14 +124,12 @@
 										allStatuses : [],
 										allStatus : "",
 										countNotification : 0,
+										user_id : "<?php echo 'channel_feedback:NewFeedback_' . Auth::user()->id; ?>",
 
 									},
 									mounted:function(){
 
-										axios.get('/topmenu/notification/getall' )
-														.then(response => {this.allStatuses = response.data});
-							  
-									 	socket.on('channel_1:NewStatus_1', function(data){
+										socket.on(this.user_id, function(data){
 									 		
 									 		this.allStatuses.unshift(data);
 									 		this.countNotification += 1;

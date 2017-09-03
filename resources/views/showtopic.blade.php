@@ -17,7 +17,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 		<!-- Web Fonts  -->
-		<link href="css/googlefonts_shadow_intro_light.css" rel="stylesheet" type="text/css">
+		<link href="/css/googlefonts_shadow_intro_light.css" rel="stylesheet" type="text/css">
 
 		<!-- Vendor CSS -->
 		<script src="/admin/assets/vendor/jquery/jquery.js"></script>
@@ -241,8 +241,6 @@
 							this.flg_name = true; 
 
 						}else{
-
-							alert(this.inpFeedback);
 							
 							this.flg_name = false;
 

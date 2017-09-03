@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Topic;
 use App\Feedback;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class ShowtopicsController extends Controller
 {
@@ -76,15 +77,30 @@ class ShowtopicsController extends Controller
 
         $topic = Topic::where('id','=',$inptopicid)->where('topic','=',$inptopicname)->first(['id','user_id']); 
 
+        $userid = $topic->user_id;
+
         $postfeedback = Feedback::create(
                 [   
-                    'user_id' => $topic->user_id,
+                    'user_id' => $userid,
                     'topic_id' => $inptopicid,
                     'topic' => $inptopicname,
                     'review' => $inpfeedback,
                     'published' => 1,
                     'status' => 1,                                 
                 ]);
+
+        $publishdata = [
+
+            'event' => "NewFeedback_$userid",
+            'data' => [
+                'topic_id' => $inptopicid,
+                'topic' => $inptopicname,
+                'review' => $inpfeedback,
+            ]
+            
+        ]; 
+
+        Redis::publish('channel_feedback',json_encode($publishdata));
 
         return $postfeedback;
    
