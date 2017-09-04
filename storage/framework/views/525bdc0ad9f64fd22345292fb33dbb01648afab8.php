@@ -9,9 +9,8 @@
 		<meta charset="UTF-8">
 
 		<title>PlsAsk - Help</title>
-		<meta name="keywords" content="HTML5 Admin Template" />
-		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
-		<meta name="author" content="okler.net">
+		<meta name="keywords" content="Please Ask, Help" />
+		<meta name="description" content="PlsAsk, Anonymous feedback">
 
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -105,13 +104,8 @@
 										</div>
 										<div class="form-group">
 											<label class="col-sm-3 control-label">Email <span class="required">*</span></label>
-											<div class="col-sm-9">
-												<div class="input-group">
-													<span class="input-group-addon">
-														<i class="fa fa-envelope"></i>
-													</span>
-													<input v-model="inpEmail" type="email" name="email" class="form-control"  required/>
-												</div>
+											<div class="col-sm-9"> 
+												<input v-model="inpEmail" type="email" name="email" class="form-control"  required/> 
 											</div>
 											<div class="col-sm-9">
 
@@ -207,8 +201,6 @@
         <br><br>
 
 		<!-- Vendor -->
-		<script src="/admin/assets/vendor/jquery/jquery.js"></script>
-		<script src="/admin/assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
 		<script src="/admin/assets/vendor/bootstrap/js/bootstrap.js"></script> 
 
 		<script src="/admin/assets/vendor/nanoscroller/nanoscroller.js"></script>
@@ -217,13 +209,7 @@
 		
 		<!-- Theme Base, Components and Settings -->
 		<script src="/admin/assets/javascripts/theme.js"></script>	
-		<!-- Theme Custom -->
-		<script src="/admin/assets/javascripts/theme.custom.js"></script>
 
-
-		
-		<!-- Theme Initialization Files -->
-		<script src="/admin/assets/javascripts/theme.init.js"></script>
 
 		<script>
 	

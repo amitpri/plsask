@@ -46,7 +46,10 @@
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
-            } 
+            }  
+			[v-cloak] {
+			  display: none;
+			}
         </style>
 
 	</head>
@@ -99,24 +102,24 @@
 											<thead>
 												<tr>
 													<th class="col-md-8">Topic</th> 
-													<th class="col-md-2">Published By</th>  
+													<th class="col-md-2">Created By</th>  
 												</tr>
 											</thead>
 											<tbody>
-												<tr v-for="topic in topics">
+												<tr v-for="topic in topics" v-cloak>
 													<td>
 
 														<a :href="'/showtopics/' + topic.id ">@{{ topic.topic }} </a>
 
 													</td> 
-													<td>Amit</td> 
+													<td><a target="_blank" :href="'/viewprofile/' + topic.user_id ">@{{ topic.name }}</a> </td> 
 												</tr>							
 											</tbody>
 										</table>
 									</div>
 								</div>
 							</section> 	
-							<div class="center"><button class="btn btn-default" @click="morenotifications">Load More</button></div>
+							<div class="center"><button class="btn btn-default" @click="morerows">Load More</button></div>
 							<div class="flex-center position-ref full-height"> 
 					            <div class="content"> 
 					                <div class="links">
@@ -155,6 +158,8 @@
 					topic: "",
 					topics: [],
 					inpKey:"", 
+					searchquery : "",
+					row_count : 10,
 				},
 				mounted:function(){
 
@@ -178,7 +183,35 @@
 							.then(response => {this.topics = response.data});
 					
 			 
-					} 
+					},
+					morerows:function(){
+
+						axios.get('/showtopics/getmore' ,{
+
+								params: {
+							      row_count: this.row_count,
+							    }
+
+							}).then(response => {
+
+								for (var i = 0;  i <= response.data.length - 1; i++ ) {
+
+									this.topics.push({
+
+											id : response.data[i].id, 
+											user_id : response.data[i].user_id, 
+											topic : response.data[i].topic, 
+											name : response.data[i].name,  
+
+										});
+								}						
+
+							});
+		 
+
+						this.row_count = this.row_count + 10;
+						
+					}
 				}
 
 			})

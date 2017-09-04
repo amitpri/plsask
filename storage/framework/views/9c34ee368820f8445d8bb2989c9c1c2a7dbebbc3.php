@@ -116,7 +116,7 @@
 									</div>
 								</div>
 							</section> 	
-							<div class="center"><button class="btn btn-default" @click="morenotifications">Load More</button></div>
+							<div class="center"><button class="btn btn-default" @click="morerows">Load More</button></div>
 							<div class="flex-center position-ref full-height"> 
 					            <div class="content"> 
 					                <div class="links">
@@ -154,6 +154,7 @@
 					review: "",
 					reviews: [],
 					inpKey:"", 
+					row_count : 10,
 				},
 				mounted:function(){
 
@@ -177,7 +178,35 @@
 							.then(response => {this.reviews = response.data});
 					
 			 
-					} 
+					},
+					morerows:function(){
+
+						axios.get('/showreviews/getmore' ,{
+
+								params: {
+							      row_count: this.row_count,
+							    }
+
+							}).then(response => {
+
+								for (var i = 0;  i <= response.data.length - 1; i++ ) {
+
+									this.reviews.push({
+
+											review : response.data[i].review, 
+											topic : response.data[i].topic, 
+											topic_id : response.data[i].topic_id,  
+
+										});
+								}						
+
+							});
+		 
+
+						this.row_count = this.row_count + 10;
+						
+					}
+
 				}
 
 			})

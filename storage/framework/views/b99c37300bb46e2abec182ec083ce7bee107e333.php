@@ -16,7 +16,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 		<!-- Web Fonts  -->
-		<link href="css/googlefonts_shadow_intro_light.css" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
+
 
 		<!-- Vendor CSS -->
 		<script src="/admin/assets/vendor/jquery/jquery.js"></script>
@@ -116,7 +117,7 @@
 						</li>
 						<script>
 
-								var socket = io('http://127.0.0.1:3000');	
+								var socket = io('https://plsask.com:3000');	
 								notifications = new Vue({
 									el:'#notifications',
 									data:{

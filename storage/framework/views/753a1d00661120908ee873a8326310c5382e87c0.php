@@ -60,18 +60,13 @@
 				<section class="panel">
 					<header class="panel-heading panel-heading-transparent">
 						 
-						<h2 class="panel-title">Latest Feedbacks</h2>
+						<h2 class="panel-title">Latest Reviews</h2>
 					</header>
 					<div class="panel-body">
 						<div class="table-responsive">
 							<div v-show="showFeedbackSpinner" class="text-center"><img src="/images/ajax_loader.gif"></div>
 							<table v-show="showFeedback" class="table table-striped mb-none">
 								<p v-if="reviews.length < 1" class="text-center"><b>No Feedback</b></p>
-								<thead v-if="reviews.length > 0">
-									<tr> 
-										<th>Feedbacks</th> 
-									</tr>
-								</thead>
 								<tbody>
 									<tr v-for="(review,index) in reviews"> 
 										<td><a href="/reviews">{{ review.review }}</a></td> 
@@ -81,7 +76,9 @@
 						</div>
 					</div>
 				</section>
+				<div class="row text-center"><a href="/reviews" class="btn btn-default">All Reviews</a></div>
 			</div>
+
 		</div> 
 	</div>
 </div>
@@ -93,13 +90,7 @@ new Vue({
 	data : {
 		id:"",
 		review: "",
-		reviews: [],
-		inpDoctorid: "",
-		inpDoctor: "",
-		inpSpeciality: "",
-		inpDetails: "",  
-		inpeditname: "", 
-		searchquery: "",
+		reviews: [],      
 		inpId : "",
 		showFeedback : false,
 		showFeedbackSpinner : true,
@@ -107,12 +98,12 @@ new Vue({
 	mounted:function(){
  
 		axios.get('/reviews/default' )
-							.then(response => {
-								this.reviews = response.data;								
-								this.showFeedbackSpinner = false; 
-								this.showFeedback = true;
+			.then(response => {
+				this.reviews = response.data;								
+				this.showFeedbackSpinner = false; 
+				this.showFeedback = true;
 
-							});
+		});
 	} 
 
 })

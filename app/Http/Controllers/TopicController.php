@@ -37,13 +37,14 @@ class TopicController extends Controller
     public function savetopic(Request $request)
     {
         $loggedinid = Auth::user()->id; 
+        $loggedinname = Auth::user()->name;
 
         $topic = $request->topic;
         $details = $request->details;
         $type = $request->type;
 
         $newtopic = Topic::create(
-                [   'user_id' => $loggedinid,  'topic' => $topic, 'type' => $type, 'details' => $details, 
+                [   'user_id' => $loggedinid, 'name' => $loggedinname,  'topic' => $topic, 'type' => $type, 'details' => $details, 
                 ]);        
                   
         return $newtopic;

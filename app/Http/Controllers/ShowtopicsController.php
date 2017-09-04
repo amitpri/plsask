@@ -19,7 +19,18 @@ class ShowtopicsController extends Controller
     public function default()
     {
 
-        $topics = Topic::where('published', '=' , 1)->where('status', '=' , 1)->where('type', '=' , 'public')->orderBy('updated_at','desc')->get(['id','topic','details']);
+        $topics = Topic::where('published', '=' , 1)->where('status', '=' , 1)->where('type', '=' , 'public')->orderBy('updated_at','desc')->take(10)->get(['id','user_id','topic','name']);
+
+        return $topics;
+   
+    }
+
+    public function getmore(Request $request)
+    {
+
+        $row_count = $request->row_count;
+
+        $topics = Topic::where('published', '=' , 1)->where('status', '=' , 1)->where('type', '=' , 'public')->orderBy('updated_at','desc')->offset($row_count)->take(10)->get(['id','user_id','topic','name']);
 
         return $topics;
    
@@ -34,6 +45,7 @@ class ShowtopicsController extends Controller
                 where('published', '=' , 1)
                 ->where('status', '=' , 1)->where('type', '=' , 'public')
                 ->where('topic', 'like' , "%$topicsinput%")
+                ->take(10)
                 ->get(['id','topic','details']);
                   
         return $topics;

@@ -161,7 +161,7 @@ class HomeController extends Controller
     {
         $loggedinid = Auth::user()->id; 
         
-        $feedbacks = Feedback::where('user_id', '=' , $loggedinid)->where('status', '=' , 1)->where('published', '=' , 1)->orderBy('updated_at','desc')->get(['id','topic_id','topic','review', 'updated_at']);
+        $feedbacks = Feedback::where('user_id', '=' , $loggedinid)->where('status', '=' , 1)->where('published', '=' , 1)->orderBy('updated_at','desc')->get(['id','topic_id','topic','review', 'updated_at'])->take(10);
                   
         return $feedbacks;
     }

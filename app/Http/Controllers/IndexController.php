@@ -34,4 +34,24 @@ class IndexController extends Controller
  		return view('confirm',compact('error'));
 
     }
+
+    public function viewprofile($id)
+    {
+
+    	$currentmenu  = "dashboard";
+        $id = $id;
+
+    	return view('viewprofile',compact('currentmenu','id'));
+
+    }
+
+    public function profiledetails(Request $request)
+    {
+        
+        $id = $request->id;
+        $user = User::where('id','=',$id)->first(['id','name','email','phone','city','country','company','company_role','details','company_designation','whatsapp','facebook','twitter','linkedin']);
+
+        return $user;
+
+    }
 }

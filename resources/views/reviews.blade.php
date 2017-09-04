@@ -2,7 +2,7 @@
 
 @section('formname')
 
-<h2>Topics Review Messages</h2>
+<h2>Reviews</h2>
 
 @stop 
  
@@ -22,7 +22,7 @@
 
 					<div class="panel-body" v-cloak>
 						<div class="row"> 
-							<div class="col-sm-3 pull-right" v-if="reviews.length > 0">							
+							<div class="col-sm-3 pull-right">							
 								 <form id="search">
 								    <input type="text" class="form-control " placeholder="Search Topics" name="query" v-model="searchquery"  @keyup="filteredtopics" >
 								  </form>
@@ -31,7 +31,7 @@
 						<div class="table-responsive">
 
 							<table class="table table-striped mb-none">
-								<p v-if="reviews.length < 1" class="text-center"><b>No Review receieved</b></p>
+								<p v-if="reviews.length < 1" class="text-center"><b>No Review available</b></p>
 								<thead v-if="reviews.length >= 1">
 									<tr>
 										<th class="col-md-1">#</th>

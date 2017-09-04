@@ -84,10 +84,12 @@ Route::get('/feedback/{key}', 'FeedbackController@feedback');
 
 Route::get('/showreviews', 'ShowreviewsController@index');
 Route::get('/showreviews/default', 'ShowreviewsController@default');
+Route::get('/showreviews/getmore', 'ShowreviewsController@getmore');
 Route::get('/showreviews/filtered', 'ShowreviewsController@filtered');
 
 Route::get('/showtopics', 'ShowtopicsController@index');
 Route::get('/showtopics/default', 'ShowtopicsController@default');
+Route::get('/showtopics/getmore', 'ShowtopicsController@getmore');
 Route::get('/showtopics/filtered', 'ShowtopicsController@filtered');
 Route::get('/showtopics/messages', 'ShowtopicsController@messages');
 Route::get('/showtopics/postfeedback', 'ShowtopicsController@postfeedback'); 
@@ -99,6 +101,8 @@ Route::get('/confirm/{key}', 'IndexController@confirm');
 Route::get('/help', 'HelpController@index');
 Route::get('/help/submit', 'HelpController@submit');
 
+Route::get('/viewprofile/details', 'IndexController@profiledetails');
+Route::get('/viewprofile/{id}', 'IndexController@viewprofile');
 
 Route::get('/download/profiles', 'DownloadController@profiles');
 
