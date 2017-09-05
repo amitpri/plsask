@@ -20,6 +20,43 @@
 	  display: none;
 	}
 </style>
+
+<script src="/css/popper.js"></script>
+<script src="/js/tooltip.js"></script>
+<script src="/js/v-tooltip.browser.js"></script>
+<style>
+
+.tooltip {
+  display: block !important;
+  pointer-events: none;
+  padding: 4px;
+  z-index: 10000;
+}
+
+.tooltip .tooltip-inner {
+  background: black;
+  color: white;
+  border-radius: 16px;
+  padding: 5px 10px 4px;
+}
+
+.tooltip tooltip-arrow{
+  display: none;
+}
+
+.tooltip[aria-hidden='true'] {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .15s, visibility .15s;
+}
+
+.tooltip[aria-hidden='false'] {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .15s;
+}
+
+</style>
 <div class="row" id="topics">
 	<div class="col-lg-12 col-md-12">
 
@@ -158,10 +195,10 @@
 									<h5>@{{ myTopic.type }}</h5>
 								</td> 
 								<td class="actions">
-									<h6>										 
-										<a :href="'/topics/' + myTopic.id + '/send'" class="on-default add-doctor-row"><i class="fa fa-envelope-o"></i></a> 
-										<a  @click="edittopic(myTopic)" href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a> 
-										<a @click="deletetopic(myTopic)" href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+									<h6>	 
+										<a v-tooltip="msg1" :href="'/topics/' + myTopic.id + '/send'" class="on-default add-doctor-row"><i class="fa fa-envelope-o"></i></a> 
+										<a v-tooltip="msg2"  @click="edittopic(myTopic)" href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a> 
+										<a v-tooltip="msg3" @click="deletetopic(myTopic)" href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
 									</h6>
 								</td> 
 							</tr>							
@@ -213,6 +250,9 @@
 			message_edittopic : "Please enter topic name",
 			error_edittype : false,
 			message_edittype : "Please select a type",
+			msg1: 'Send Mail',
+			msg2: 'Edit',
+			msg3: 'Delete',
 
 		},
 		mounted :function(){

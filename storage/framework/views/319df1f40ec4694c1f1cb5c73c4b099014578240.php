@@ -31,6 +31,42 @@
 </style>
 <?php $__env->startSection('content_page'); ?>
 
+<script src="/css/popper.js"></script>
+<script src="/js/tooltip.js"></script>
+<script src="/js/v-tooltip.browser.js"></script>
+<style>
+
+.tooltip {
+  display: block !important;
+  pointer-events: none;
+  padding: 4px;
+  z-index: 10000;
+}
+
+.tooltip .tooltip-inner {
+  background: black;
+  color: white;
+  border-radius: 16px;
+  padding: 5px 10px 4px;
+}
+
+.tooltip tooltip-arrow{
+  display: none;
+}
+
+.tooltip[aria-hidden='true'] {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .15s, visibility .15s;
+}
+
+.tooltip[aria-hidden='false'] {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .15s;
+}
+
+</style>
 <div id="groups">   
 
 	<div class="row" >
@@ -81,11 +117,11 @@
 								</td>
 
 								<td class="actions">
-									<a alt="Hi" v-show="group.editfalse" :href="'/groups/' + group.id  + '/addprofile'" class="on-default add-doctor-row"><i class="fa fa-user-md"></i></a>	 		
-									<a v-show="group.editfalse" @click="editrow(group)" href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a> 
-									<a v-show="group.editfalse" @click="deleterow(group)" href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
-									<a v-show="group.edittrue" @click="saveeditrow(group)" href="#" class="on-editing save-row"><i class="fa fa-save"></i></a>
-									<a v-show="group.edittrue" @click="canceleditrow(group)" href="#" class="on-editing cancel-row"><i class="fa fa-times"></i></a> 
+									<a v-tooltip="msg1"  v-show="group.editfalse" :href="'/groups/' + group.id  + '/addprofile'" class="on-default add-doctor-row"><i class="fa fa-user-md"></i></a>	 		
+									<a v-tooltip="msg2"  v-show="group.editfalse" @click="editrow(group)" href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a> 
+									<a v-tooltip="msg3"  v-show="group.editfalse" @click="deleterow(group)" href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+									<a v-tooltip="msg4"  v-show="group.edittrue" @click="saveeditrow(group)" href="#" class="on-editing save-row"><i class="fa fa-save"></i></a>
+									<a v-tooltip="msg5"  v-show="group.edittrue" @click="canceleditrow(group)" href="#" class="on-editing cancel-row"><i class="fa fa-times"></i></a> 
 								</td>
 							</tr> 
 						</tbody>
@@ -105,6 +141,11 @@
 			disableaddbutton: false, 
 			searchquery: "",
 			flg_name: false,
+			msg1: 'Add Users to this Group',
+			msg2: 'Edit',
+			msg3: 'Delete',
+			msg4: 'Save',
+			msg5: 'Cancel',
 		},
 		mounted :function(){
 

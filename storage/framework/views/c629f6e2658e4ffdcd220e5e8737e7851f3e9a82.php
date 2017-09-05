@@ -10,6 +10,43 @@
 	  display: none;
 	}
 </style>
+
+<script src="/css/popper.js"></script>
+<script src="/js/tooltip.js"></script>
+<script src="/js/v-tooltip.browser.js"></script>
+<style>
+
+.tooltip {
+  display: block !important;
+  pointer-events: none;
+  padding: 4px;
+  z-index: 10000;
+}
+
+.tooltip .tooltip-inner {
+  background: black;
+  color: white;
+  border-radius: 16px;
+  padding: 5px 10px 4px;
+}
+
+.tooltip tooltip-arrow{
+  display: none;
+}
+
+.tooltip[aria-hidden='true'] {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .15s, visibility .15s;
+}
+
+.tooltip[aria-hidden='false'] {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .15s;
+}
+
+</style>
 <div id="mrprofiles">   
 
 	<div class="row">
@@ -72,10 +109,10 @@
 								</td>
 
 								<td class="actions">	 					
-									<a v-show="profile.editfalse" @click="editrow(profile)" href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a> 
-									<a v-show="profile.editfalse" @click="deleterow(profile)" href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
-									<a v-show="profile.edittrue" @click="saveeditrow(profile)" href="#" class="on-editing save-row"><i class="fa fa-save"></i></a>
-									<a v-show="profile.edittrue" @click="canceleditrow(profile)" href="#" class="on-editing cancel-row"><i class="fa fa-times"></i></a> 
+									<a v-tooltip="msg1" v-show="profile.editfalse" @click="editrow(profile)" href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a> 
+									<a v-tooltip="msg2" v-show="profile.editfalse" @click="deleterow(profile)" href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+									<a v-tooltip="msg3" v-show="profile.edittrue" @click="saveeditrow(profile)" href="#" class="on-editing save-row"><i class="fa fa-save"></i></a>
+									<a v-tooltip="msg4" v-show="profile.edittrue" @click="canceleditrow(profile)" href="#" class="on-editing cancel-row"><i class="fa fa-times"></i></a> 
 								</td>
 							</tr> 
 						</tbody>
@@ -95,6 +132,10 @@
 			disableaddbutton: false, 
 			flg_email: false,
 			searchquery: "",
+			msg1 : 'Edit',
+			msg2 : 'Delete',
+			msg3 : 'Save',
+			msg4 : 'Cancel',
 		},
 		mounted :function(){
 
