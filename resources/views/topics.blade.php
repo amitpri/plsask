@@ -165,6 +165,39 @@
 				</div>
 
 			</div> 
+
+			<div v-if="showShare" class="panel-body" v-cloak>
+				<div class="panel-actions">
+					<a href="#" class="panel-action panel-action-dismiss" @click="showShareTopic"></a>
+				</div>
+				<h4 class="center text-color-light"><strong>Share Topic</strong></h4>
+
+				<div class="panel-body">
+					<form> 
+
+						<div class="form-group">
+							<label class="col-md-3 control-label" for="textareaDefault">Topic</label>
+							<div class="col-md-8">
+								
+								<p>@{{inpTopic}}</p>
+
+							</div>
+						</div>  				
+								
+						<div class="form-group">
+							<label class="col-md-3 control-label">Sharable Link ( Please copy paste to facebook, twitter, linkedin, whatsapp etc)</label>
+							<div class="col-md-8">			  
+
+								<textarea name="details" class="form-control" rows="2" disabled="disabled">https://plsask.com/showtopics/@{{inpId}}</textarea>
+											 										 
+							</div>
+						</div>	
+						 
+					</form>
+				
+				</div>
+
+			</div> 
  
 
 			<h4 v-if="showMy && myTopics.length > 0" class="center text-color-light "><strong>My Topics</strong></h4>
@@ -199,6 +232,7 @@
 										<a v-tooltip="msg1" :href="'/topics/' + myTopic.id + '/send'" class="on-default add-doctor-row"><i class="fa fa-envelope-o"></i></a> 
 										<a v-tooltip="msg2"  @click="edittopic(myTopic)" href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a> 
 										<a v-tooltip="msg3" @click="deletetopic(myTopic)" href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+										<a v-show="myTopic.type == 'public'" v-tooltip="msg4" @click="sharetopic(myTopic)" class="on-default add-doctor-row"><i class="fa fa-share-alt"></i></a> 
 									</h6>
 								</td> 
 							</tr>							
@@ -229,6 +263,7 @@
 			showNew : false,
 			showMy : true,
 			showEdit : false,
+			showShare : false,
 			showTopic : false,
 			inpTopic : "",
 			inpId : "",
@@ -253,6 +288,7 @@
 			msg1: 'Send Mail',
 			msg2: 'Edit',
 			msg3: 'Delete',
+			msg4: 'Share',
 
 		},
 		mounted :function(){
@@ -289,6 +325,18 @@
 				this.showAll = false;
 				this.showTopic = false;
 				this.showEdit = false;
+				this.showShare = false;
+ 
+			},
+			showShareTopic:function(e){  
+				e.preventDefault();							 
+
+				this.showNew = false;
+				this.showMy = true;
+				this.showAll = false;
+				this.showTopic = false;
+				this.showEdit = false;
+				this.showShare = false;
  
 			},
 			showMyTopic:function(e){  
@@ -348,6 +396,7 @@
 
 						this.showNew = false;
 						this.showEdit = false;
+						this.showShare = false;
 						this.showMy = true; 
 						this.inpTopic = "";
 						this.inpType = "";
@@ -398,6 +447,7 @@
 
 						this.showNew = false;
 						this.showEdit = false;
+						this.showShare = false;
 						this.showMy = true; 
 						this.inpTopic = "";
 						this.inpType = "";
@@ -415,6 +465,23 @@
 			edittopic:function(row){
 				 
 				this.showEdit = true;
+				this.showShare = false;
+				this.showNew = false;
+				this.showMy = false; 
+
+				var rowedit = this.myTopics.indexOf(row); 
+  
+				this.inpTopic = this.myTopics[rowedit].topic; 
+				this.inpType = this.myTopics[rowedit].type;
+				this.inpDetails = this.myTopics[rowedit].details;
+				this.inpId = this.myTopics[rowedit].id;
+
+
+			},
+			sharetopic:function(row){
+				 
+				this.showEdit = false;
+				this.showShare = true;
 				this.showNew = false;
 				this.showMy = false; 
 
