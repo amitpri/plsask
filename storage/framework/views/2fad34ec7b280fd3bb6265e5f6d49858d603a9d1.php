@@ -1,14 +1,14 @@
 <!doctype html>
  
-<html class="sidebar-left-big-icons sidebar-light "> 
+<html class="sidebar-left-big-icons sidebar-light"> 
  
 	<head>
  
 		<meta charset="UTF-8">
 
-		<title>PlsAsk - Topics</title>
+		<title>Please Ask</title>
 		<meta name="keywords" content="Please Ask - Topics" />
-		<meta name="description" content="Please Ask - Topics"> 
+		<meta name="description" content="<?php echo e($topic->topic); ?>"> 
 
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -52,7 +52,7 @@
 
 	</head>
 	<body>
-	
+
 		<section class="body">
  
 			<header class="header">
