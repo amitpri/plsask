@@ -32,7 +32,8 @@ class Newregistration implements ShouldQueue
         $tomail = $this->tomail;
         $name = $this->name;
         $confirmation_code = $this->confirmation_code;
+        $adminuser = "amitpri@gmail.com";
         
-        \Mail::to($tomail)->send(new Registration($name,$confirmation_code));
+        \Mail::to($tomail)->bcc($adminuser)->send(new Registration($name,$confirmation_code));
     }
 }

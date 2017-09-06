@@ -229,8 +229,16 @@
 					submithelp:function(e){
 
 						e.preventDefault();
+					//	alert(this.inpEmail.length);
 
-						axios.get('/help/submit' ,{
+				 
+						if( this.inpDetails == "" || this.inpDetails == null){
+
+							var c = alert("Please enter Details?");
+
+						}else{
+
+							axios.get('/help/submit' ,{
 
 								params: {
 
@@ -256,6 +264,11 @@
 
 									toastr.success('We have recieved the message!!',{ fadeAway: 1 });
 							});
+
+						}
+					
+
+						
 					
 			 
 					} 

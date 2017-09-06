@@ -8,9 +8,8 @@
 		<meta charset="UTF-8">
 
 		<title>PlsAsk - Private Anonymous Review Platform</title>
-		<meta name="keywords" content="HTML5 Admin Template" />
-		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
-		<meta name="author" content="okler.net">
+		<meta name="keywords" content="Pls Ask" />
+		<meta name="description" content="View Profile">
 
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -18,14 +17,10 @@
 		<!-- Web Fonts  -->
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
 
-
-		<!-- Vendor CSS -->
-		<script src="/admin/assets/vendor/jquery/jquery.js"></script>
+ 
 		<link rel="stylesheet" href="/admin/assets/vendor/bootstrap/css/bootstrap.css" />
 
-		<link rel="stylesheet" href="/admin/assets/vendor/font-awesome/css/font-awesome.css" />
-		<link rel="stylesheet" href="/admin/assets/vendor/magnific-popup/magnific-popup.css" />
-		<link rel="stylesheet" href="/admin/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
+		<link rel="stylesheet" href="/admin/assets/vendor/font-awesome/css/font-awesome.css" /> 
 
 		<!-- Specific Page Vendor CSS -->
 
@@ -40,9 +35,7 @@
 
 		<!-- Theme Custom CSS -->
 		<link rel="stylesheet" href="/admin/assets/stylesheets/theme-custom.css">
-
-		<!-- Head Libs -->
-		<script src="/admin/assets/vendor/modernizr/modernizr.js"></script>
+ 
 
 		<!--
 		<script src="https://unpkg.com/vue@2.3.0"></script>   -->
@@ -50,14 +43,6 @@
 		<script src="/vue/vue.min.js"></script> 
 
      	<script src="/axios/axios.min.js"></script>
-
-        <script src="/toastr/toastr.min.js"></script> 
-        <link href="/toastr/toastr.min.css" rel="stylesheet" type="text/css">
-
-         
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
-
-        <script src="/socket/socket.io.js"></script>
         <style>
 			[v-cloak] {
 			  display: none;
@@ -165,22 +150,7 @@
 															
 														</div>
 													</div>
-													<div class="form-group">
-														<label class="col-md-3 control-label" for="email">Email Id</label>
-														<div class="col-md-8">
-
-															<h5>@{{inpEmail}}</h5>
-
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="col-md-3 control-label" for="phone">Phone</label>
-														<div class="col-md-8">
- 
-															<h5>@{{inpPhone}}</h5>
-
-														</div>
-													</div>
+													
 													  
 													<div class="form-group">
 														<label class="col-md-3 control-label" for="city">City</label>
@@ -201,7 +171,7 @@
 													</div>
 													 
 													<div class="form-group">
-														<label class="col-md-3 control-label" for="profileBio">About me</label>
+														<label class="col-md-3 control-label" for="profileBio">About </label>
 														<div class="col-md-8">
 
 												           <h5>@{{inpDetails}}</h5>
@@ -271,7 +241,7 @@
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-3 control-label" for="name">Your Role</label>
+														<label class="col-md-3 control-label" for="name"> Role</label>
 														<div class="col-md-8">
 
 															<h5>@{{inpRole}}</h5>
@@ -280,7 +250,7 @@
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-3 control-label" for="email">Your Designation</label>
+														<label class="col-md-3 control-label" for="email"> Designation</label>
 														<div class="col-md-8">
 
 															<h5>@{{inpDesignation}}</h5>
@@ -307,7 +277,6 @@
 									inpId : {!! $id !!},
 									inpName : "",
 									inpEmail : "",
-									inpPhone : "",
 									inpCity : "",
 									inpCountry : "",
 									inpCompany : "",
@@ -337,8 +306,7 @@
 													
 													this.inpId = response.data.id;
 													this.inpName = response.data.name;
-													this.inpEmail = response.data.email;
-													this.inpPhone = response.data.phone;
+													this.inpEmail = response.data.email; 
 													this.inpCity = response.data.city;
 													this.inpCountry = response.data.country;
 													this.inpCompany = response.data.company;
@@ -402,26 +370,8 @@
 
 		<!-- Vendor -->
 		<script src="/admin/assets/vendor/jquery/jquery.js"></script>
-		<script src="/admin/assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
 		<script src="/admin/assets/vendor/bootstrap/js/bootstrap.js"></script>
-		<script src="/admin/assets/vendor/nanoscroller/nanoscroller.js"></script>
-		<script src="/admin/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-		<script src="/admin/assets/vendor/magnific-popup/jquery.magnific-popup.js"></script>
-		<script src="/admin/assets/vendor/jquery-placeholder/jquery-placeholder.js"></script>
 		
-		<!-- Specific Page Vendor -->
 		
-		<script src="/admin/assets/vendor/autosize/autosize.js"></script>
-		
-		<!-- Theme Base, Components and Settings -->
-		<script src="/admin/assets/javascripts/theme.js"></script>	
-		<!-- Theme Custom -->
-		<script src="/admin/assets/javascripts/theme.custom.js"></script>
-		
-		<!-- Theme Initialization Files -->
-		<script src="/admin/assets/javascripts/theme.init.js"></script>
-
-		<!-- Examples -->
-
 	</body>
 </html>

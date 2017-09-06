@@ -49,7 +49,7 @@ class IndexController extends Controller
     {
         
         $id = $request->id;
-        $user = User::where('id','=',$id)->first(['id','name','email','phone','city','country','company','company_role','details','company_designation','whatsapp','facebook','twitter','linkedin']);
+        $user = User::where('id','=',$id)->first(['id','name','email','city','country','company','company_role','details','company_designation','whatsapp','facebook','twitter','linkedin']);
 
         return $user;
 

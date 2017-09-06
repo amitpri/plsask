@@ -64,7 +64,7 @@ class SendMail implements ShouldQueue
                 [   'user_id' => $loggedinid,  'topic_id' => $topicid, 'group_id' => $groupid, 'profile_id' => $profileid, 'emailid' => $toemailid, 'mailkey' => $mailkey,
                 ]); 
 
-            \Mail::to($toemailid)->send(new MailTopic($topicname,$username,$mailkey));
+            \Mail::to($toemailid)->queue(new MailTopic($topicname,$username,$mailkey));
 
         }
     }

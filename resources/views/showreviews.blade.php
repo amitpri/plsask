@@ -9,9 +9,8 @@
 		<meta charset="UTF-8">
 
 		<title>PlsAsk - Reviews</title>
-		<meta name="keywords" content="HTML5 Admin Template" />
-		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
-		<meta name="author" content="okler.net">
+		<meta name="keywords" content="PlsAsk" />
+		<meta name="description" content="PlsAsk Feedback Messages">
 
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -19,15 +18,12 @@
 		<!-- Web Fonts  -->
 		<link href="css/googlefonts_shadow_intro_light.css" rel="stylesheet" type="text/css">
 
-		<!-- Vendor CSS -->
-		<script src="/admin/assets/vendor/jquery/jquery.js"></script>
+		<!-- Vendor CSS -->>
 		<link rel="stylesheet" href="/admin/assets/vendor/bootstrap/css/bootstrap.css" />	  
 		<link rel="stylesheet" href="/admin/assets/stylesheets/theme.css" /> 
 		<link rel="stylesheet" href="/admin/assets/stylesheets/skins/default.css" /> 
 		<script src="/vue/vue.min.js"></script>
-		<script src="/axios/axios.min.js"></script>
-		<script src="/toastr/toastr.min.js"></script> 
-        <link href="/toastr/toastr.min.css" rel="stylesheet" type="text/css"> 
+		<script src="/axios/axios.min.js"></script> 
 
         <style>  
 
@@ -154,6 +150,7 @@
 					reviews: [],
 					inpKey:"", 
 					row_count : 10,
+					searchquery : "",
 				},
 				mounted:function(){
 

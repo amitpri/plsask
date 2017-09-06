@@ -9,8 +9,8 @@
 		<meta charset="UTF-8">
 
 		<title>PlsAsk - Topic</title>
-		<meta name="keywords" content="{{inpTopics}}" />
-		<meta name="description" content="{{inpTopics}}"> 
+		<meta name="keywords" content="Please Ask, Feedback management system" />
+		<meta name="description" content="Please Ask, Feedback management system"> 
 
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -18,15 +18,11 @@
 		<!-- Web Fonts  -->
 		<link href="/css/googlefonts_shadow_intro_light.css" rel="stylesheet" type="text/css">
 
-		<!-- Vendor CSS -->
-		<script src="/admin/assets/vendor/jquery/jquery.js"></script>
 		<link rel="stylesheet" href="/admin/assets/vendor/bootstrap/css/bootstrap.css" />	  
 		<link rel="stylesheet" href="/admin/assets/stylesheets/theme.css" /> 
 		<link rel="stylesheet" href="/admin/assets/stylesheets/skins/default.css" /> 
 		<script src="/vue/vue.min.js"></script>
 		<script src="/axios/axios.min.js"></script>
-		<script src="/toastr/toastr.min.js"></script> 
-        <link href="/toastr/toastr.min.css" rel="stylesheet" type="text/css"> 
 
         <style>  
 
@@ -95,7 +91,7 @@
 					<div class="row">
 						<div class="col-lg-12 col-md-12">
 							<section class="panel">   						
-								<h4 class="center text-color-light "><strong>My Topics</strong></h4>
+								<h4 class="center text-color-light "><strong>Topics</strong></h4>
 								<div  class="panel-body">
 									<div class="table-responsive" >
 										<table class="table table-striped mb-none">
@@ -153,8 +149,7 @@
 				el : '#feedback',
 				data : {
 					id:"", 
-					inpId: "",
-					inpTopics: "",
+					inpId: "", 
 					topic: "",
 					topics: [],
 					inpKey:"", 

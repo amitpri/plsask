@@ -6,6 +6,7 @@ use Auth;
 use App\User;
 use App\Help;
 use Illuminate\Http\Request;
+use App\Mail\HelpMail; 
 
 class HelpController extends Controller
 {
@@ -54,7 +55,11 @@ class HelpController extends Controller
                     'details' => $inpdetails,                              
                 ]);
 
-        return "ok";
+         $toemailid = "amitpri@gmail.com";
+
+        \Mail::to($toemailid)->send(new HelpMail($loggedinid, $inpname, $inpemail, $inptype, $inpdetails));
+
+         return "ok";
    
     }
 }

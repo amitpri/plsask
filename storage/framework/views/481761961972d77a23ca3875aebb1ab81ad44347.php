@@ -330,7 +330,6 @@
 			inpFacebook : "",
 			inpTwitter : "",
 			inpLinkedin : "",
-
 			inpUpdatestatus : "",
 			allStatuses : [],
 			allStatus : "",
