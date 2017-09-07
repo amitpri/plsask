@@ -93,7 +93,7 @@
 											<thead>
 												<tr>
 													<th class="col-md-8">Feedbacks</th> 
-													<th class="col-md-2">Published By</th>  
+													<th class="col-md-2">Date</th>  
 												</tr>
 											</thead>
 											<tbody>
@@ -104,7 +104,7 @@
 														<p><h6><a :href="'/showtopics/' + review.topic_id">@{{ review.topic }}</a></h6></p>
 
 													</td> 
-													<td>Amit</td> 
+													<td>@{{  review.created_at }}</td> 
 												</tr>							
 											</tbody>
 										</table>

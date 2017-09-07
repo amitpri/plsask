@@ -18,7 +18,7 @@ class ShowreviewsController extends Controller
     public function default()
     {
 
-        $feedbacks = Feedback::where('published', '=' , 1)->where('status', '=' , 1)->orderBy('updated_at','desc')->get(['id','topic_id','topic','review'])->take(10);
+        $feedbacks = Feedback::where('published', '=' , 1)->where('status', '=' , 1)->orderBy('updated_at','desc')->get(['id','topic_id','topic','review','created_at'])->take(10);
 
         return $feedbacks;
    
@@ -29,7 +29,7 @@ class ShowreviewsController extends Controller
 
         $row_count = $request->row_count;
 
-        $feedbacks = Feedback::where('published', '=' , 1)->where('status', '=' , 1)->orderBy('updated_at','desc')->offset($row_count)->take(10)->get(['id','topic_id','topic','review']);
+        $feedbacks = Feedback::where('published', '=' , 1)->where('status', '=' , 1)->orderBy('updated_at','desc')->offset($row_count)->take(10)->get(['id','topic_id','topic','review','created_at']);
 
         return $feedbacks;
    
@@ -45,7 +45,7 @@ class ShowreviewsController extends Controller
                 ->where('status', '=' , 1)
                 ->where('review', 'like' , "%$feedbackinput%")
                 ->take(10)
-                ->get(['id','topic_id','topic','review']);
+                ->get(['id','topic_id','topic','review','created_at']);
                   
         return $feedbacks;
    
