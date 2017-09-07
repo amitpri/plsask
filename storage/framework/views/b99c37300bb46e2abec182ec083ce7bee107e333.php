@@ -8,8 +8,8 @@
 		<meta charset="UTF-8">
 
 		<title>PlsAsk - Private Anonymous Review Platform</title>
-		<meta name="keywords" content="HTML5 Admin Template" />
-		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
+		<meta name="keywords" content="Pls Ask" />
+		<meta name="description" content="Private Anonymous Review Platform">
 		<meta name="author" content="okler.net">
 
 		<!-- Mobile Metas -->
@@ -177,6 +177,9 @@
 								</li>
 								<li>
 									<a role="menuitem" tabindex="-1" href="/settings" ><i class="fa fa-cog"></i> Settings</a>
+								</li>
+								<li>
+									<a role="menuitem" tabindex="-1" href="/password" ><i class="fa fa-key"></i> Password</a>
 								</li>
 								<li>
 									<a role="menuitem" tabindex="-1" href="<?php echo e(route('logout')); ?>"

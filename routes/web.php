@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('password', 'Auth\UpdatePasswordController@password'); 
+Route::post('password', 'Auth\UpdatePasswordController@update');
 
 Route::get('/topicname', 'HomeController@topicname'); 
 
