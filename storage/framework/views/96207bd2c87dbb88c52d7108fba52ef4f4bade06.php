@@ -381,6 +381,7 @@
 							details : response.data.details,
 							type : response.data.type,
 							id : response.data.id,
+							key : response.data.key,
 
 						});
 
