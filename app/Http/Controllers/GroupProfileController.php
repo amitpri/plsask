@@ -61,6 +61,7 @@ class GroupProfileController extends Controller
     {
   
         $loggedinid = Auth::user()->id;
+        $key = str_random(20);
 
         $getprofile = Profile::
             where('id' , '=' , $request->id )-> 
@@ -70,6 +71,7 @@ class GroupProfileController extends Controller
         $creategroupprofile = GroupProfile::create(
                 [   
                     'user_id' => $loggedinid,
+                    'key' => $key,
                     'name' => $getprofile->name,
                     'group_id' => $group_id,
                     'emailid' => $getprofile->emailid,

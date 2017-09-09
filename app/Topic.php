@@ -12,6 +12,6 @@ class Topic extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-	       'user_id','topic','type','details','status','name'
+	       'user_id','key','topic','type','details','status','name'
 	    ];
 }

@@ -77,13 +77,8 @@
 				<li>
 					<a href="#company" data-toggle="tab">Company</a>
 				</li>
-				<li>
-					<a href="#password" data-toggle="tab">Password</a>
-				</li>
 			</ul>
-			<div class="tab-content">
-				Hi there <?php echo e(session('data') ?? ''); ?>
-
+			<div class="tab-content"> 
 				<div id="personal" class="tab-pane active">
 					<form class="form-horizontal" method="get">
 						<h4 class="mb-xlg">Personal Information</h4>
@@ -269,68 +264,6 @@
 
 					</form>
 						 
-
-				</div>
-				<div id="password" class="tab-pane">
-
-					<form action="change-password" method="post" role="form" class="form-horizontal">
-
-						<?php echo e(csrf_field()); ?>
-
-						 
-						<h4 class="mb-xlg">Change Password</h4>
-					 
-						<div class="form-group<?php echo e($errors->has('old') ? ' has-error' : ''); ?>">
-                            <label for="password" class="col-md-4 control-label">Old Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="old">
-
-                                <?php if($errors->has('old')): ?>
-                                    <span class="help-block">
-                                        <strong><?php echo e($errors->first('old')); ?></strong>
-                                    </span>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group<?php echo e($errors->has('password') ? ' has-error' : ''); ?>">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password">
-
-                                <?php if($errors->has('password')): ?>
-                                    <span class="help-block">
-                                    <strong><?php echo e($errors->first('password')); ?></strong>
-                                </span>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group<?php echo e($errors->has('password_confirmation') ? ' has-error' : ''); ?>">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
-
-                                <?php if($errors->has('password_confirmation')): ?>
-                                    <span class="help-block">
-                                    <strong><?php echo e($errors->first('password_confirmation')); ?></strong>
-                                </span>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-					 
-						<div class="panel-footer">
-							<div class="row">
-								<div class="col-md-12 col-md-offset-3">
-									<button type="submit" class="btn btn-primary">Submit</button> 
-								</div>
-							</div>
-						</div>
-
-					</form>
 
 				</div>
 			</div>

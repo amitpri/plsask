@@ -50,6 +50,7 @@ class ProfileController extends Controller
         
         $newprofile = Profile::create(
                 [   'user_id' => $loggedinid, 
+                    'key' => str_random(20),
                 ]);
 
         $profiles = Profile::where('id', '=' , $newprofile->id)->where('user_id', '=' , $loggedinid)
@@ -81,6 +82,7 @@ class ProfileController extends Controller
         $profile->phone= $request->phone; 
         $profile->notes= $request->notes; 
         $profile->status= 1;
+        $profile->key = str_random(20);
 
         $profile->save();
      
@@ -159,6 +161,7 @@ class ProfileController extends Controller
                     $inserts[] = [
                         'name' => $value->name,
                         'emailid' => $value->emailid,
+                        'key' => str_random(20),
                         'phone' => $value->phone,                        
                         'notes' => $value->notes,
                         'status' => 1,

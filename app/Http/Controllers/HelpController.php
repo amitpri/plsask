@@ -35,6 +35,7 @@ class HelpController extends Controller
         $inpemail = $request->email;
         $inptype = $request->type;
         $inpdetails = $request->details; 
+        $key = str_random(20);
 
 		if(Auth::user())
 		{
@@ -49,6 +50,7 @@ class HelpController extends Controller
         $help = Help::create(
                 [   
                     'user_id' => $loggedinid,
+                    'key' => $key,
                     'name' => $inpname,
                     'emailid' => $inpemail,
                     'type' => $inptype,

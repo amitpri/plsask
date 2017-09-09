@@ -80,8 +80,7 @@
 					<a href="#company" data-toggle="tab">Company</a>
 				</li>
 			</ul>
-			<div class="tab-content">
-				Hi there {{ session('data') ?? '' }}
+			<div class="tab-content"> 
 				<div id="personal" class="tab-pane active">
 					<form class="form-horizontal" method="get">
 						<h4 class="mb-xlg">Personal Information</h4>

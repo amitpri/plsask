@@ -170,25 +170,16 @@
 				<div class="panel-actions">
 					<a href="#" class="panel-action panel-action-dismiss" @click="showShareTopic"></a>
 				</div>
-				<h4 class="center text-color-light"><strong>Share Topic</strong></h4>
+				<h4 class="center text-color-light"><strong>@{{inpTopic}}</strong></h4>
 
 				<div class="panel-body">
-					<form> 
-
-						<div class="form-group">
-							<label class="col-md-3 control-label" for="textareaDefault">Topic</label>
-							<div class="col-md-8">
-								
-								<p>@{{inpTopic}}</p>
-
-							</div>
-						</div>  				
+					<form>   				
 								
 						<div class="form-group">
 							<label class="col-md-3 control-label">Sharable Link ( Please copy paste to facebook, twitter, linkedin, whatsapp etc)</label>
 							<div class="col-md-8">			  
 
-								<textarea name="details" class="form-control" rows="2" disabled="disabled">https://plsask.com/showtopics/@{{inpId}}</textarea>
+								<textarea name="details" class="form-control" rows="2" disabled="disabled">https://plsask.com/showtopics/@{{inpKey}}</textarea>
 											 										 
 							</div>
 						</div>	
@@ -232,7 +223,7 @@
 										<a v-tooltip="msg1" :href="'/topics/' + myTopic.id + '/send'" class="on-default add-doctor-row"><i class="fa fa-envelope-o"></i></a> 
 										<a v-tooltip="msg2"  @click="edittopic(myTopic)" href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a> 
 										<a v-tooltip="msg3" @click="deletetopic(myTopic)" href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
-										<a v-show="myTopic.type == 'public'" v-tooltip="msg4" @click="sharetopic(myTopic)" class="on-default add-doctor-row"><i class="fa fa-share-alt"></i></a> 
+										<a v-show="myTopic.type == 'public'" v-tooltip="msg4" href="#" @click="sharetopic(myTopic)" class="on-default add-doctor-row"><i class="fa fa-share-alt"></i></a> 
 									</h6>
 								</td> 
 							</tr>							
@@ -267,6 +258,7 @@
 			showTopic : false,
 			inpTopic : "",
 			inpId : "",
+			inpKey : "",
 			inpDetails : "",
 			inpType: "",
 			listTopics : [],
@@ -401,6 +393,7 @@
 						this.inpTopic = "";
 						this.inpType = "";
 						this.inpId = "";
+						this.inpKey = "";
 						this.inpDetails = "";
 
 						toastr.options = {
@@ -491,6 +484,7 @@
 				this.inpType = this.myTopics[rowedit].type;
 				this.inpDetails = this.myTopics[rowedit].details;
 				this.inpId = this.myTopics[rowedit].id;
+				this.inpKey = this.myTopics[rowedit].key;
 
 
 			},

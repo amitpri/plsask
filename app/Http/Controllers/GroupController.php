@@ -46,6 +46,7 @@ class GroupController extends Controller
         
         $newgroup = Group::create(
                 [   'user_id' => $loggedinid, 
+                    'key' => str_random(20),
                 ]);
 
         $groups = Group::where('id', '=' , $newgroup->id)->where('user_id', '=' , $loggedinid)
@@ -74,6 +75,7 @@ class GroupController extends Controller
  
         $group->name= $request->name;  
         $group->notes= $request->notes; 
+        $group->key = str_random(20);
         $group->status= 1;
 
         $group->save();

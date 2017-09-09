@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class GroupProfile extends Model
 {
     protected $fillable = [
-	       'user_id','group_id','name','emailid','phone','status'
+	       'user_id', 'key','group_id','name','emailid','phone','status'
 	    ];
 }

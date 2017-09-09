@@ -23,6 +23,7 @@
                         <?php echo e(config('app.name', 'PlsAsk')); ?>
 
                     </a>
+                    
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">

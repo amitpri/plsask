@@ -97,7 +97,7 @@ Route::get('/showtopics/messages', 'ShowtopicsController@messages');
 Route::get('/showtopics/postfeedback', 'ShowtopicsController@postfeedback'); 
 Route::get('/showtopics/showdetails', 'ShowtopicsController@showdetails'); 
 
-Route::get('/showtopics/{id}', 'ShowtopicsController@show');
+Route::get('/showtopics/{key}', 'ShowtopicsController@show');
 
 Route::get('/confirm/{key}', 'IndexController@confirm');
 Route::get('/help', 'HelpController@index');

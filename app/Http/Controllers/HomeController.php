@@ -81,7 +81,7 @@ class HomeController extends Controller
         if ( $param == 'twitter') $myprofile->twitter = $val;
         if ( $param == 'linkedin') $myprofile->linkedin = $val; 
       
-
+        
         $myprofile->save();
              
         return $myprofile->name;
@@ -104,8 +104,9 @@ class HomeController extends Controller
 
         $loggedinid = Auth::user()->id;   
    
-
-        $settings = Setting::updateOrCreate([ 'user_id' => $loggedinid ],['user_id' => $loggedinid]); 
+        $key = str_random(20);
+        
+        $settings = Setting::updateOrCreate([ 'user_id' => $loggedinid ],['user_id' => $loggedinid,'key' => $key]); 
    
         return view('settings', compact('currentmenu','settings'));
     }
@@ -116,14 +117,16 @@ class HomeController extends Controller
         
         $val = $request->val;
 
+        $key = str_random(20);
+
         if ( $param == 'searchable'){
           $searchable = $val; 
-          $setting = Setting::updateOrCreate([ 'user_id' => $loggedinid ],['user_id' => $loggedinid,'searchable' => $searchable]); 
+          $setting = Setting::updateOrCreate([ 'user_id' => $loggedinid ],['user_id' => $loggedinid,'key' => $key,'searchable' => $searchable]); 
         } 
 
         if ( $param == 'share'){
           $share = $val; 
-          $setting = Setting::updateOrCreate([ 'user_id' => $loggedinid ],['user_id' => $loggedinid,'share' => 
+          $setting = Setting::updateOrCreate([ 'user_id' => $loggedinid ],['user_id' => $loggedinid,'key' => $key,'share' => 
             $share]); 
         }
 

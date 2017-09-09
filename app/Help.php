@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Help extends Model
 {
     protected $fillable = [
-	       'user_id','name','emailid','type','details'
+	       'user_id', 'key','name','emailid','type','details'
 	    ];
 }

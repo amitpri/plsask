@@ -72,10 +72,12 @@ class RegisterController extends Controller
         $tomail = $data['email'];
         $name = $data['name'];
         $confirmation_code = str_random(30);
+        $key = str_random(20);
           
         $this->dispatch(new Newregistration($tomail, $name, $confirmation_code));
 
         return User::create([
+            'key' => $key,
             'name' => $name,
             'email' => $tomail,
             'password' => bcrypt($data['password']),

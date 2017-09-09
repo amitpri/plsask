@@ -31,6 +31,7 @@ class FeedbackController extends Controller
         $topic_id = $request->topic_id;
         $mailkey = $request->mailkey;
         $id = $request->id;
+        
 
         $feedbacks = TopicMail::where('user_id', '=' , $user_id)->
                             where('profile_id', '=' , $profile_id)->
@@ -63,6 +64,7 @@ class FeedbackController extends Controller
         $topic = $request->topic;
         $mailkey = $request->mailkey;
         $id = $request->id;
+        $key = str_random(20);
 
         $feedbacks = TopicMail::where('user_id', '=' , $user_id)->
                             where('profile_id', '=' , $profile_id)->
@@ -81,6 +83,7 @@ class FeedbackController extends Controller
                     ],
                     [
                         'user_id' => $user_id,
+                        'key' => $key,
                         'topic_id' => $topic_id,
                         'topic' => $topic,
                         'profile_id' => $profile_id,
@@ -106,6 +109,7 @@ class FeedbackController extends Controller
         $topic = $request->topic;
         $mailkey = $request->mailkey;
         $id = $request->id;
+        $key = str_random(20);
 
         $feedbacks = TopicMail::where('user_id', '=' , $user_id)->
                             where('profile_id', '=' , $profile_id)->
@@ -124,6 +128,7 @@ class FeedbackController extends Controller
                     ],
                     [
                         'user_id' => $user_id,
+                        'key' => $key,
                         'topic_id' => $topic_id,
                         'topic' => $topic,
                         'profile_id' => $profile_id,

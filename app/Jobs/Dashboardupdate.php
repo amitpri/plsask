@@ -42,6 +42,8 @@ class Dashboardupdate implements ShouldQueue
         $visittotal = 0;
         $visittoday = 0; 
 
+        $key = str_random(20);
+
         $feedbacktotal = Feedback::where('user_id', '=' , $loggedinid)->where('published', '=' , 1)->where('status', '=' , 1)->groupBy('user_id')->count();
 
         $feedbacktoday = Feedback::whereDate('created_at', '=', date('Y-m-d'))->where('user_id', '=' , $loggedinid)->where('published', '=' , 1)->where('status', '=' , 1)->groupBy('user_id')->count();
@@ -57,6 +59,7 @@ class Dashboardupdate implements ShouldQueue
                     ],
                     [
                         'user_id' => $loggedinid, 
+                        'key' => $key,
                         'feedbacktotal' => $feedbacktotal,
                         'feedbacktoday' => $feedbacktoday,
                         'visittotal' => $visittotal,

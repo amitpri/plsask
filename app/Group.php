@@ -12,6 +12,6 @@ class Group extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-	       'user_id','name','notes'
+	       'user_id', 'key','name','notes'
 	    ];
 }

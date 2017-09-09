@@ -12,6 +12,6 @@ class Profile extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-	       'user_id','name','emailid','phone','notes'
+	       'user_id', 'key','name','emailid','phone','notes'
 	    ];
 }

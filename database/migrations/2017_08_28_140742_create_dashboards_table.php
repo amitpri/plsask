@@ -6,15 +6,12 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateDashboardsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    
     public function up()
     {
         Schema::create('dashboards', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('key');
             $table->integer('user_id')->unsigned();
             $table->integer('feedbacktotal')->unsigned();
             $table->integer('feedbacktoday')->unsigned();
@@ -25,6 +22,8 @@ class CreateDashboardsTable extends Migration
             $table->timestamps();
             $table->engine = 'INNODB';
         });
+
+        DB::update("ALTER TABLE dashboards AUTO_INCREMENT = 100000;");
     }
 
     /**

@@ -15,6 +15,7 @@ class CreateHelpsTable extends Migration
     {
         Schema::create('helps', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('key');
             $table->integer('user_id')->unsigned()->nullable();
             $table->string('name')->nullable();
             $table->string('emailid')->nullable();

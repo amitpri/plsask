@@ -19,7 +19,7 @@ class ShowtopicsController extends Controller
     public function default()
     {
 
-        $topics = Topic::where('published', '=' , 1)->where('status', '=' , 1)->where('type', '=' , 'public')->orderBy('updated_at','desc')->take(10)->get(['id','user_id','topic','name']);
+        $topics = Topic::where('published', '=' , 1)->where('admin_status', '=' , 1)->where('status', '=' , 1)->where('type', '=' , 'public')->orderBy('updated_at','desc')->take(10)->get(['id','key','user_id','topic','name']);
 
         return $topics;
    
@@ -52,12 +52,19 @@ class ShowtopicsController extends Controller
    
     } 
 
-    public function show($id)
+    public function show($key)
     {
  
-        $topic = Topic::where('id','=',$id)->where('type','=','public')->first(['id','topic']);
+        $topic = Topic::where('admin_status','=',1)->where('status','=',1)->where('key','=',$key)->where('type','=','public')->first(['id','topic']);
 
-        return view('showtopic',compact('topic'));
+
+        if($topic == null){
+            
+        }else{
+            return view('showtopic',compact('topic'));    
+        }
+
+        
    
     } 
 
@@ -90,10 +97,12 @@ class ShowtopicsController extends Controller
         $topic = Topic::where('id','=',$inptopicid)->where('topic','=',$inptopicname)->first(['id','user_id']); 
 
         $userid = $topic->user_id;
+        $key = str_random(20);
 
         $postfeedback = Feedback::create(
                 [   
                     'user_id' => $userid,
+                    'key' => $key,
                     'topic_id' => $inptopicid,
                     'topic' => $inptopicname,
                     'review' => $inpfeedback,

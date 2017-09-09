@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('key');
             $table->string('email');
             $table->string('name')->nullable();
             $table->string('phone')->nullable(); 
@@ -32,11 +33,14 @@ class CreateUsersTable extends Migration
             $table->string('twitter')->nullable();
             $table->string('linkedin')->nullable();
             $table->boolean('confirmed')->default(0);
+            $table->boolean('admin_status')->default(1);
             $table->string('confirmation_code')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->engine = 'INNODB'; 
         });
+
+        DB::update("ALTER TABLE users AUTO_INCREMENT = 100000;");
     }
 
     /**
