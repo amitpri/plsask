@@ -78,7 +78,7 @@
 						<div class="col-lg-12 col-md-12" v-cloak>
 						
 							 <h2 class="center text-color-light "><strong>@{{ inpTopic }}</strong></h2>
-							 <h4 class="center text-color-light ">@{{ inpDetail }}</h4>
+							 <h4 class="center text-color-light "><div v-html="inpDetail"></div></h4>
 
 							 <button @click="addfeedback"  id="addToTable" class="btn btn-primary">Add Feedback <i class="fa fa-plus"></i></button>
 
