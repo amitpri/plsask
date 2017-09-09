@@ -16,7 +16,7 @@ class FeedbackController extends Controller
 
         $topicmail = TopicMail::where('mailkey', '=' , $key)->first(['id','topic_id','profile_id','mailkey']);
 
-        $topic = Topic::where('id', $topicmail->topic_id)->where('status', 1)->first(['id','user_id','topic','details']);
+        $topic = Topic::where('id', $topicmail->topic_id)->where('status', 1)->first(['id','key','user_id','topic','details']);
 
 
         return view('feedback', compact('currentmenu','topic','topicmail'));
@@ -61,6 +61,7 @@ class FeedbackController extends Controller
         $user_id = $request->user_id;
         $profile_id = $request->profile_id;
         $topic_id = $request->topic_id;
+        $topic_key = $request->key;
         $topic = $request->topic;
         $mailkey = $request->mailkey;
         $id = $request->id;
@@ -85,6 +86,7 @@ class FeedbackController extends Controller
                         'user_id' => $user_id,
                         'key' => $key,
                         'topic_id' => $topic_id,
+                        'topic_key' => $topic_key,
                         'topic' => $topic,
                         'profile_id' => $profile_id,
                         'review' => $review,
@@ -106,6 +108,7 @@ class FeedbackController extends Controller
         $user_id = $request->user_id;
         $profile_id = $request->profile_id;
         $topic_id = $request->topic_id;
+        $topic_key = $request->key;
         $topic = $request->topic;
         $mailkey = $request->mailkey;
         $id = $request->id;
@@ -130,6 +133,7 @@ class FeedbackController extends Controller
                         'user_id' => $user_id,
                         'key' => $key,
                         'topic_id' => $topic_id,
+                        'topic_key' => $topic_key,
                         'topic' => $topic,
                         'profile_id' => $profile_id,
                         'review' => $review,

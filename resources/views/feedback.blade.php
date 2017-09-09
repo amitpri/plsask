@@ -148,7 +148,7 @@
 					id:"", 
 					inpId: "{!! $topicmail->id !!}", 
 					inpReview: "",
-					inpKey:"", 
+					inpKey: "{!! $topic->key !!}",  
 					inpUser_id : "{!! $topic->user_id !!}", 
 					inpProfile_id : "{!! $topicmail->profile_id !!}", 
 					inpTopic_id : "{!! $topicmail->topic_id !!}", 
@@ -197,6 +197,7 @@
 					      		topic : this.inpTopic,
 					      		id : this.inpId, 
 					      		mailkey : this.inpMailkey,
+					      		key : this.inpKey,
 					      	 
 					    	}
 						}).then(function(response){
@@ -227,6 +228,7 @@
 						      		topic : this.inpTopic,
 						      		id : this.inpId, 
 						      		mailkey : this.inpMailkey, 
+						      		key : this.inpKey,
 						      	 
 						    	}
 							}).then(function(response){

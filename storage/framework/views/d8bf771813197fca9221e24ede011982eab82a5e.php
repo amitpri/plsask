@@ -8,7 +8,7 @@
  
 		<meta charset="UTF-8">
 
-		<title>ASKPLS - MR Management Portal</title>
+		<title>PlsAsk - Feedback</title>
 		<meta name="keywords" content="HTML5 Admin Template" />
 		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
 		<meta name="author" content="okler.net">
@@ -17,7 +17,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 		<!-- Web Fonts  -->
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+		<link href="css/googlefonts_shadow_intro_light.css" rel="stylesheet" type="text/css">
 
 		<!-- Vendor CSS -->
 		<script src="/admin/assets/vendor/jquery/jquery.js"></script>
@@ -29,23 +29,40 @@
 		<script src="/toastr/toastr.min.js"></script> 
         <link href="/toastr/toastr.min.css" rel="stylesheet" type="text/css"> 
 
+        <style>  
+
+            .flex-center {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+                margin-top:50px;
+            }
+
+            .links > a {
+                color: #636b6f;
+                padding: 0 25px;
+                font-size: 12px;
+                font-weight: 600;
+                letter-spacing: .1rem;
+                text-decoration: none;
+                text-transform: uppercase;
+            } 
+        </style>
+
 	</head>
 	<body>
 		<section class="body">
  
 			<header class="header">
 				<div class="logo-container">
-					<a href="../" class="logo">
-						<img src="/admin/assets/images/logo-shop.png" width="90" height="42" alt="Porto Admin" />
-					</a>
-					<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
-						<i class="fa fa-bars" aria-label="Toggle sidebar"></i>
-					</div>
+					<strong><a class="navbar-brand" href="<?php echo e(url('/')); ?>">
+                        <?php echo e(config('app.name', 'PlsAsk')); ?>
+
+                    </a></strong>
 				</div>
 			 
 				<div class="header-right">
 			   
-			
 					<span class="separator"></span>
 			 
 				</div> 
@@ -132,7 +149,7 @@
 					id:"", 
 					inpId: "<?php echo $topicmail->id; ?>", 
 					inpReview: "",
-					inpKey:"", 
+					inpKey: "<?php echo $topic->key; ?>",  
 					inpUser_id : "<?php echo $topic->user_id; ?>", 
 					inpProfile_id : "<?php echo $topicmail->profile_id; ?>", 
 					inpTopic_id : "<?php echo $topicmail->topic_id; ?>", 
@@ -181,6 +198,7 @@
 					      		topic : this.inpTopic,
 					      		id : this.inpId, 
 					      		mailkey : this.inpMailkey,
+					      		key : this.inpKey,
 					      	 
 					    	}
 						}).then(function(response){
@@ -211,6 +229,7 @@
 						      		topic : this.inpTopic,
 						      		id : this.inpId, 
 						      		mailkey : this.inpMailkey, 
+						      		key : this.inpKey,
 						      	 
 						    	}
 							}).then(function(response){
