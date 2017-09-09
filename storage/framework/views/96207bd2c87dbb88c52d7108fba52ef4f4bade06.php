@@ -1,20 +1,18 @@
-@extends('layouts.mr.manage')
-
-@section('formname')
+<?php $__env->startSection('formname'); ?>
 
 <h2>Topics</h2>
 
-@stop
+<?php $__env->stopSection(); ?>
  
 
-@section('content_examplejs')
+<?php $__env->startSection('content_examplejs'); ?>
  
     <script src="/toastr/toastr.min.js"></script> 
     <link href="/toastr/toastr.min.css" rel="stylesheet" type="text/css">
 
-@stop
+<?php $__env->stopSection(); ?>
 
-@section('content_page')
+<?php $__env->startSection('content_page'); ?>
 	<style>
 		[v-cloak] {
 		  display: none;
@@ -81,7 +79,7 @@
 							<div class="col-md-10">
 								
 								<input type="text" name="topic" class="form-control" v-model="inpTopic" >
-								<p v-if="error_newtopic" class="text-danger">@{{ message_newtopic }}</p>
+								<p v-if="error_newtopic" class="text-danger">{{ message_newtopic }}</p>
 
 							</div>
 						</div> 
@@ -95,7 +93,7 @@
 								<label class="radio-inline">
 								  <input type="radio" name="type" value="public" v-model="inpType"> Public ( Searchable and can be reviewed through Facebook, emails and other social media)
 								</label> 
-								<p v-if="error_newtype" class="text-danger">@{{ message_newtype }}</p>
+								<p v-if="error_newtype" class="text-danger">{{ message_newtype }}</p>
 							</div>
 
 						</div>						
@@ -131,7 +129,7 @@
 							<div class="col-md-10">
 								
 								<input type="text" name="topic" class="form-control" v-model="inpTopic" >
-								<p v-if="error_edittopic" class="text-danger">@{{ message_edittopic }}</p>
+								<p v-if="error_edittopic" class="text-danger">{{ message_edittopic }}</p>
 
 							</div>
 						</div> 
@@ -145,7 +143,7 @@
 								<label class="radio-inline">
 								  <input type="radio" name="type" value="public" v-model="inpType"> Public ( Searchable and can be reviewed through Facebook, emails and other social media)
 								</label> 
-								<p v-if="error_edittype" class="text-danger">@{{ message_edittype }}</p>
+								<p v-if="error_edittype" class="text-danger">{{ message_edittype }}</p>
 							</div>
 						</div>						
 								
@@ -170,7 +168,7 @@
 				<div class="panel-actions">
 					<a href="#" class="panel-action panel-action-dismiss" @click="showShareTopic"></a>
 				</div>
-				<h4 class="center text-color-light"><strong>@{{inpTopic}}</strong></h4>
+				<h4 class="center text-color-light"><strong>{{inpTopic}}</strong></h4>
 
 				<div class="panel-body">
 					<form>   				
@@ -179,7 +177,7 @@
 							<label class="col-md-3 control-label">Sharable Link ( Please copy paste to facebook, twitter, linkedin, whatsapp etc)</label>
 							<div class="col-md-8">			  
 
-								<textarea name="details" class="form-control" rows="2" disabled="disabled">https://plsask.com/showtopics/@{{inpKey}}</textarea>
+								<textarea name="details" class="form-control" rows="2" disabled="disabled">https://plsask.com/showtopics/{{inpKey}}</textarea>
 											 										 
 							</div>
 						</div>	
@@ -212,11 +210,11 @@
 							<tr v-for="myTopic in myTopics">
 								<td>
 
-									<a :href="'/topics/' + myTopic.key + '/send'"><h5>@{{ myTopic.topic }} </h5></a>
+									<a :href="'/topics/' + myTopic.key + '/send'"><h5>{{ myTopic.topic }} </h5></a>
 
 								</td> 
 								<td>
-									<h5>@{{ myTopic.type }}</h5>
+									<h5>{{ myTopic.type }}</h5>
 								</td> 
 								<td class="actions">
 									<h6>	 
@@ -520,4 +518,6 @@
 	});
 
 </script>
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.mr.manage', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

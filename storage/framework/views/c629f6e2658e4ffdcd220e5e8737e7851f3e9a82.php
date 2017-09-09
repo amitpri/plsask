@@ -1,12 +1,10 @@
-@extends('layouts.mr.manage')
-
-@section('formname')
+<?php $__env->startSection('formname'); ?>
 
 <h2>Manage Profiles</h2>
 
-@stop
+<?php $__env->stopSection(); ?>
 
-@section('content_page')
+<?php $__env->startSection('content_page'); ?>
 <style>
 	[v-cloak] {
 	  display: none;
@@ -92,22 +90,22 @@
 						<tbody>  
 							<tr v-for="(profile,index) in profiles"> 
 								
-								<td v-show="profile.editfalse" class="doctor">@{{ profile.name }}</td>
+								<td v-show="profile.editfalse" class="doctor">{{ profile.name }}</td>
 								<td v-show="profile.edittrue" class="doctor">
 									<input type="text" class="form-control input-block" v-model="profile.name" >
 								</td> 
 								
-								<td v-show="profile.editfalse" class="details">@{{ profile.emailid }}</td>	
+								<td v-show="profile.editfalse" class="details">{{ profile.emailid }}</td>	
 								<td v-show="profile.edittrue" class="details">
 									<input type="text" class="form-control input-block" v-model="profile.emailid">
 								</td>
 
-								<td v-show="profile.editfalse" class="details">@{{ profile.phone }}</td>	
+								<td v-show="profile.editfalse" class="details">{{ profile.phone }}</td>	
 								<td v-show="profile.edittrue" class="details">
 									<input type="text" class="form-control input-block" v-model="profile.phone">
 								</td>
 
-								<td v-show="profile.editfalse" class="details">@{{ profile.notes }}</td>	
+								<td v-show="profile.editfalse" class="details">{{ profile.notes }}</td>	
 								<td v-show="profile.edittrue" class="details">
 									<input type="text" class="form-control input-block" v-model="profile.notes">
 								</td>
@@ -282,4 +280,6 @@
 
 </script>
 
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.mr.manage', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

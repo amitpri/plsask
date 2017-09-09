@@ -1,13 +1,11 @@
-@extends('layouts.mr.manage')
-
-@section('formname')
+<?php $__env->startSection('formname'); ?>
 
 <h2>Manage Groups</h2>
 
-@stop
+<?php $__env->stopSection(); ?>
 
   
-@section('content_page')
+<?php $__env->startSection('content_page'); ?>
 <style>
 	[v-cloak] {
 	  display: none;
@@ -89,12 +87,12 @@
 						<tbody>  
 							<tr v-for="group in groups"> 
 								
-								<td v-show="group.editfalse" class="doctor">@{{ group.name }}</td>
+								<td v-show="group.editfalse" class="doctor">{{ group.name }}</td>
 								<td v-show="group.edittrue" class="doctor">
 									<input type="text" class="form-control input-block" v-model="group.name" >
 								</td> 
 																
-								<td v-show="group.editfalse" class="details">@{{ group.notes }}</td>	
+								<td v-show="group.editfalse" class="details">{{ group.notes }}</td>	
 								<td v-show="group.edittrue" class="details">
 									<input type="text" class="form-control input-block" v-model="group.notes">
 								</td>
@@ -265,4 +263,6 @@
 
 </script>
 
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.mr.manage', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

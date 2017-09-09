@@ -1,17 +1,15 @@
-@extends('layouts.mr.manage')
-
-@section('formname')
+<?php $__env->startSection('formname'); ?>
 
 <h2>Reviews</h2>
 
-@stop 
+<?php $__env->stopSection(); ?> 
  
 <style>
 	[v-cloak] {
 	  display: none;
 	}
 </style>
-@section('content_page')
+<?php $__env->startSection('content_page'); ?>
 
 
 <div class="row"> 
@@ -41,12 +39,12 @@
 								</thead>
 								<tbody>
 									<tr v-for="(review,index) in reviews">
-										<td>@{{index + 1}}</td>
+										<td>{{index + 1}}</td>
 										<td>
-											<h5><strong>@{{ review.review }}</strong></h5>
-											<h6><a :href="'reviews/topics/' + review.topic_key">@{{ review.topic }}</h6></a>
+											<h5><strong>{{ review.review }}</strong></h5>
+											<h6><a :href="'reviews/topics/' + review.topic_key">{{ review.topic }}</h6></a>
 										</td>
-										<td><span class=""><h5>@{{ review.created_at }}</h5></span></td>
+										<td><span class=""><h5>{{ review.created_at }}</h5></span></td>
 									</tr>
 								</tbody>
 							</table>
@@ -104,4 +102,6 @@ new Vue({
 
 </script> 
 
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.mr.manage', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
