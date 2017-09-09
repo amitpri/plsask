@@ -8,7 +8,7 @@
 
 		<title>{{$topic->topic}}</title>
 		<meta name="keywords" content="Please Ask - Topics" />
-		<meta name="description" content="{{$topic->details}}"> 
+		<meta name="description" content="Private Anonymous review platform"> 
 
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
