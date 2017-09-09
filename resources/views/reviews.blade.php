@@ -44,7 +44,7 @@
 										<td>@{{index + 1}}</td>
 										<td>
 											<h5>@{{ review.review }}</h5>
-											<h6><a :href="'reviews/topics/' + review.topic_id">@{{ review.topic }}</h6></a>
+											<h6><a :href="'reviews/topics/' + review.topic_key">@{{ review.topic }}</h6></a>
 										</td>
 										<td><span class="">@{{ review.updated_at }}</span></td>
 									</tr>

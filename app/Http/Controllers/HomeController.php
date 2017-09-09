@@ -34,7 +34,14 @@ class HomeController extends Controller
 
         $topic = Topic::where('id','=',$topic_id)->where('user_id','=',$loggedinid)->first(['id','topic','created_at']);
 
-        return $topic;
+        if($topic == null){
+
+        }else{
+
+            return $topic; 
+        }
+
+       
     }
 
     public function profile()
@@ -155,7 +162,7 @@ class HomeController extends Controller
     {
         $loggedinid = Auth::user()->id; 
         
-        $feedbacks = Feedback::where('user_id', '=' , $loggedinid)->where('status', '=' , 1)->where('published', '=' , 1)->orderBy('updated_at','desc')->get(['id','topic_id','topic','review', 'updated_at'])->take(10);
+        $feedbacks = Feedback::where('user_id', '=' , $loggedinid)->where('status', '=' , 1)->where('published', '=' , 1)->orderBy('updated_at','desc')->get(['id','topic_id','topic_key','topic','review', 'updated_at'])->take(10);
                   
         return $feedbacks;
     }
@@ -169,7 +176,7 @@ class HomeController extends Controller
         $feedbacks = Feedback::
                 where('user_id', '=' , $loggedinid)-> 
                 where('topic', 'like' , "%$topicsinput%")->
-                get(['id','topic_id','topic','review', 'updated_at']);
+                get(['id','topic_id','topic_key','topic','review', 'updated_at']);
                   
         return $feedbacks;
    
@@ -181,9 +188,17 @@ class HomeController extends Controller
         $loggedinid = Auth::user()->id;
         $currentmenu = 'reviews';
         
-        $topic = Topic::where('id','=',$id)->where('user_id','=',$loggedinid)->first(['id','topic','created_at']); 
+        $topic = Topic::where('key','=',$id)->where('user_id','=',$loggedinid)->first(['id', 'key' , 'topic','created_at']); 
 
-        return view('reviewstopics',compact('currentmenu','topic'));
+        if($topic == null){
+
+        }else{
+
+            return view('reviewstopics',compact('currentmenu','topic'));
+                
+        }
+
+        
    
     } 
 
@@ -195,7 +210,15 @@ class HomeController extends Controller
         
         $feedbacks = Feedback::where('topic_id','=',$topic_id)->where('user_id','=',$loggedinid)->get(['id','topic','review','created_at']); 
 
-        return $feedbacks;
+        if(count($feedbacks) > 0){
+
+            return $feedbacks;
+
+        }else{
+            
+        }
+
+        
    
     } 
 
