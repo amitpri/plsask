@@ -220,7 +220,7 @@
 								</td> 
 								<td class="actions">
 									<h6>	 
-										<a v-tooltip="msg1" :href="'/topics/' + myTopic.id + '/send'" class="on-default add-doctor-row"><i class="fa fa-envelope-o"></i></a> 
+										<a v-tooltip="msg1" :href="'/topics/' + myTopic.key + '/send'" class="on-default add-doctor-row"><i class="fa fa-envelope-o"></i></a> 
 										<a v-tooltip="msg2"  @click="edittopic(myTopic)" href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a> 
 										<a v-tooltip="msg3" @click="deletetopic(myTopic)" href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
 										<a v-show="myTopic.type == 'public'" v-tooltip="msg4" href="#" @click="sharetopic(myTopic)" class="on-default add-doctor-row"><i class="fa fa-share-alt"></i></a> 
