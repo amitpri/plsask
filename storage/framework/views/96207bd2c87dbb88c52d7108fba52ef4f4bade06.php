@@ -7,52 +7,52 @@
 
 <?php $__env->startSection('content_examplejs'); ?>
  
-        <script src="/toastr/toastr.min.js"></script> 
-        <link href="/toastr/toastr.min.css" rel="stylesheet" type="text/css">
+    <script src="/toastr/toastr.min.js"></script> 
+    <link href="/toastr/toastr.min.css" rel="stylesheet" type="text/css">
 
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content_page'); ?>
-<style>
-	[v-cloak] {
+	<style>
+		[v-cloak] {
+		  display: none;
+		}
+	</style>
+
+	<script src="/css/popper.js"></script>
+	<script src="/js/tooltip.js"></script>
+	<script src="/js/v-tooltip.browser.js"></script>
+	<style>
+
+	.tooltip {
+	  display: block !important;
+	  pointer-events: none;
+	  padding: 4px;
+	  z-index: 10000;
+	}
+
+	.tooltip .tooltip-inner {
+	  background: black;
+	  color: white;
+	  border-radius: 16px;
+	  padding: 5px 10px 4px;
+	}
+
+	.tooltip tooltip-arrow{
 	  display: none;
 	}
-</style>
 
-<script src="/css/popper.js"></script>
-<script src="/js/tooltip.js"></script>
-<script src="/js/v-tooltip.browser.js"></script>
-<style>
+	.tooltip[aria-hidden='true'] {
+	  visibility: hidden;
+	  opacity: 0;
+	  transition: opacity .15s, visibility .15s;
+	}
 
-.tooltip {
-  display: block !important;
-  pointer-events: none;
-  padding: 4px;
-  z-index: 10000;
-}
-
-.tooltip .tooltip-inner {
-  background: black;
-  color: white;
-  border-radius: 16px;
-  padding: 5px 10px 4px;
-}
-
-.tooltip tooltip-arrow{
-  display: none;
-}
-
-.tooltip[aria-hidden='true'] {
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity .15s, visibility .15s;
-}
-
-.tooltip[aria-hidden='false'] {
-  visibility: visible;
-  opacity: 1;
-  transition: opacity .15s;
-}
+	.tooltip[aria-hidden='false'] {
+	  visibility: visible;
+	  opacity: 1;
+	  transition: opacity .15s;
+	}
 
 </style>
 <div class="row" id="topics">
@@ -303,6 +303,7 @@
 					this.showMy = false;
 					this.showAll = false;
 					this.showTopic = false;
+					this.showEdit = false;
 
 				};
 
