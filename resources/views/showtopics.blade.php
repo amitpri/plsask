@@ -107,7 +107,7 @@
 														<a :href="'/showtopics/' + topic.key ">@{{ topic.topic }} </a>
 
 													</td> 
-													<td><a target="_blank" :href="'/viewprofile/' + topic.user_id ">@{{ topic.name }}</a> </td> 
+													<td><a target="_blank" :href="'/viewprofile/' + topic.user_key ">@{{ topic.name }}</a> </td> 
 												</tr>							
 											</tbody>
 										</table>

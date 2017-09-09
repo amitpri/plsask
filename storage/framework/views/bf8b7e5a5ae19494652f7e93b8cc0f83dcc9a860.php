@@ -24,7 +24,7 @@
 
 		<!-- Specific Page Vendor CSS -->
 
-			@yield('content_pagecss')
+			<?php echo $__env->yieldContent('content_pagecss'); ?>
 
 
 		<!-- Theme CSS -->
@@ -57,8 +57,9 @@
 				<div class="logo-container">
 					<div class="navbar-header">
 
-                    <strong><a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'PlsAsk') }}
+                    <strong><a class="navbar-brand" href="<?php echo e(url('/')); ?>">
+                        <?php echo e(config('app.name', 'PlsAsk')); ?>
+
                     </a></strong>
                 </div>
 					<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
@@ -94,15 +95,15 @@
 										<div class="thumb-info mb-md" v-cloak>
 											<img :src="'/uploadimage/' + inpId + '-' + inpEmail + '-profile.png'" class="rounded img-responsive"  >
 											<div class="thumb-info-title">
-												<span class="thumb-info-inner">@{{ inpName }}</span>
-												<span class="thumb-info-type">@{{ inpDesignation }}</span>
+												<span class="thumb-info-inner">{{ inpName }}</span>
+												<span class="thumb-info-type">{{ inpDesignation }}</span>
 											</div>
 										</div>
 
 
 										<hr class="dotted short">
 						 
-										<p>@{{ inpDetails}}</p> 
+										<p>{{ inpDetails}}</p> 
 
 										<hr class="dotted short">
 
@@ -146,7 +147,7 @@
 														<label class="col-md-3 control-label" for="name">Name</label>
 														<div class="col-md-8">
 
-															<h5>@{{inpName}}</h5>
+															<h5>{{inpName}}</h5>
 															
 														</div>
 													</div>
@@ -156,7 +157,7 @@
 														<label class="col-md-3 control-label" for="city">City</label>
 														<div class="col-md-8">
 
-															<h5>@{{inpCity}}</h5>
+															<h5>{{inpCity}}</h5>
 
 														</div>
 													</div>
@@ -165,7 +166,7 @@
 														<label class="col-md-3 control-label" for="profileFirstName">Country</label>
 														<div class="col-md-8">
 
-															<h5>@{{inpCountry}}</h5>
+															<h5>{{inpCountry}}</h5>
 
 														</div>
 													</div>
@@ -174,12 +175,13 @@
 														<label class="col-md-3 control-label" for="profileBio">About </label>
 														<div class="col-md-8">
 
-												           <h5>@{{inpDetails}}</h5>
+												           <h5>{{inpDetails}}</h5>
 
 														</div>
 													</div>								
 												</fieldset>
-												{!! Form::close() !!}
+												<?php echo Form::close(); ?>
+
 											</form>
 										</div>  
 										<div id="social" class="tab-pane">
@@ -192,7 +194,7 @@
 														<label class="col-md-3 control-label" for="whatsapp">Whatsapp</label>
 														<div class="col-md-8">
 															
-															<h5>@{{inpWhatsapp}}</h5>
+															<h5>{{inpWhatsapp}}</h5>
 
 														</div>
 													</div>
@@ -200,7 +202,7 @@
 														<label class="col-md-3 control-label" for="facebook">Facebook</label>
 														<div class="col-md-8">
 															
-															<h5>@{{inpFacebook}}</h5>
+															<h5>{{inpFacebook}}</h5>
 
 														</div>
 													</div>
@@ -208,7 +210,7 @@
 														<label class="col-md-3 control-label" for="twitter">Twitter</label>
 														<div class="col-md-8">
 
-															<h5>@{{inpTwitter}}</h5>
+															<h5>{{inpTwitter}}</h5>
 
 															
 														</div>
@@ -217,7 +219,7 @@
 														<label class="col-md-3 control-label" for="linkedin">Linkedin</label>
 														<div class="col-md-8">
 
-															<h5>@{{inpLinkedin}}</h5>
+															<h5>{{inpLinkedin}}</h5>
 
 														</div>
 													</div> 							
@@ -236,7 +238,7 @@
 														<label class="col-md-3 control-label" for="profileCompany">Company</label>
 														<div class="col-md-8">
 															
-															<h5>@{{inpCompany}}</h5>
+															<h5>{{inpCompany}}</h5>
 
 														</div>
 													</div>
@@ -244,7 +246,7 @@
 														<label class="col-md-3 control-label" for="name"> Role</label>
 														<div class="col-md-8">
 
-															<h5>@{{inpRole}}</h5>
+															<h5>{{inpRole}}</h5>
 
 															
 														</div>
@@ -253,7 +255,7 @@
 														<label class="col-md-3 control-label" for="email"> Designation</label>
 														<div class="col-md-8">
 
-															<h5>@{{inpDesignation}}</h5>
+															<h5>{{inpDesignation}}</h5>
 
 														</div>
 													</div>								
@@ -275,7 +277,7 @@
 								data: {
 
 									inpId : "",
-									inpKey : "{!! $key !!}",
+									inpKey : "<?php echo $key; ?>",
 									inpName : "",
 									inpEmail : "",
 									inpCity : "",
@@ -347,14 +349,14 @@
 				       	<div class="flex-center position-ref full-height"> 
 				            <div class="content"> 
 				                <div class="links">
-				                    @if (Route::has('login'))
-				                        @if (Auth::check())
-				                            <a href="{{ url('/dashboard') }}">Home</a>
-				                        @else
-				                            <a href="{{ url('/register') }}">Register</a>
-				                            <a href="{{ url('/login') }}">Login</a>                            
-				                        @endif
-				                    @endif
+				                    <?php if(Route::has('login')): ?>
+				                        <?php if(Auth::check()): ?>
+				                            <a href="<?php echo e(url('/dashboard')); ?>">Home</a>
+				                        <?php else: ?>
+				                            <a href="<?php echo e(url('/register')); ?>">Register</a>
+				                            <a href="<?php echo e(url('/login')); ?>">Login</a>                            
+				                        <?php endif; ?>
+				                    <?php endif; ?>
 				                    <a href="/showtopics">Topics</a>
 				                    <a href="/showreviews">Review</a>
 				                    <a href="/help">Help</a>

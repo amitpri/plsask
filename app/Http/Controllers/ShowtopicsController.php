@@ -19,7 +19,7 @@ class ShowtopicsController extends Controller
     public function default()
     {
 
-        $topics = Topic::where('published', '=' , 1)->where('admin_status', '=' , 1)->where('status', '=' , 1)->where('type', '=' , 'public')->orderBy('updated_at','desc')->take(10)->get(['id','key','user_id','topic','name']);
+        $topics = Topic::where('published', '=' , 1)->where('admin_status', '=' , 1)->where('status', '=' , 1)->where('type', '=' , 'public')->orderBy('updated_at','desc')->take(10)->get(['id','key','user_id','topic','name' , 'user_key']);
 
         return $topics;
    
@@ -30,7 +30,7 @@ class ShowtopicsController extends Controller
 
         $row_count = $request->row_count;
 
-        $topics = Topic::where('published', '=' , 1)->where('status', '=' , 1)->where('type', '=' , 'public')->orderBy('updated_at','desc')->offset($row_count)->take(10)->get(['id','key','user_id','topic','name']);
+        $topics = Topic::where('published', '=' , 1)->where('status', '=' , 1)->where('type', '=' , 'public')->orderBy('updated_at','desc')->offset($row_count)->take(10)->get(['id','key','user_id','topic','name', 'user_key']);
 
         return $topics;
    
@@ -46,7 +46,7 @@ class ShowtopicsController extends Controller
                 ->where('status', '=' , 1)->where('type', '=' , 'public')
                 ->where('topic', 'like' , "%$topicsinput%")
                 ->take(10)
-                ->get(['id','key','topic','details']);
+                ->get(['id','key','topic','details' , 'name', 'user_key']);
                   
         return $topics;
    
@@ -73,7 +73,7 @@ class ShowtopicsController extends Controller
  
         $id = $request->id; 
 
-        $topic = Topic::where('id','=',$id)->where('type','=','public')->first(['id','topic','details','type']);
+        $topic = Topic::where('id','=',$id)->where('type','=','public')->first(['id','topic','details','type','user_id','name', 'user_key']);
         
         return $topic;
     }

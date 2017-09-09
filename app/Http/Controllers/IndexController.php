@@ -35,21 +35,21 @@ class IndexController extends Controller
 
     }
 
-    public function viewprofile($id)
+    public function viewprofile($key)
     {
 
     	$currentmenu  = "dashboard";
-        $id = $id;
+        $key = $key;
 
-    	return view('viewprofile',compact('currentmenu','id'));
+    	return view('viewprofile',compact('currentmenu','key'));
 
     }
 
     public function profiledetails(Request $request)
     {
         
-        $id = $request->id;
-        $user = User::where('id','=',$id)->first(['id','name','email','city','country','company','company_role','details','company_designation','whatsapp','facebook','twitter','linkedin']);
+        $key = $request->key;
+        $user = User::where('key','=',$key)->first(['id','name','email','city','country','company','company_role','details','company_designation','whatsapp','facebook','twitter','linkedin']);
 
         return $user;
 

@@ -17,6 +17,7 @@ class CreateTopicsTable extends Migration
             $table->increments('id');
             $table->string('key');
             $table->integer('user_id')->unsigned()->nullable();
+            $table->string('user_key')->nullable();
             $table->string('name')->nullable();
             $table->string('topic')->nullable();
             $table->string('type')->default('private');

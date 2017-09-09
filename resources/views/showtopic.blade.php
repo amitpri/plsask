@@ -82,6 +82,9 @@
 
 							 <button @click="addfeedback"  id="addToTable" class="btn btn-primary">Add Feedback <i class="fa fa-plus"></i></button>
 
+							 <p class="col-md-4 pull-right">Topic posted By : 
+							 	<a target="_blank"  :href="'/viewprofile/' + inpUser_key">@{{ inpName }}</a></p>
+
 						</div>
 					</div>
 					<div v-if="shownewfeedback"   class="panel-body" v-cloak> 
@@ -181,6 +184,8 @@
 					shownewfeedback: false,
 					inpFeedback : "",
 					flg_name : false,
+					inpUser_key : "",
+					inpName : "",
 				},
 				mounted:function(){
 
@@ -197,6 +202,8 @@
 						this.inpTopic  = response.data.topic;
 						this.inpId = response.data.id;
 						this.inpDetail = response.data.details;
+						this.inpName = response.data.name;
+						this.inpUser_key = response.data.user_key;
 
 					});
 
