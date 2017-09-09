@@ -61,7 +61,7 @@ class SendMail implements ShouldQueue
             $mailkey = str_random(50);
 
             $newmail = TopicMail::create(
-                [   'user_id' => $loggedinid,  'topic_id' => $topicid, 'group_id' => $groupid, 'profile_id' => $profileid, 'emailid' => $toemailid, 'mailkey' => $mailkey,
+                [   'user_id' => $loggedinid, 'key' => str_random(20), 'topic_id' => $topicid, 'group_id' => $groupid, 'profile_id' => $profileid, 'emailid' => $toemailid, 'mailkey' => $mailkey,
                 ]); 
 
             \Mail::to($toemailid)->queue(new MailTopic($topicname,$username,$mailkey));

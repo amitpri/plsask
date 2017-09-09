@@ -104,11 +104,11 @@ class TopicController extends Controller
     {
         $currentmenu = 'topics';
 
-        $topicid = $id;
+        $topic_key = $id;
 
         $loggedinid = Auth::user()->id;
 
-        $topics = Topic::where('user_id' , '=' , $loggedinid)->where('id' , '=' , $topicid)->first(['id','topic','details']);        
+        $topics = Topic::where('user_id' , '=' , $loggedinid)->where('key' , '=' , $topic_key)->first(['id','topic','details']);        
         return view('send', compact('topics' , 'currentmenu'));
         
     } 

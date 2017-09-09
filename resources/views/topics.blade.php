@@ -212,7 +212,7 @@
 							<tr v-for="myTopic in myTopics">
 								<td>
 
-									<a :href="'/topics/' + myTopic.id + '/send'"><h5>@{{ myTopic.topic }} </h5></a>
+									<a :href="'/topics/' + myTopic.key + '/send'"><h5>@{{ myTopic.topic }} </h5></a>
 
 								</td> 
 								<td>
