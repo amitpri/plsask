@@ -58,8 +58,9 @@
  
 			<header class="header">
 				<div class="logo-container">
-					<strong><a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'PlsAsk') }}
+					<strong><a class="navbar-brand" href="<?php echo e(url('/')); ?>">
+                        <?php echo e(config('app.name', 'PlsAsk')); ?>
+
                     </a></strong>
 				</div>
 			 
@@ -82,9 +83,9 @@
 								<section class="panel"> 
 
 									<div  class="panel-body"> 
-										<h2 class="center text-color-light"><strong>{{ $topic->topic }}</strong></h2>
+										<h2 class="center text-color-light"><strong><?php echo e($topic->topic); ?></strong></h2>
 
-										<h4 class="center text-color-light">{{ $topic->details }}</h4>
+										<h4 class="center text-color-light"><?php echo e($topic->details); ?></h4>
 
 										<div class="panel-body" v-if="published" v-cloak>
 											<form> 
@@ -165,14 +166,14 @@
 
 				data : {
 					id:"", 
-					inpId: "{!! $topicmail->id !!}", 
+					inpId: "<?php echo $topicmail->id; ?>", 
 					inpReview: "",
-					inpKey: "{!! $topic->key !!}",  
-					inpUser_id : "{!! $topic->user_id !!}", 
-					inpProfile_id : "{!! $topicmail->profile_id !!}", 
-					inpTopic_id : "{!! $topicmail->topic_id !!}", 
-					inpTopic : "{!! $topic->topic !!}", 
-					inpMailkey : "{!! $topicmail->mailkey !!}", 
+					inpKey: "<?php echo $topic->key; ?>",  
+					inpUser_id : "<?php echo $topic->user_id; ?>", 
+					inpProfile_id : "<?php echo $topicmail->profile_id; ?>", 
+					inpTopic_id : "<?php echo $topicmail->topic_id; ?>", 
+					inpTopic : "<?php echo $topic->topic; ?>", 
+					inpMailkey : "<?php echo $topicmail->mailkey; ?>", 
 					published : true,
 					publishmessage : false,
 					},
