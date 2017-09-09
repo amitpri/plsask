@@ -55,7 +55,7 @@ class ShowtopicsController extends Controller
     public function show($key)
     {
  
-        $topic = Topic::where('admin_status','=',1)->where('status','=',1)->where('key','=',$key)->where('type','=','public')->first(['id','topic']);
+        $topic = Topic::where('admin_status','=',1)->where('status','=',1)->where('key','=',$key)->where('type','=','public')->first(['id', 'key' ,'topic']);
 
 
         if($topic == null){
@@ -91,10 +91,11 @@ class ShowtopicsController extends Controller
     public function postfeedback(Request $request)
     {   
         $inptopicid = $request->topicid;
+        $inptopickey = $request->topickey;
         $inptopicname = $request->topicname;
         $inpfeedback = $request->feedback;
 
-        $topic = Topic::where('id','=',$inptopicid)->where('topic','=',$inptopicname)->first(['id','user_id']); 
+        $topic = Topic::where('id','=',$inptopicid)->where('key','=',$inptopickey)->where('topic','=',$inptopicname)->first(['id','user_id']); 
 
         $userid = $topic->user_id;
         $key = str_random(20);
@@ -104,6 +105,7 @@ class ShowtopicsController extends Controller
                     'user_id' => $userid,
                     'key' => $key,
                     'topic_id' => $inptopicid,
+                    'topic_key' => $inptopickey,
                     'topic' => $inptopicname,
                     'review' => $inpfeedback,
                     'published' => 1,

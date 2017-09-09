@@ -102,7 +102,7 @@
 													<td>
 
 														<p><h5><strong>{{ review.review }}</strong></h5></p>
-														<p><h6><a :href="'/showtopics/' + review.topic_id">{{ review.topic }}</a></h6></p>
+														<p><h6><a :href="'/showtopics/' + review.topic_key">{{ review.topic }}</a></h6></p>
 
 													</td> 
 													<td>{{  review.created_at }}</td> 

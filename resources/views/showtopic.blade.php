@@ -173,11 +173,11 @@
 				data : {
 					id:"", 
 					inpId: "{!! $topic->id !!}",
+					inpKey: "{!! $topic->key !!}",
 					inpTopic: "",
 					inpDetail: "", 
 					feedback: "",
-					feedbacks: [],
-					inpKey:"", 
+					feedbacks: [], 
 					shownewfeedback: false,
 					inpFeedback : "",
 					flg_name : false,
@@ -248,6 +248,7 @@
 
 								      		feedback: this.inpFeedback,
 								      		topicid : this.inpId,
+								      		topickey : this.inpKey,
 								      		topicname : this.inpTopic, 
 								      	 
 								    	}

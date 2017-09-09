@@ -18,6 +18,7 @@ class CreateFeedbackTable extends Migration
             $table->string('key');
             $table->integer('user_id')->unsigned()->nullable();
             $table->integer('topic_id')->unsigned()->nullable(); 
+            $table->string('topic_key')->nullable(); 
             $table->string('topic')->nullable();
             $table->integer('profile_id')->unsigned()->nullable(); 
             $table->text('review')->nullable();
