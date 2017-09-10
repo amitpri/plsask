@@ -58,7 +58,7 @@
 
 </style>
 <div class="row" id="topics">
-	<div class="col-lg-12 col-md-12">
+	<div v-show="displayconfirmed" class="col-lg-12 col-md-12">
 
 		<section class="panel">
 			<header class="panel-heading panel-heading-transparent">
@@ -239,8 +239,13 @@
 			</div>	
 
 		</section> 
-
 		
+
+	</div>
+
+	<div v-show="!displayconfirmed" class="col-lg-12 col-md-12">
+
+		<row><p class="text-danger"><strong>You cannot access this area because you havent confirmed your email yet. Please <a href="resendconfirmation">click here</a> to resend the mail again</strong></p></row>
 
 	</div>
 </div>
@@ -281,9 +286,29 @@
 			msg2: 'Edit',
 			msg3: 'Delete',
 			msg4: 'Share',
+			confirmed: "",
+			displayconfirmed : false,
 
 		},
 		mounted :function(){
+
+			axios.get('/emailconfirmationstatus' )
+				.then(response => {
+
+					this.confirmed = response.data.confirmed;
+
+					if( this.confirmed == 0){
+
+						this.displayconfirmed = false;
+
+					}else{
+
+						this.displayconfirmed = true;
+
+					}
+
+				});
+
 
 			axios.get('/topics/getmytopic' )
 							.then(response => {this.myTopics = response.data});

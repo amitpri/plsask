@@ -11,7 +11,7 @@ use App\Dashboard;
 use App\Jobs\Dashboardupdate;
 
 use Illuminate\Http\Request;
-
+use App\Jobs\Newregistration;
 class HomeController extends Controller
 {
  
@@ -44,6 +44,37 @@ class HomeController extends Controller
        
     }
 
+    public function emailconfirmationstatus()
+    {
+
+        $loggedinid = Auth::user()->id;  
+
+        $user = User::find($loggedinid)->first(['confirmed']);
+
+        return $user;
+
+    }
+
+    public function resendconfirmation()
+    {
+
+        $loggedinid = Auth::user()->id;  
+
+        $user = User::find($loggedinid)->first(['email', 'name' , 'confirmation_code']);
+
+        $tomail = $user['email'];
+        $name = $user['name'];
+        $confirmation_code = $user['confirmation_code']; 
+
+        $this->dispatch(new Newregistration($tomail, $name, $confirmation_code));
+
+        $currentmenu = 'topics';
+
+        return view('topics',compact('currentmenu'));
+
+    }
+
+  
     public function profile()
     {
         
