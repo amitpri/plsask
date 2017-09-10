@@ -56,195 +56,201 @@
 
 </style>
 <div class="row" id="topics">
-	<div v-show="displayconfirmed" class="col-lg-12 col-md-12">
 
-		<section class="panel">
-			<header class="panel-heading panel-heading-transparent">
-			
-				<button class="btn btn-default" @click="showMyTopic">My Topics</button>				
-				<button class="btn btn-default" @click="showNewTopic">New Topic</button>
+	<div v-show="showSpinner" class="text-center"><img src="/images/ajax_loader.gif"></div>
 
-			</header>
+	<div v-show="showContent">
 
-			<div v-if="showNew" class="panel-body" v-cloak>
-				<div class="panel-actions">
-					<a href="#" class="panel-action panel-action-dismiss" @click="showNewTopic"></a>
-				</div>
-				<h4 class="center text-color-light"><strong>Create new Topic</strong></h4>
+		<div v-show="displayconfirmed" class="col-lg-12 col-md-12" >
 
-				<div class="panel-body">
-					<form>
-						<div class="form-group">
-							<label class="col-md-1 control-label" for="textareaDefault">Topic</label>
-							<div class="col-md-10">
-								
-								<input type="text" name="topic" class="form-control" v-model="inpTopic" >
-								<p v-if="error_newtopic" class="text-danger">{{ message_newtopic }}</p>
-
-							</div>
-						</div> 
-
-						<div class="form-group">
-							<label class="col-md-1 control-label" for="textareaDefault">Type</label>
-							<div class="col-md-10"> 
-								<label class="radio-inline">
-								  <input type="radio" name="type" value="private" v-model="inpType"> Private ( Can be shared only with your own profiles and groups)
-								</label>
-								<label class="radio-inline">
-								  <input type="radio" name="type" value="public" v-model="inpType"> Public ( Searchable and can be reviewed through Facebook, emails and other social media)
-								</label> 
-								<p v-if="error_newtype" class="text-danger">{{ message_newtype }}</p>
-							</div>
-
-						</div>						
-								
-						<div class="form-group">
-							<label class="col-md-1 control-label">Details</label>
-							<div class="col-md-10">			  
-
-								<textarea name="details" class="form-control" rows="10" v-model="inpDetails"></textarea>
-											 										 
-							</div>
-						</div>	
-						<div class="form-group center">	
-							<button type="button" class="btn btn-primary" @click="savetopic">Save</button> 
-						</div>
-					</form>
+			<section class="panel">
+				<header class="panel-heading panel-heading-transparent">
 				
-				</div>
+					<button class="btn btn-default" @click="showMyTopic">My Topics</button>				
+					<button class="btn btn-default" @click="showNewTopic">New Topic</button>
 
-			</div> 
+				</header>
 
-			<div v-if="showEdit" class="panel-body" v-cloak>
-				<div class="panel-actions">
-					<a href="#" class="panel-action panel-action-dismiss" @click="showEditTopic"></a>
-				</div>
-				<h4 class="center text-color-light"><strong>Edit Topic</strong></h4>
+				<div v-if="showNew" class="panel-body" v-cloak>
+					<div class="panel-actions">
+						<a href="#" class="panel-action panel-action-dismiss" @click="showNewTopic"></a>
+					</div>
+					<h4 class="center text-color-light"><strong>Create new Topic</strong></h4>
 
-				<div class="panel-body">
-					<form> 
+					<div class="panel-body">
+						<form>
+							<div class="form-group">
+								<label class="col-md-1 control-label" for="textareaDefault">Topic</label>
+								<div class="col-md-10">
+									
+									<input type="text" name="topic" class="form-control" v-model="inpTopic" >
+									<p v-if="error_newtopic" class="text-danger">{{ message_newtopic }}</p>
 
-						<div class="form-group">
-							<label class="col-md-1 control-label" for="textareaDefault">Topic</label>
-							<div class="col-md-10">
-								
-								<input type="text" name="topic" class="form-control" v-model="inpTopic" >
-								<p v-if="error_edittopic" class="text-danger">{{ message_edittopic }}</p>
+								</div>
+							</div> 
 
+							<div class="form-group">
+								<label class="col-md-1 control-label" for="textareaDefault">Type</label>
+								<div class="col-md-10"> 
+									<label class="radio-inline">
+									  <input type="radio" name="type" value="private" v-model="inpType"> Private ( Can be shared only with your own profiles and groups)
+									</label>
+									<label class="radio-inline">
+									  <input type="radio" name="type" value="public" v-model="inpType"> Public ( Searchable and can be reviewed through Facebook, emails and other social media)
+									</label> 
+									<p v-if="error_newtype" class="text-danger">{{ message_newtype }}</p>
+								</div>
+
+							</div>						
+									
+							<div class="form-group">
+								<label class="col-md-1 control-label">Details</label>
+								<div class="col-md-10">			  
+
+									<textarea name="details" class="form-control" rows="10" v-model="inpDetails"></textarea>
+												 										 
+								</div>
+							</div>	
+							<div class="form-group center">	
+								<button type="button" class="btn btn-primary" @click="savetopic">Save</button> 
 							</div>
-						</div> 
+						</form>
+					
+					</div>
 
-						<div class="form-group">
-							<label class="col-md-1 control-label" for="textareaDefault">Type</label>
-							<div class="col-md-10"> 
-								<label class="radio-inline">
-								  <input type="radio" name="type" value="private" v-model="inpType"> Private( Can be shared only with your own profiles and groups)
-								</label>
-								<label class="radio-inline">
-								  <input type="radio" name="type" value="public" v-model="inpType"> Public ( Searchable and can be reviewed through Facebook, emails and other social media)
-								</label> 
-								<p v-if="error_edittype" class="text-danger">{{ message_edittype }}</p>
+				</div> 
+
+				<div v-if="showEdit" class="panel-body" v-cloak>
+					<div class="panel-actions">
+						<a href="#" class="panel-action panel-action-dismiss" @click="showEditTopic"></a>
+					</div>
+					<h4 class="center text-color-light"><strong>Edit Topic</strong></h4>
+
+					<div class="panel-body">
+						<form> 
+
+							<div class="form-group">
+								<label class="col-md-1 control-label" for="textareaDefault">Topic</label>
+								<div class="col-md-10">
+									
+									<input type="text" name="topic" class="form-control" v-model="inpTopic" >
+									<p v-if="error_edittopic" class="text-danger">{{ message_edittopic }}</p>
+
+								</div>
+							</div> 
+
+							<div class="form-group">
+								<label class="col-md-1 control-label" for="textareaDefault">Type</label>
+								<div class="col-md-10"> 
+									<label class="radio-inline">
+									  <input type="radio" name="type" value="private" v-model="inpType"> Private( Can be shared only with your own profiles and groups)
+									</label>
+									<label class="radio-inline">
+									  <input type="radio" name="type" value="public" v-model="inpType"> Public ( Searchable and can be reviewed through Facebook, emails and other social media)
+									</label> 
+									<p v-if="error_edittype" class="text-danger">{{ message_edittype }}</p>
+								</div>
+							</div>						
+									
+							<div class="form-group">
+								<label class="col-md-1 control-label">Details</label>
+								<div class="col-md-10">			  
+
+									<textarea name="details" class="form-control" rows="10" v-model="inpDetails"></textarea>
+												 										 
+								</div>
+							</div>	
+							<div class="form-group center">	
+								<button type="button" class="btn btn-primary" @click="saveedittopic">Save</button> 
 							</div>
-						</div>						
-								
-						<div class="form-group">
-							<label class="col-md-1 control-label">Details</label>
-							<div class="col-md-10">			  
+						</form>
+					
+					</div>
 
-								<textarea name="details" class="form-control" rows="10" v-model="inpDetails"></textarea>
-											 										 
-							</div>
-						</div>	
-						<div class="form-group center">	
-							<button type="button" class="btn btn-primary" @click="saveedittopic">Save</button> 
-						</div>
-					</form>
-				
-				</div>
+				</div> 
 
-			</div> 
+				<div v-if="showShare" class="panel-body" v-cloak>
+					<div class="panel-actions">
+						<a href="#" class="panel-action panel-action-dismiss" @click="showShareTopic"></a>
+					</div>
+					<h4 class="center text-color-light"><strong>{{inpTopic}}</strong></h4>
 
-			<div v-if="showShare" class="panel-body" v-cloak>
-				<div class="panel-actions">
-					<a href="#" class="panel-action panel-action-dismiss" @click="showShareTopic"></a>
-				</div>
-				<h4 class="center text-color-light"><strong>{{inpTopic}}</strong></h4>
+					<div class="panel-body">
+						<form>   				
+									
+							<div class="form-group">
+								<label class="col-md-3 control-label">Sharable Link ( Please copy paste to facebook, twitter, linkedin, whatsapp etc)</label>
+								<div class="col-md-8">			  
 
-				<div class="panel-body">
-					<form>   				
-								
-						<div class="form-group">
-							<label class="col-md-3 control-label">Sharable Link ( Please copy paste to facebook, twitter, linkedin, whatsapp etc)</label>
-							<div class="col-md-8">			  
+									<textarea name="details" class="form-control" rows="2" disabled="disabled">https://plsask.com/showtopics/{{inpKey}}</textarea>
+												 										 
+								</div>
+							</div>	
+							 
+						</form>
+					
+					</div>
 
-								<textarea name="details" class="form-control" rows="2" disabled="disabled">https://plsask.com/showtopics/{{inpKey}}</textarea>
-											 										 
-							</div>
-						</div>	
-						 
-					</form>
-				
-				</div>
-
-			</div> 
- 
-
-			<h4 v-if="showMy && myTopics.length > 0" class="center text-color-light "><strong>My Topics</strong></h4>
-
-			<div v-if="showMy && myTopics.length > 0" class="panel-body" v-cloak>
-
-				<div class="panel-actions">
-					<a href="#" class="panel-action panel-action-dismiss" @click="showMyTopic"></a>
-				</div>
-
-				<div class="table-responsive" >
-					<table class="table table-striped mb-none">
-						<thead>
-							<tr>
-								<th class="col-md-8">Topic</th> 
-								<th class="col-md-2">Type</th> 
-								<th class="col-md-2">Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr v-for="myTopic in myTopics">
-								<td>
-
-									<a :href="'/topics/' + myTopic.key + '/send'"><h5>{{ myTopic.topic }} </h5></a>
-
-								</td> 
-								<td>
-									<h5>{{ myTopic.type }}</h5>
-								</td> 
-								<td class="actions">
-									<h6>	 
-										<a v-tooltip="msg1" :href="'/topics/' + myTopic.key + '/send'" class="on-default add-doctor-row"><i class="fa fa-envelope-o"></i></a> 
-										<a v-tooltip="msg2"  @click="edittopic(myTopic)" href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a> 
-										<a v-tooltip="msg3" @click="deletetopic(myTopic)" href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
-										<a v-show="myTopic.type == 'public'" v-tooltip="msg4" href="#" @click="sharetopic(myTopic)" class="on-default add-doctor-row"><i class="fa fa-share-alt"></i></a> 
-									</h6>
-								</td> 
-							</tr>							
-						</tbody>
-					</table>
-				</div>
-			</div>
-
-			<div class="panel-body" v-if="myTopics.length < 1"  v-cloak> 	 
-
-				<h5 v-if="myTopics.length < 1" class="center text-color-light " v-cloak>No Topic Available. Please create one</h4>
+				</div> 
 	 
-			</div>	
 
-		</section> 
-		
+				<h4 v-if="showMy && myTopics.length > 0" class="center text-color-light "><strong>My Topics</strong></h4>
 
-	</div>
+				<div v-if="showMy && myTopics.length > 0" class="panel-body" v-cloak>
 
-	<div v-show="!displayconfirmed" class="col-lg-12 col-md-12">
+					<div class="panel-actions">
+						<a href="#" class="panel-action panel-action-dismiss" @click="showMyTopic"></a>
+					</div>
 
-		<row><p class="text-danger"><strong>You cannot access this area because you havent confirmed your email yet. Please <a href="resendconfirmation">click here</a> to resend the mail again</strong></p></row>
+					<div class="table-responsive" >
+						<table class="table table-striped mb-none">
+							<thead>
+								<tr>
+									<th class="col-md-8">Topic</th> 
+									<th class="col-md-2">Type</th> 
+									<th class="col-md-2">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="myTopic in myTopics">
+									<td>
 
+										<a :href="'/topics/' + myTopic.key + '/send'"><h5>{{ myTopic.topic }} </h5></a>
+
+									</td> 
+									<td>
+										<h5>{{ myTopic.type }}</h5>
+									</td> 
+									<td class="actions">
+										<h6>	 
+											<a v-tooltip="msg1" :href="'/topics/' + myTopic.key + '/send'" class="on-default add-doctor-row"><i class="fa fa-envelope-o"></i></a> 
+											<a v-tooltip="msg2"  @click="edittopic(myTopic)" href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a> 
+											<a v-tooltip="msg3" @click="deletetopic(myTopic)" href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+											<a v-show="myTopic.type == 'public'" v-tooltip="msg4" href="#" @click="sharetopic(myTopic)" class="on-default add-doctor-row"><i class="fa fa-share-alt"></i></a> 
+										</h6>
+									</td> 
+								</tr>							
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="panel-body" v-if="myTopics.length < 1"  v-cloak> 	 
+
+					<h5 v-if="myTopics.length < 1" class="center text-color-light " v-cloak>No Topic Available. Please create one</h4>
+		 
+				</div>	
+
+			</section> 
+			
+
+		</div>
+
+		<div v-show="!displayconfirmed" class="col-lg-12 col-md-12" v-cloak>
+
+			<row><p class="text-danger"><strong>You cannot access this area because you havent confirmed your email yet. Please <a href="resendconfirmation">click here</a> to resend the mail again</strong></p></row>
+
+		</div>
 	</div>
 </div>
 
@@ -286,6 +292,8 @@
 			msg4: 'Share',
 			confirmed: "",
 			displayconfirmed : false,
+			showSpinner : true,
+			showContent : false,
 
 		},
 		mounted :function(){
@@ -309,7 +317,17 @@
 
 
 			axios.get('/topics/getmytopic' )
-							.then(response => {this.myTopics = response.data});
+							.then(response => {
+
+					this.myTopics = response.data;
+
+					this.showSpinner = false; 
+					this.showContent = true;
+
+
+				});
+
+			
 
 		},
 		methods: { 
