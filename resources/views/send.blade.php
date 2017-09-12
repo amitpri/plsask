@@ -6,19 +6,7 @@
 
 @stop
 
-@section('content_pagecss')
  
- 
-@stop
-
-@section('content_pagejs')
- 
-@stop
-
-@section('content_examplejs')
-  
-
-@stop
 <style>
 	[v-cloak] {
 	  display: none;
@@ -67,32 +55,39 @@
 						</div>
 					</div>						
 				</div>
-				<div class="row text-center" v-if="displaymessage" v-cloak>
-
-					<h4 class="text-danger"><b>Mails being sent. You can check back at the <a href="/reviews">review</a> section to find out the responses</b></h4>	
+				<div class="row" v-if="errormsg" v-cloak>
+						
+					<h6 class="text-danger">Please enter a valid group name. If you have not created one then please <a href="/groups">click here</a> to create a group</h6>
 
 				</div>
+				<div class="row text-center" v-if="displaymessage" v-cloak>
+
+					<h6 class="text-info"><b>Mails are being sent to these email ids. You can check back at the <a href="/reviews">review</a> section to find out the responses</b></h6>	
+
+				</div>
+
+				<br>
+
+				<div v-if="topicprofiles.length > 0" class="panel-header" v-cloak><b>Topic Recipients</b></div>
+
+				<br>
 				
 				<div v-if="topicprofiles.length > 0" class="panel-body" v-cloak>
-					<table class="table table-bordered table-striped mb-none" id="datatable-editable">
+					<table class="table  mb-none" id="datatable-editable">
 						<thead>
 							<tr>
-								<th>Email Id</th>
-								<th>Date</th>
-								<th>Status</th>
+								<th><h6><strong>Email Id</strong></h6></th>
+								<th><h6><strong>Date</strong></h6></th> 
 							</tr>
 						</thead>
 						<tbody> 
 							<tr v-for="topicprofile in topicprofiles" data-item-id=""> 
 								
-								<td  class="doctor">@{{ topicprofile.emailid }}</td> 
+								<td  class="doctor"><h6>@{{ topicprofile.emailid }}</h6></td> 
 								
-								<td   class="details">@{{ topicprofile.updated_at }}</td> 
+								<td   class="details"><h6>@{{ topicprofile.created_at }}</h6></td> 
 
-								<td class="actions">									
-									Sent
-									 
-								</td>
+							 
 							</tr> 
 						</tbody>
 					</table>
@@ -118,18 +113,24 @@ new Vue({
 		searchquery: "",
 		inpId : "{!! $topics->id !!}",
 		displaymessage : false,
+		errormsg : false,
 	},
 	mounted:function(){
  		
  		axios.get('/topics/senddefault',{
 
-					params: {
- 
-				      	topicid: this.inpId,
+				params: {
 
-				    	}
+			      	topicid: this.inpId,
 
-					}).then(response => {this.topicprofiles = response.data});	
+			    	}
+
+				}).then(response => {
+
+					this.topicprofiles = response.data;
+//					this.topicprofiles.status = 'Sent'; 
+
+				});	
 
 	},
 	methods:{
@@ -153,7 +154,15 @@ new Vue({
 		},
 		topicsend:function(){
 
-			var c = confirm("Sure to send? Please make sure you are not spamming anyone.");				 
+			if(this.searchquery == ""){
+
+				this.errormsg =  true;
+
+			}else{
+
+				this.errormsg =  false;
+
+				var c = confirm("Sure to send? Please make sure you are not spamming anyone.");				 
 
 				if( c == true){
 
@@ -167,10 +176,18 @@ new Vue({
 						    	}
 
 							})
-						.then(response => {this.groups = response.data});
+						.then(response => {
+
+							this.topicprofiles = response.data;
+
+						});
 
 					this.displaymessage = true;
 				}
+
+			}
+
+
 
 		},
 	}

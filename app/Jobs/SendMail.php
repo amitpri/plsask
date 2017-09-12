@@ -39,13 +39,17 @@ class SendMail implements ShouldQueue
 
         $loggedinid = Auth::user()->id;
 
+        $topicmails = TopicMail::where('user_id', '=' , $loggedinid)->where('topic_id', '=' , $topicid)->get(['emailid']);
+ 
         $profiles = GroupProfile::where('group_id',$groupid)
             ->where('user_id',$fromid)
             ->where('status',1)
+            ->whereNotIn('emailid',$topicmails)
             ->get(['id','emailid']);
-
+ 
 
         $user = User::where('id', $loggedinid)->first(['id','name']);
+
         $username = $user->name;
 
         $topic = Topic::where('user_id',$loggedinid)
@@ -57,7 +61,9 @@ class SendMail implements ShouldQueue
         for($i = 0; $i < $profiles->count(); $i++){
 
             $toemailid = $profiles[$i]->emailid;
+
             $profileid = $profiles[$i]->id;
+
             $mailkey = str_random(50);
 
             $newmail = TopicMail::create(

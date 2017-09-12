@@ -9,6 +9,7 @@ use App\Profile;
 use App\Group;
 use App\TopicMail;
 use App\Mail\MailTopic;
+use App\GroupProfile;
 
 use Illuminate\Http\Request;
 use App\Jobs\SendMail;
@@ -98,7 +99,7 @@ class TopicController extends Controller
         $loggedinid = Auth::user()->id; 
         $topicid = $request->topicid;
 
-        $topicmails = TopicMail::where('user_id', '=' , $loggedinid)->where('topic_id', '=' , $topicid)->orderBy('updated_at','desc')->get(['id','emailid','updated_at']);
+        $topicmails = TopicMail::where('user_id', '=' , $loggedinid)->where('topic_id', '=' , $topicid)->orderBy('updated_at','desc')->get(['id','emailid','created_at']);
                   
         return $topicmails;
    
@@ -112,8 +113,15 @@ class TopicController extends Controller
 
         $loggedinid = Auth::user()->id;
 
-        $topics = Topic::where('user_id' , '=' , $loggedinid)->where('key' , '=' , $topic_key)->first(['id','topic','details']);        
-        return view('send', compact('topics' , 'currentmenu'));
+        $topics = Topic::where('user_id' , '=' , $loggedinid)->where('key' , '=' , $topic_key)->first(['id','topic','details']); 
+
+        if($topics == null){
+
+        }else{
+            return view('send', compact('topics' , 'currentmenu'));    
+        }
+
+        
         
     } 
 
@@ -149,7 +157,16 @@ class TopicController extends Controller
          
         $job = new SendMail($groupid, $topicid);
 
+        $topicmails = TopicMail::where('user_id', '=' , $loggedinid)->where('topic_id', '=' , $topicid)->get(['emailid']);
+
+        $profiles = GroupProfile::where('group_id',$groupid)
+            ->where('user_id',$loggedinid)
+            ->where('status',1)
+            ->whereNotIn('emailid',$topicmails)
+            ->get(['emailid','created_at']); 
+
         $this->dispatch($job);
-   
+                  
+        return $profiles; 
     } 
 }
