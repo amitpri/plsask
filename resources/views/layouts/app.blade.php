@@ -12,6 +12,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @include('analytics')
+    
 </head>
 <body style="background: white;">
     <div id="app">

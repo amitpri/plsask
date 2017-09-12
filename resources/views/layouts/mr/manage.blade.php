@@ -59,6 +59,8 @@
 
         <script src="/socket/socket.io.js"></script>
 
+        @include('analytics')
+
 	</head>
 	<body>
 		<section class="body">

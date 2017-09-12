@@ -50,6 +50,8 @@
 			}
 		</style>
 
+		@include('analytics')
+
 	</head>
 	<body>
 

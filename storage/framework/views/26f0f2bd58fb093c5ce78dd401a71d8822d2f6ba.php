@@ -68,6 +68,8 @@
                 margin-bottom: 30px;
             }
         </style>
+
+        <?php echo $__env->make('analytics', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
     </head>
     <body>
         <div class="flex-center position-ref full-height"> 

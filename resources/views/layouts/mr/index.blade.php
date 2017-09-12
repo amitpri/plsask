@@ -63,7 +63,8 @@
 		<script src="js/jquery.easy-autocomplete.js"></script> 
 		<link rel="stylesheet" href="css/easy-autocomplete.css"> 
 
-
+		@include('analytics')
+		
 	</head>
 	<body>
 

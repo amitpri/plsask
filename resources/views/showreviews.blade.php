@@ -45,6 +45,9 @@
             } 
         </style>
 
+        @include('analytics')
+        
+
 	</head>
 	<body>
 		<section class="body">
