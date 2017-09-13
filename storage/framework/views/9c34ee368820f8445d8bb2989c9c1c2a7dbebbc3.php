@@ -45,6 +45,9 @@
             } 
         </style>
 
+        <?php echo $__env->make('analytics', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        
+
 	</head>
 	<body>
 		<section class="body">
@@ -65,74 +68,80 @@
 
 			</header>
 			
-			<div class="inner-wrapper" id="feedback"> 
+			<div id="feedback">
 
-				<section role="main" class="content-body">
-					<div class="row">
-						<div class="col-lg-6 col-md-6">
-							<div class="search-control-wrapper">
-								<form action="pages-search-results.html">
-									<div class="form-group">
-										<div class="input-group">
-											<input type="text" class="form-control" placeholder="Search Topics" v-model="searchquery"  @keyup="filteredreviews" >
+				<div v-show="showSpinner" class="text-center"><img src="/images/ajax_loader.gif"></div>
+				
+				<div v-show="showContent" class="inner-wrapper" > 
 
-											<span class="input-group-btn">
-												<button class="btn btn-primary" type="button">Search</button>
-											</span>
+					<section role="main" class="content-body">
+						<div class="row">
+							<div class="col-lg-6 col-md-6">
+								<div class="search-control-wrapper">
+									<form action="pages-search-results.html">
+										<div class="form-group">
+											<div class="input-group">
+												<input type="text" class="form-control" placeholder="Search Topics" v-model="searchquery"  @keyup="filteredreviews" >
+
+												<span class="input-group-btn">
+													<button class="btn btn-primary" type="button">Search</button>
+												</span>
+											</div>
+										</div>
+									</form>
+								</div> 
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12 col-md-12">
+								<section class="panel">   						 
+									<div  class="panel-body">
+										<div class="table-responsive" >
+											<table class="table table-striped mb-none">
+												<thead>
+													<tr>
+														<th class="col-md-8">Feedbacks</th> 
+														<th class="col-md-2">Date</th>  
+													</tr>
+												</thead>
+												<tbody>
+													<tr v-for="review in reviews">
+														<td>
+
+															<p><h5><strong>{{ review.review }}</strong></h5></p>
+															<p><h6><a :href="'/showtopics/' + review.topic_key">{{ review.topic }}</a></h6></p>
+
+														</td> 
+														<td>{{  review.created_at }}</td> 
+													</tr>							
+												</tbody>
+											</table>
 										</div>
 									</div>
-								</form>
-							</div> 
+								</section> 	
+								<div class="center"><button class="btn btn-default" @click="morerows">Load More</button></div>
+								<div class="flex-center position-ref full-height"> 
+						            <div class="content"> 
+						                <div class="links">
+						                    <?php if(Route::has('login')): ?>
+						                        <?php if(Auth::check()): ?>
+						                            <a href="<?php echo e(url('/dashboard')); ?>">Home</a>
+						                        <?php else: ?>
+						                            <a href="<?php echo e(url('/register')); ?>">Register</a>
+						                            <a href="<?php echo e(url('/login')); ?>">Login</a>                            
+						                        <?php endif; ?>
+						                    <?php endif; ?>
+						                    <a href="/showtopics">Topics</a>
+						                    <a href="/showreviews">Review</a>
+						                    <a href="/help">Help</a>
+						                </div>
+						            </div>
+						        </div>
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-12 col-md-12">
-							<section class="panel">   						 
-								<div  class="panel-body">
-									<div class="table-responsive" >
-										<table class="table table-striped mb-none">
-											<thead>
-												<tr>
-													<th class="col-md-8">Feedbacks</th> 
-													<th class="col-md-2">Date</th>  
-												</tr>
-											</thead>
-											<tbody>
-												<tr v-for="review in reviews">
-													<td>
+					</section>
 
-														<p><h5><strong>{{ review.review }}</strong></h5></p>
-														<p><h6><a :href="'/showtopics/' + review.topic_key">{{ review.topic }}</a></h6></p>
-
-													</td> 
-													<td>{{  review.created_at }}</td> 
-												</tr>							
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</section> 	
-							<div class="center"><button class="btn btn-default" @click="morerows">Load More</button></div>
-							<div class="flex-center position-ref full-height"> 
-					            <div class="content"> 
-					                <div class="links">
-					                    <?php if(Route::has('login')): ?>
-					                        <?php if(Auth::check()): ?>
-					                            <a href="<?php echo e(url('/dashboard')); ?>">Home</a>
-					                        <?php else: ?>
-					                            <a href="<?php echo e(url('/register')); ?>">Register</a>
-					                            <a href="<?php echo e(url('/login')); ?>">Login</a>                            
-					                        <?php endif; ?>
-					                    <?php endif; ?>
-					                    <a href="/showtopics">Topics</a>
-					                    <a href="/showreviews">Review</a>
-					                    <a href="/help">Help</a>
-					                </div>
-					            </div>
-					        </div>
-						</div>
-					</div>
-				</section>
+				</div>
 
 			</div> 
 
@@ -151,12 +160,18 @@
 					reviews: [],
 					inpKey:"", 
 					row_count : 10,
-					searchquery : "",
+					searchquery : "",					
+					showSpinner : true,
+					showContent : false,
 				},
 				mounted:function(){
 
 					axios.get('/showreviews/default')
-					.then(response => {this.reviews = response.data}); 
+					.then(response => {
+
+						this.reviews = response.data;						
+						this.showSpinner = false; 
+						this.showContent = true;}); 
 
 				},
 				methods:{
@@ -172,7 +187,13 @@
 							    	}
 
 								})
-							.then(response => {this.reviews = response.data});
+							.then(response => {
+
+								this.reviews = response.data;						
+								this.showSpinner = false; 
+								this.showContent = true;
+
+							});
 					
 			 
 					},

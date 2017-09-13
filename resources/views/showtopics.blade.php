@@ -1,8 +1,5 @@
 <!doctype html>
-
- 
  <html class="sidebar-left-big-icons sidebar-light "> 
- 
 
 	<head>
  
@@ -68,75 +65,81 @@
 				</div> 
 
 			</header>
-			
-			<div class="inner-wrapper" id="feedback"> 
 
-				<section role="main" class="content-body">
-					<div class="row">
-						<div class="col-lg-6 col-md-6">
-							<div class="search-control-wrapper">
-								<form action="pages-search-results.html">
-									<div class="form-group">
-										<div class="input-group">
-											<input type="text" class="form-control" placeholder="Search Topics" v-model="searchquery"  @keyup="filteredtopics" >
+			<div id="feedback">
 
-											<span class="input-group-btn">
-												<button class="btn btn-primary" type="button">Search</button>
-											</span>
+				<div v-show="showSpinner" class="text-center"><img src="/images/ajax_loader.gif"></div>
+				
+				<div v-show="showContent" class="inner-wrapper" > 
+
+					<section role="main" class="content-body">
+						<div class="row">
+							<div class="col-lg-6 col-md-6">
+								<div class="search-control-wrapper">
+									<form action="pages-search-results.html">
+										<div class="form-group">
+											<div class="input-group">
+												<input type="text" class="form-control" placeholder="Search Topics" v-model="searchquery"  @keyup="filteredtopics" >
+
+												<span class="input-group-btn">
+													<button class="btn btn-primary" type="button">Search</button>
+												</span>
+											</div>
+										</div>
+									</form>
+								</div> 
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12 col-md-12">
+								<section class="panel">   						
+									<h4 class="center text-color-light "><strong>Topics</strong></h4>
+									<div  class="panel-body">
+										<div class="table-responsive" >
+											<table class="table table-striped mb-none">
+												<thead>
+													<tr>
+														<th class="col-md-8">Topic</th> 
+														<th class="col-md-2">Created By</th>  
+													</tr>
+												</thead>
+												<tbody>
+													<tr v-for="topic in topics" v-cloak>
+														<td>
+
+															<a :href="'/showtopics/' + topic.key ">@{{ topic.topic }} </a>
+
+														</td> 
+														<td><a target="_blank" :href="'/viewprofile/' + topic.user_key ">@{{ topic.name }}</a> </td> 
+													</tr>							
+												</tbody>
+											</table>
 										</div>
 									</div>
-								</form>
-							</div> 
+								</section> 	
+								<div class="center"><button class="btn btn-default" @click="morerows">Load More</button></div>
+								<div class="flex-center position-ref full-height"> 
+						            <div class="content"> 
+						                <div class="links">
+						                    @if (Route::has('login'))
+						                        @if (Auth::check())
+						                            <a href="{{ url('/dashboard') }}">Home</a>
+						                        @else
+						                            <a href="{{ url('/register') }}">Register</a>
+						                            <a href="{{ url('/login') }}">Login</a>                            
+						                        @endif
+						                    @endif
+						                    <a href="/showtopics">Topics</a>
+						                    <a href="/showreviews">Review</a>
+						                    <a href="/help">Help</a>
+						                </div>
+						            </div>
+						        </div>
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-12 col-md-12">
-							<section class="panel">   						
-								<h4 class="center text-color-light "><strong>Topics</strong></h4>
-								<div  class="panel-body">
-									<div class="table-responsive" >
-										<table class="table table-striped mb-none">
-											<thead>
-												<tr>
-													<th class="col-md-8">Topic</th> 
-													<th class="col-md-2">Created By</th>  
-												</tr>
-											</thead>
-											<tbody>
-												<tr v-for="topic in topics" v-cloak>
-													<td>
+					</section>
 
-														<a :href="'/showtopics/' + topic.key ">@{{ topic.topic }} </a>
-
-													</td> 
-													<td><a target="_blank" :href="'/viewprofile/' + topic.user_key ">@{{ topic.name }}</a> </td> 
-												</tr>							
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</section> 	
-							<div class="center"><button class="btn btn-default" @click="morerows">Load More</button></div>
-							<div class="flex-center position-ref full-height"> 
-					            <div class="content"> 
-					                <div class="links">
-					                    @if (Route::has('login'))
-					                        @if (Auth::check())
-					                            <a href="{{ url('/dashboard') }}">Home</a>
-					                        @else
-					                            <a href="{{ url('/register') }}">Register</a>
-					                            <a href="{{ url('/login') }}">Login</a>                            
-					                        @endif
-					                    @endif
-					                    <a href="/showtopics">Topics</a>
-					                    <a href="/showreviews">Review</a>
-					                    <a href="/help">Help</a>
-					                </div>
-					            </div>
-					        </div>
-						</div>
-					</div>
-				</section>
+				</div> 
 
 			</div> 
 
@@ -155,12 +158,21 @@
 					topics: [],
 					inpKey:"", 
 					searchquery : "",
-					row_count : 10,
+					row_count : 10,					
+					showSpinner : true,
+					showContent : false,
 				},
 				mounted:function(){
 
 					axios.get('/showtopics/default')
-					.then(response => {this.topics = response.data}); 
+					.then(response => {
+
+						this.topics = response.data;						
+						this.showSpinner = false; 
+						this.showContent = true;
+
+
+					}); 
 
 				},
 				methods:{
@@ -176,7 +188,15 @@
 							    	}
 
 								})
-							.then(response => {this.topics = response.data});
+							.then(response => {
+
+								this.topics = response.data;
+
+
+								this.showSpinner = false; 
+								this.showContent = true;
+
+							});
 					
 			 
 					},
