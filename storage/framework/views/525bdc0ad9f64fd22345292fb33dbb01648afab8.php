@@ -47,6 +47,8 @@
             } 
         </style>
 
+        <?php echo $__env->make('analytics', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
 	</head>
 	<body>
 		<section class="body">
@@ -147,9 +149,7 @@
 						<div class="col-md-6">
 							<section class="panel panel-featured">
 								<header class="panel-heading">
-									<div class="panel-actions">
-										<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a> 
-									</div>
+									 
 
 									<h2 class="panel-title">Please explain how it works</h2>
 								</header>
@@ -162,10 +162,7 @@
 						<div class="col-md-6">
 							<section class="panel panel-featured">
 								<header class="panel-heading">
-									<div class="panel-actions">
-										<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
-										 
-									</div>
+									 
 
 									<h2 class="panel-title">How to get the feedbacks</h2> 
 								</header>
