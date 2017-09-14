@@ -1,8 +1,5 @@
 <!doctype html>
-
- 
  <html class="sidebar-left-big-icons sidebar-light "> 
- 
 
 	<head>
  
@@ -111,7 +108,7 @@
 													<tr v-for="topic in topics" v-cloak>
 														<td>
 
-															<a :href="'/showtopics/' + topic.key ">{{ topic.topic }} </a>
+															<a target="_blank" :href="'/showtopics/' + topic.key ">{{ topic.topic }} </a>
 
 														</td> 
 														<td><a target="_blank" :href="'/viewprofile/' + topic.user_key ">{{ topic.name }}</a> </td> 
@@ -195,7 +192,7 @@
 							.then(response => {
 
 								this.topics = response.data;
-											
+
 
 								this.showSpinner = false; 
 								this.showContent = true;
@@ -210,6 +207,7 @@
 
 								params: {
 							      row_count: this.row_count,
+							      topics : this.searchquery, 
 							    }
 
 							}).then(response => {
@@ -222,6 +220,9 @@
 											user_id : response.data[i].user_id, 
 											topic : response.data[i].topic, 
 											name : response.data[i].name,  
+											key : response.data[i].key,
+											user_key : response.data[i].user_key,
+											
 
 										});
 								}						

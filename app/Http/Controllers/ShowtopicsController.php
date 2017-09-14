@@ -29,9 +29,18 @@ class ShowtopicsController extends Controller
     {
 
         $row_count = $request->row_count;
+        $searchquery  = $request->topics;
 
-        $topics = Topic::where('published', '=' , 1)->where('status', '=' , 1)->where('type', '=' , 'public')->orderBy('updated_at','desc')->offset($row_count)->take(10)->get(['id','key','user_id','topic','name', 'user_key']);
+        if( $searchquery == "" ){
 
+             $topics = Topic::where('published', '=' , 1)->where('status', '=' , 1)->where('type', '=' , 'public')->orderBy('updated_at','desc')->offset($row_count)->take(10)->get(['id','key','user_id','topic','name', 'user_key']);
+
+        }else{
+
+             $topics = Topic::where('published', '=' , 1)->where('status', '=' , 1)->where('type', '=' , 'public')->where('topic', 'like' , "%$searchquery%")->orderBy('updated_at','desc')->offset($row_count)->take(10)->get(['id','key','user_id','topic','name', 'user_key']);
+
+        }
+ 
         return $topics;
    
     }
