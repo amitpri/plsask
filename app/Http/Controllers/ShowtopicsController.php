@@ -21,7 +21,17 @@ class ShowtopicsController extends Controller
 
         $category = $request->category;
 
-        $topics = Topic::where('published', '=' , 1)->where('admin_status', '=' , 1)->where('category', '=' , $category)->where('status', '=' , 1)->where('type', '=' , 'public')->orderBy('updated_at','desc')->take(10)->get(['id','key','user_id','topic','name' , 'category' , 'user_key']);
+        if($category == ""){
+
+            $topics = Topic::where('published', '=' , 1)->where('admin_status', '=' , 1)->where('status', '=' , 1)->where('type', '=' , 'public')->orderBy('updated_at','desc')->take(10)->get(['id','key','user_id','topic','name' , 'category' , 'user_key']);
+
+        }else{
+
+            $topics = Topic::where('published', '=' , 1)->where('admin_status', '=' , 1)->where('category', '=' , $category)->where('status', '=' , 1)->where('type', '=' , 'public')->orderBy('updated_at','desc')->take(10)->get(['id','key','user_id','topic','name' , 'category' , 'user_key']);
+
+        }
+
+
 
         return $topics;
    

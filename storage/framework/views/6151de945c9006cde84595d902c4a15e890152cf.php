@@ -198,7 +198,7 @@
 					topic: "",
 					topics: [],
 					inpKey:"", 
-					inpCategory: "<?php echo $category ?? 'personal'; ?>", 
+					inpCategory: "<?php echo $category ?? null; ?>", 
 					searchquery : "",
 					row_count : 10,					
 					showSpinner : true,
