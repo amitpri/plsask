@@ -80,7 +80,7 @@
 					<div class="panel-body">
 						<form>
 							<div class="form-group">
-								<label class="col-md-1 control-label" for="textareaDefault">Topic</label>
+								<label class="col-md-1 control-label" for="textareaDefault"><strong>Topic</strong></label>
 								<div class="col-md-10">
 									
 									<input type="text" name="topic" class="form-control" v-model="inpTopic" >
@@ -90,7 +90,7 @@
 							</div> 
 
 							<div class="form-group">
-								<label class="col-md-1 control-label" for="textareaDefault">Type</label>
+								<label class="col-md-1 control-label" for="textareaDefault"><strong>Type</strong></label>
 								<div class="col-md-10"> 
 									<label class="radio-inline">
 									  <input type="radio" name="type" value="private" v-model="inpType"> Private ( Can be shared only with your own profiles and groups)
@@ -101,10 +101,42 @@
 									<p v-if="error_newtype" class="text-danger">{{ message_newtype }}</p>
 								</div>
 
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-1 control-label" for="textareaDefault"><strong>Category</strong></label>
+								<div class="col-md-10"> 
+									<label class="radio-inline">
+									  <input type="radio" name="category" value="personal" v-model="inpCategory">  Personal
+									</label>
+									<label class="radio-inline">
+									  <input type="radio" name="category" value="professional" v-model="inpCategory">  Professional
+									</label> 
+									<label class="radio-inline">
+									  <input type="radio" name="category" value="food" v-model="inpCategory">  Food
+									</label>
+									<label class="radio-inline">
+									  <input type="radio" name="category" value="movies" v-model="inpCategory">  Movies
+									</label> 
+									<label class="radio-inline">
+									  <input type="radio" name="category" value="politics" v-model="inpCategory">  Politics
+									</label> 
+									<label class="radio-inline">
+									  <input type="radio" name="category" value="products" v-model="inpCategory">  Products
+									</label> 
+									<label class="radio-inline">
+									  <input type="radio" name="category" value="activities" v-model="inpCategory">  Activities
+									</label> 
+									<label class="radio-inline">
+									  <input type="radio" name="category" value="current" v-model="inpCategory">  Current Affairs
+									</label>
+									
+								</div>
+
 							</div>						
 									
 							<div class="form-group">
-								<label class="col-md-1 control-label">Details</label>
+								<label class="col-md-1 control-label"><strong>Details</strong></label>
 								<div class="col-md-10">			  
 
 									<textarea name="details" class="form-control" rows="10" v-model="inpDetails"></textarea>
@@ -130,7 +162,7 @@
 						<form> 
 
 							<div class="form-group">
-								<label class="col-md-1 control-label" for="textareaDefault">Topic</label>
+								<label class="col-md-1 control-label" for="textareaDefault"><strong>Topic</strong></label>
 								<div class="col-md-10">
 									
 									<input type="text" name="topic" class="form-control" v-model="inpTopic" >
@@ -140,7 +172,7 @@
 							</div> 
 
 							<div class="form-group">
-								<label class="col-md-1 control-label" for="textareaDefault">Type</label>
+								<label class="col-md-1 control-label" for="textareaDefault"><strong>Type</strong></label>
 								<div class="col-md-10"> 
 									<label class="radio-inline">
 									  <input type="radio" name="type" value="private" v-model="inpType"> Private( Can be shared only with your own profiles and groups)
@@ -150,10 +182,42 @@
 									</label> 
 									<p v-if="error_edittype" class="text-danger">{{ message_edittype }}</p>
 								</div>
+							</div>	
+
+							<div class="form-group">
+								<label class="col-md-1 control-label" for="textareaDefault"><strong>Category</strong></label>
+								<div class="col-md-10"> 
+									<label class="radio-inline">
+									  <input type="radio" name="category" value="personal" v-model="inpCategory">  Personal
+									</label>
+									<label class="radio-inline">
+									  <input type="radio" name="category" value="professional" v-model="inpCategory">  Professional
+									</label> 
+									<label class="radio-inline">
+									  <input type="radio" name="category" value="food" v-model="inpCategory">  Food
+									</label>
+									<label class="radio-inline">
+									  <input type="radio" name="category" value="movies" v-model="inpCategory">  Movies
+									</label> 
+									<label class="radio-inline">
+									  <input type="radio" name="category" value="politics" v-model="inpCategory">  Politics
+									</label> 
+									<label class="radio-inline">
+									  <input type="radio" name="category" value="products" v-model="inpCategory">  Products
+									</label> 
+									<label class="radio-inline">
+									  <input type="radio" name="category" value="activities" v-model="inpCategory">  Activities
+									</label> 
+									<label class="radio-inline">
+									  <input type="radio" name="category" value="current" v-model="inpCategory">  Current Affairs
+									</label>
+									
+								</div>
+
 							</div>						
 									
 							<div class="form-group">
-								<label class="col-md-1 control-label">Details</label>
+								<label class="col-md-1 control-label"><strong>Details</strong></label>
 								<div class="col-md-10">			  
 
 									<textarea name="details" class="form-control" rows="10" v-model="inpDetails"></textarea>
@@ -206,7 +270,8 @@
 						<table class="table table-striped mb-none">
 							<thead>
 								<tr>
-									<th class="col-md-8">Topic</th> 
+									<th class="col-md-6">Topic</th> 
+									<th class="col-md-2">Category</th>
 									<th class="col-md-2">Type</th> 
 									<th class="col-md-2">Action</th>
 								</tr>
@@ -217,6 +282,9 @@
 
 										<a :href="'/topics/' + myTopic.key + '/send'"><h5>{{ myTopic.topic }} </h5></a>
 
+									</td> 
+									<td>
+										<h5>{{ myTopic.category.charAt(0).toUpperCase() + myTopic.category.slice(1)}}</h5>
 									</td> 
 									<td>
 										<h5>{{ myTopic.type }}</h5>
@@ -270,6 +338,7 @@
 			inpKey : "",
 			inpDetails : "",
 			inpType: "",
+			inpCategory : "",
 			listTopics : [],
 			myTopics : [],
 			myTopic : "",
@@ -417,6 +486,7 @@
 					      topic: this.inpTopic,
 					      details: this.inpDetails,
 					      type: this.inpType,
+					      category: this.inpCategory,
 					    }
 
 					})
@@ -427,6 +497,7 @@
 							topic : response.data.topic,
 							details : response.data.details,
 							type : response.data.type,
+							category: response.data.category,
 							id : response.data.id,
 							key : response.data.key,
 
@@ -468,6 +539,7 @@
 					      topic: this.inpTopic,
 					      details: this.inpDetails,
 					      type: this.inpType, 
+					      category: this.inpCategory,
 					      id: this.inpId,
 					    }
 					})
@@ -480,6 +552,7 @@
 							topic : response.data.topic,
 							details : response.data.details,
 							type : response.data.type,
+							category: response.data.category,
 							id : response.data.id,
 
 						});
@@ -512,6 +585,7 @@
   
 				this.inpTopic = this.myTopics[rowedit].topic; 
 				this.inpType = this.myTopics[rowedit].type;
+				this.inpCategory = this.myTopics[rowedit].category;
 				this.inpDetails = this.myTopics[rowedit].details;
 				this.inpId = this.myTopics[rowedit].id;
 
@@ -528,6 +602,7 @@
   
 				this.inpTopic = this.myTopics[rowedit].topic; 
 				this.inpType = this.myTopics[rowedit].type;
+				this.inpCategory = this.myTopics[rowedit].category;
 				this.inpDetails = this.myTopics[rowedit].details;
 				this.inpId = this.myTopics[rowedit].id;
 				this.inpKey = this.myTopics[rowedit].key;

@@ -92,6 +92,43 @@
 							</div>
 						</div>
 						<div class="row">
+							<div class="col-lg-6 col-md-6">
+								<div class="search-control-wrapper">
+									<div class="form-group">
+								 
+										<div class="col-md-8"> 
+											<label class="radio-inline">
+											  <input type="radio" name="type" value="personal" v-model="inpCategory">  Personal
+											</label>
+											<label class="radio-inline">
+											  <input type="radio" name="type" value="professional" v-model="inpCategory">  Professional
+											</label> 
+											<label class="radio-inline">
+											  <input type="radio" name="type" value="food" v-model="inpCategory">  Food
+											</label>
+											<label class="radio-inline">
+											  <input type="radio" name="type" value="movies" v-model="inpCategory">  Movies
+											</label> 
+											<label class="radio-inline">
+											  <input type="radio" name="type" value="politics" v-model="inpCategory">  Politics
+											</label> 
+											<label class="radio-inline">
+											  <input type="radio" name="type" value="products" v-model="inpCategory">  Products
+											</label> 
+											<label class="radio-inline">
+											  <input type="radio" name="type" value="activities" v-model="inpCategory">  Activities
+											</label> 
+											<label class="radio-inline">
+											  <input type="radio" name="type" value="current" v-model="inpCategory">  Current Affairs
+											</label>
+											
+										</div>
+
+									</div>
+								</div> 
+							</div>
+						</div>
+						<div class="row">
 							<div class="col-lg-12 col-md-12">
 								<section class="panel">   						
 									<h4 class="center text-color-light "><strong>Topics</strong></h4>
@@ -101,16 +138,19 @@
 												<thead>
 													<tr>
 														<th class="col-md-8">Topic</th> 
+														<th class="col-md-2">Category</th> 
 														<th class="col-md-2">Created By</th>  
 													</tr>
 												</thead>
 												<tbody>
 													<tr v-for="topic in topics" v-cloak>
 														<td>
-
 															<a target="_blank" :href="'/showtopics/' + topic.key ">{{ topic.topic }} </a>
-
 														</td> 
+														<td>
+															<a :href="'/showtopics/' + topic.category ">{{ topic.category.charAt(0).toUpperCase() + topic.category.slice(1)}}</a> 
+														</td>
+
 														<td><a target="_blank" :href="'/viewprofile/' + topic.user_key ">{{ topic.name }}</a> </td> 
 													</tr>							
 												</tbody>
@@ -158,20 +198,29 @@
 					topic: "",
 					topics: [],
 					inpKey:"", 
+					inpCategory: "<?php echo $category ?? 'personal'; ?>", 
 					searchquery : "",
 					row_count : 10,					
 					showSpinner : true,
 					showContent : false,
 				},
 				mounted:function(){
+ 
 
-					axios.get('/showtopics/default')
+					axios.get('/showtopics/default',{
+
+						params: {
+ 
+					      	category : this.inpCategory,
+
+					    	}
+
+						})
 					.then(response => {
 
 						this.topics = response.data;						
 						this.showSpinner = false; 
 						this.showContent = true;
-
 
 					}); 
 
@@ -185,6 +234,7 @@
 								params: {
 
 							      	topics : this.searchquery, 
+							      	category : this.inpCategory,
 
 							    	}
 
@@ -208,6 +258,7 @@
 								params: {
 							      row_count: this.row_count,
 							      topics : this.searchquery, 
+							      category : this.inpCategory,
 							    }
 
 							}).then(response => {
@@ -220,6 +271,7 @@
 											user_id : response.data[i].user_id, 
 											topic : response.data[i].topic, 
 											name : response.data[i].name,  
+											category : response.data[i].category,  
 											key : response.data[i].key,
 											user_key : response.data[i].user_key,
 											

@@ -21,6 +21,7 @@ class CreateTopicsTable extends Migration
             $table->string('name')->nullable();
             $table->string('topic')->nullable();
             $table->string('type')->default('private');
+            $table->string('category')->default('personal');
             $table->text('details')->nullable();
             $table->integer('published')->default(1);
             $table->integer('status')->default(1);

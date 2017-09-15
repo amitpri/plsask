@@ -80,12 +80,15 @@
 						<div class="col-lg-12 col-md-12" v-cloak>
 						
 							 <h2 class="center text-color-light "><strong>@{{ inpTopic }}</strong></h2>
-							 <h4 class="center text-color-light "><div v-html="inpDetail"></div></h4>
+
+							 <h6 class="col-md-12 text-center">By : 
+							 	<a target="_blank"  :href="'/viewprofile/' + inpUser_key">@{{ inpName }}</a> | 
+							 	Category : <a  	 :href="'/showtopics/' + inpCategory">@{{   inpCategory.charAt(0).toUpperCase() + inpCategory.slice(1)  }}</a></h6>
+ 
+
+							 <h4 class="text-center text-color-light "><div v-html="inpDetail"></div></h4>
 
 							 <button @click="addfeedback"  id="addToTable" class="btn btn-primary">Add Feedback <i class="fa fa-plus"></i></button>
-
-							 <p class="col-md-4 pull-right">Topic posted By : 
-							 	<a target="_blank"  :href="'/viewprofile/' + inpUser_key">@{{ inpName }}</a></p>
 
 						</div>
 					</div>
@@ -180,6 +183,7 @@
 					inpId: "{!! $topic->id !!}",
 					inpKey: "{!! $topic->key !!}",
 					inpTopic: "",
+					inpCategory: "",
 					inpDetail: "", 
 					feedback: "",
 					feedbacks: [], 
@@ -205,6 +209,7 @@
 						this.inpId = response.data.id;
 						this.inpDetail = response.data.details;
 						this.inpName = response.data.name;
+						this.inpCategory = response.data.category;
 						this.inpUser_key = response.data.user_key;
 
 					});
@@ -286,12 +291,6 @@
 							}
 
 						}
-
-
-					
-
-
-
 
 					}
 				},

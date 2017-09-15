@@ -16,10 +16,12 @@ class ShowtopicsController extends Controller
    
     }
 
-    public function default()
+    public function default(Request $request)
     {
 
-        $topics = Topic::where('published', '=' , 1)->where('admin_status', '=' , 1)->where('status', '=' , 1)->where('type', '=' , 'public')->orderBy('updated_at','desc')->take(10)->get(['id','key','user_id','topic','name' , 'user_key']);
+        $category = $request->category;
+
+        $topics = Topic::where('published', '=' , 1)->where('admin_status', '=' , 1)->where('category', '=' , $category)->where('status', '=' , 1)->where('type', '=' , 'public')->orderBy('updated_at','desc')->take(10)->get(['id','key','user_id','topic','name' , 'category' , 'user_key']);
 
         return $topics;
    
@@ -30,14 +32,15 @@ class ShowtopicsController extends Controller
 
         $row_count = $request->row_count;
         $searchquery  = $request->topics;
+        $searchcategory  = $request->category;
 
         if( $searchquery == "" ){
 
-             $topics = Topic::where('published', '=' , 1)->where('status', '=' , 1)->where('type', '=' , 'public')->orderBy('updated_at','desc')->offset($row_count)->take(10)->get(['id','key','user_id','topic','name', 'user_key']);
+             $topics = Topic::where('published', '=' , 1)->where('category', '=' , $searchcategory)->where('status', '=' , 1)->where('type', '=' , 'public')->orderBy('updated_at','desc')->offset($row_count)->take(10)->get(['id','key','user_id','topic','name', 'category', 'user_key']);
 
         }else{
 
-             $topics = Topic::where('published', '=' , 1)->where('status', '=' , 1)->where('type', '=' , 'public')->where('topic', 'like' , "%$searchquery%")->orderBy('updated_at','desc')->offset($row_count)->take(10)->get(['id','key','user_id','topic','name', 'user_key']);
+             $topics = Topic::where('published', '=' , 1)->where('category', '=' , $searchcategory)->where('status', '=' , 1)->where('type', '=' , 'public')->where('topic', 'like' , "%$searchquery%")->orderBy('updated_at','desc')->offset($row_count)->take(10)->get(['id','key','user_id','topic','name', 'category', 'user_key']);
 
         }
  
@@ -49,13 +52,15 @@ class ShowtopicsController extends Controller
     {
 
         $topicsinput = $request->topics;
+        $searchcategory  = $request->category;
         
         $topics = Topic::
                 where('published', '=' , 1)
+                ->where('category', '=' , $searchcategory)
                 ->where('status', '=' , 1)->where('type', '=' , 'public')
                 ->where('topic', 'like' , "%$topicsinput%")
                 ->take(10)
-                ->get(['id','key','topic','details' , 'name', 'user_key']);
+                ->get(['id','key','topic','details' , 'name', 'category', 'user_key']);
                   
         return $topics;
    
@@ -63,17 +68,61 @@ class ShowtopicsController extends Controller
 
     public function show($key)
     {
- 
-        $topic = Topic::where('admin_status','=',1)->where('status','=',1)->where('key','=',$key)->where('type','=','public')->first(['id', 'key' ,'topic']);
 
+        if ( $key == "personal"){
 
-        if($topic == null){
+            $category = "personal";
+            return view('showtopics',compact('category'));
+
+        }elseif($key == "professional"){
             
-        }else{
-            return view('showtopic',compact('topic'));    
-        }
+            $category = "professional";
+            return view('showtopics',compact('category'));
 
-        
+        }elseif($key == "food"){
+            
+            $category = "food";
+            return view('showtopics',compact('category'));
+
+        }elseif($key == "movies"){
+            
+            $category = "movies";
+            return view('showtopics',compact('category'));
+
+        }elseif($key == "politics"){
+            
+            $category = "politics";
+            return view('showtopics',compact('category'));
+
+        }elseif($key == "products"){
+            
+            $category = "products";
+            return view('showtopics',compact('category'));
+
+        }elseif($key == "activities"){
+            
+            $category = "activities";
+            return view('showtopics',compact('category'));
+
+        }elseif($key == "current"){
+            
+            $category = "current";
+            return view('showtopics',compact('category'));
+
+        }else{
+
+            $topic = Topic::where('admin_status','=',1)->where('status','=',1)->where('key','=',$key)->where('type','=','public')->first(['id', 'key' ,'topic']);
+
+
+            if($topic == null){
+                
+            }else{
+                return view('showtopic',compact('topic'));    
+            }
+
+        }
+ 
+      
    
     } 
 
@@ -82,7 +131,7 @@ class ShowtopicsController extends Controller
  
         $id = $request->id; 
 
-        $topic = Topic::where('id','=',$id)->where('type','=','public')->first(['id','topic','details','type','user_id','name', 'user_key']);
+        $topic = Topic::where('id','=',$id)->where('type','=','public')->first(['id','topic','details','type', 'category' , 'user_id','name', 'user_key']);
         
         return $topic;
     }

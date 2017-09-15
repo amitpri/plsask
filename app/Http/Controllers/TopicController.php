@@ -31,7 +31,7 @@ class TopicController extends Controller
     {
         $loggedinid = Auth::user()->id; 
 
-        $topics = Topic::where('user_id', '=' , $loggedinid)->orderBy('updated_at','desc')->get(['id','key','user_id','topic','type','details']);         
+        $topics = Topic::where('user_id', '=' , $loggedinid)->orderBy('updated_at','desc')->get(['id','key','user_id','topic','category','type','details']);         
                   
         return $topics;
     }
@@ -47,10 +47,11 @@ class TopicController extends Controller
         $topic = $request->topic;
         $details = $request->details;
         $type = $request->type;
+        $category = $request->category;
         $key = str_random(20);
 
         $newtopic = Topic::create(
-                [   'user_id' => $loggedinid, 'key' => $key,'name' => $loggedinname, 'user_key' => $user_key ,   'topic' => $topic, 'type' => $type, 'details' => $details, 
+                [   'user_id' => $loggedinid, 'key' => $key,'name' => $loggedinname, 'user_key' => $user_key ,   'topic' => $topic, 'type' => $type, 'category' => $category, 'details' => $details, 
                 ]);        
                   
         return $newtopic;
@@ -63,10 +64,11 @@ class TopicController extends Controller
         $topic = $request->topic;
         $details = $request->details;
         $type = $request->type;
+        $category = $request->category;
         $key = str_random(20);
         $id = $request->id; 
 
-        $updatetopic = Topic::updateOrCreate([ 'user_id' => $loggedinid, 'id' => $id  ],['topic' => $topic, 'key' => $key, 'details' => $details , 'type' => $type]);       
+        $updatetopic = Topic::updateOrCreate([ 'user_id' => $loggedinid, 'id' => $id  ],['topic' => $topic, 'key' => $key, 'details' => $details , 'type' => $type, 'category' => $category]);       
                   
         return $updatetopic;
     }
