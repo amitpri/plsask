@@ -13,6 +13,7 @@ use App\GroupProfile;
 
 use Illuminate\Http\Request;
 use App\Jobs\SendMail;
+use App\Jobs\Newtopic;
 
 class TopicController extends Controller
 {
@@ -41,19 +42,24 @@ class TopicController extends Controller
         $loggedinid = Auth::user()->id; 
         $loggedinname = Auth::user()->name;
 
-        $user = User::where('id', '=' , $loggedinid)->first(['key']);
+        $user = User::where('id', '=' , $loggedinid)->first(['key' , 'email']);
 
         $user_key = $user->key;
+        $email = $user->email;
         $topic = $request->topic;
         $details = $request->details;
         $type = $request->type;
         $category = $request->category;
         $key = str_random(20);
 
+        $job = new Newtopic($key, $topic, $email);
+
         $newtopic = Topic::create(
                 [   'user_id' => $loggedinid, 'key' => $key,'name' => $loggedinname, 'user_key' => $user_key ,   'topic' => $topic, 'type' => $type, 'category' => $category, 'details' => $details, 
-                ]);        
-                  
+                ]);    
+
+        $this->dispatch($job);
+
         return $newtopic;
     }
 
