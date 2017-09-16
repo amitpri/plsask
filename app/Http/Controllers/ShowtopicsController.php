@@ -123,7 +123,7 @@ class ShowtopicsController extends Controller
 
         }else{
 
-            $topic = Topic::where('admin_status','=',1)->where('status','=',1)->where('key','=',$key)->where('type','=','public')->first(['id', 'key' ,'topic']);
+            $topic = Topic::where('admin_status','=',1)->where('status','=',1)->where('key','=',$key)->where('type','=','public')->orderBy('updated_at','desc')->first(['id', 'key' ,'topic']);
 
 
             if($topic == null){
