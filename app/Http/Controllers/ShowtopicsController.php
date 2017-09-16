@@ -152,7 +152,7 @@ class ShowtopicsController extends Controller
     {   
         $inpid = $request->id; 
 
-        $topic = Feedback::where('topic_id','=',$inpid)->get(['id','topic','review','created_at']); 
+        $topic = Feedback::where('topic_id','=',$inpid)->orderBy('updated_at','desc')->get(['id','topic','review','created_at']); 
 
         return $topic;
    
