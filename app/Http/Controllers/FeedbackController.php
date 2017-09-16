@@ -7,6 +7,8 @@ use App\Topic;
 use App\TopicMail;
 use Illuminate\Http\Request;
 
+use App\Jobs\Newmessage;
+
 class FeedbackController extends Controller
 {
     public function feedback($key)
@@ -142,7 +144,11 @@ class FeedbackController extends Controller
 
                 );
 
-        }      
+        }  
+
+        $job = new Newmessage($topic_key, $topic, $review, $user_id);
+
+        $this->dispatch($job);    
                   
         return "ok"; 
 

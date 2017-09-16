@@ -7,6 +7,8 @@ use App\Feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
+use App\Jobs\Newmessage;
+
 class ShowtopicsController extends Controller
 {
     public function index()
@@ -192,6 +194,10 @@ class ShowtopicsController extends Controller
         ]; 
 
         Redis::publish('channel_feedback',json_encode($publishdata));
+
+        $job = new Newmessage($inptopickey, $inptopicname, $inpfeedback, $userid);
+
+        $this->dispatch($job);
 
         return $postfeedback;
    
