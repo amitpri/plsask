@@ -97,28 +97,28 @@
 								 
 										<div class="col-md-8"> 
 											<label class="radio-inline">
-											  <input type="radio" name="type" value="personal" v-model="inpCategory">  Personal
+											  <input type="radio" name="type" value="personal" v-model="inpCategory" @click="changecategory">  Personal
 											</label>
 											<label class="radio-inline">
-											  <input type="radio" name="type" value="professional" v-model="inpCategory">  Professional
+											  <input type="radio" name="type" value="professional" v-model="inpCategory" @click="changecategory">  Professional
 											</label> 
 											<label class="radio-inline">
-											  <input type="radio" name="type" value="food" v-model="inpCategory">  Food
+											  <input type="radio" name="type" value="food" v-model="inpCategory" @click="changecategory">  Food
 											</label>
 											<label class="radio-inline">
-											  <input type="radio" name="type" value="movies" v-model="inpCategory">  Movies
+											  <input type="radio" name="type" value="movies" v-model="inpCategory" @click="changecategory">  Movies
 											</label> 
 											<label class="radio-inline">
-											  <input type="radio" name="type" value="politics" v-model="inpCategory">  Politics
+											  <input type="radio" name="type" value="politics" v-model="inpCategory" @click="changecategory">  Politics
 											</label> 
 											<label class="radio-inline">
-											  <input type="radio" name="type" value="products" v-model="inpCategory">  Products
+											  <input type="radio" name="type" value="products" v-model="inpCategory" @click="changecategory">  Products
 											</label> 
 											<label class="radio-inline">
-											  <input type="radio" name="type" value="activities" v-model="inpCategory">  Activities
+											  <input type="radio" name="type" value="activities" v-model="inpCategory" @click="changecategory">  Activities
 											</label> 
 											<label class="radio-inline">
-											  <input type="radio" name="type" value="current" v-model="inpCategory">  Current Affairs
+											  <input type="radio" name="type" value="current" v-model="inpCategory" @click="changecategory">  Current Affairs
 											</label>
 											
 										</div>
@@ -226,6 +226,27 @@
 				},
 				methods:{
 
+					changecategory:function(){
+
+						axios.get('/showtopics/default',{
+
+							params: {
+	 
+						      	category : this.inpCategory,
+
+						    	}
+
+							})
+						.then(response => {
+
+							this.topics = response.data;						
+							this.showSpinner = false; 
+							this.showContent = true;
+
+						});   
+					
+			 
+					},
 					filteredtopics:function(){
 
 						axios.get('/showtopics/filtered' ,{
