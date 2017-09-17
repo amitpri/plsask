@@ -107,8 +107,8 @@
 													<tr v-for="review in reviews">
 														<td>
 
-															<p><h5><strong><div v-html="review.review"></div></strong></h5></p>
-															<p><h6><a :href="'/showtopics/' + review.topic_key">@{{ review.topic }}</a></h6></p>
+															<p><h5><div v-html="review.review"></div></h5></p>
+															<p><h6><strong><a :href="'/showtopics/' + review.topic_key">@{{ review.topic }}</a></strong></h6></p>
 
 														</td> 
 														<td>@{{  review.created_at }}</td> 

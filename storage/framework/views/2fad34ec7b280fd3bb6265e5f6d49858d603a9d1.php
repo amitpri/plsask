@@ -78,7 +78,7 @@
 
 				<section role="main" class="content-body">
 					<div class="row">
-						<div class="col-lg-12 col-md-12" v-cloak>
+						<div class="well col-lg-12 col-md-12" v-cloak>
 						
 							 <h2 class="center text-color-light "><strong><?php echo e($topic->topic); ?></strong></h2>
 
@@ -87,12 +87,15 @@
 							 	Category : <a  	 :href="'/showtopics/' + inpCategory">{{   inpCategory.charAt(0).toUpperCase() + inpCategory.slice(1)  }}</a></h6>
  
 
-							 <div class="">
-							 		<h6 class="text-left text-color-light "><?php echo nl2br($topic->details); ?></h6>
-							 </div>
+							<row><h5 class=" "><?php echo nl2br($topic->details); ?></h5></row>
 
-							 <button @click="addfeedback"  id="addToTable" class="btn btn-primary">Add Feedback <i class="fa fa-plus"></i></button>
+							 
 
+						</div>
+					</div>
+					<div class="row">
+						<div class="  col-lg-12 col-md-12" v-cloak>
+							<button @click="addfeedback"   class="btn btn-primary">Add Feedback <i class="fa fa-plus"></i></button>
 						</div>
 					</div>
 					<div v-if="shownewfeedback"   class="panel-body" v-cloak> 
