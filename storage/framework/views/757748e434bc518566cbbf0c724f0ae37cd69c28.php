@@ -1,17 +1,15 @@
-@extends('layouts.mr.manage')
-
-@section('formname')
+<?php $__env->startSection('formname'); ?>
 
 <h2>Topics Review Messages</h2>
 
-@stop 
+<?php $__env->stopSection(); ?> 
  
 <style>
 	[v-cloak] {
 	  display: none;
 	}
 </style>
-@section('content_page')
+<?php $__env->startSection('content_page'); ?>
 
 
 <div class="row"  id="messages" > 
@@ -20,8 +18,8 @@
 
 			<div class="panel-body" > 
 
-			 	<h4 class="text-center">{{ $topic->topic }}</h4> 
-			 	<h6 class="">{!! nl2br($topic->details) !!}</h6> 
+			 	<h4 class="text-center"><?php echo e($topic->topic); ?></h4> 
+			 	<h6 class=""><?php echo nl2br($topic->details); ?></h6> 
 
 			</div>
 		</section>
@@ -47,7 +45,7 @@
 										<td>
 											<h5><div v-html="review.review"></div></h5> 
 										</td>
-										<td><span class="">@{{ review.created_at }}</span></td>
+										<td><span class="">{{ review.created_at }}</span></td>
 									</tr>
 								</tbody>
 							</table>
@@ -71,7 +69,7 @@ new Vue({
 		topicname : "",
 		topicdetails : "",
 		inpId : "",
-		inpTopicId: "{!! $topic->id !!}",
+		inpTopicId: "<?php echo $topic->id; ?>",
 	},
 	mounted:function(){
  
@@ -117,4 +115,6 @@ new Vue({
 
 </script> 
 
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.mr.manage', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

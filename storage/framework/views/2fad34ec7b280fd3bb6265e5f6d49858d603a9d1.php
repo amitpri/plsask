@@ -80,14 +80,16 @@
 					<div class="row">
 						<div class="col-lg-12 col-md-12" v-cloak>
 						
-							 <h2 class="center text-color-light "><strong>{{ inpTopic }}</strong></h2>
+							 <h2 class="center text-color-light "><strong><?php echo e($topic->topic); ?></strong></h2>
 
 							 <h6 class="col-md-12 text-center">By : 
 							 	<a target="_blank"  :href="'/viewprofile/' + inpUser_key">{{ inpName }}</a> | 
 							 	Category : <a  	 :href="'/showtopics/' + inpCategory">{{   inpCategory.charAt(0).toUpperCase() + inpCategory.slice(1)  }}</a></h6>
  
 
-							 <h4 class="text-center text-color-light "><div v-html="inpDetail"></div></h4>
+							 <div class="">
+							 		<h6 class="text-left text-color-light "><?php echo nl2br($topic->details); ?></h6>
+							 </div>
 
 							 <button @click="addfeedback"  id="addToTable" class="btn btn-primary">Add Feedback <i class="fa fa-plus"></i></button>
 
@@ -138,7 +140,7 @@
 												<tr v-for="feedback in feedbacks">
 													<td>
 
-														{{ feedback.review }} 
+														<div v-html="feedback.review"></div> 
 
 													</td> 
 													<td>{{ feedback.created_at }} </td> 

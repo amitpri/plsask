@@ -41,7 +41,7 @@
 									<tr v-for="(review,index) in reviews">
 										<td>{{index + 1}}</td>
 										<td>
-											<h5><strong>{{ review.review }}</strong></h5>
+											<h5><strong><div v-html="review.review"></div></strong></h5>
 											<h6><a :href="'reviews/topics/' + review.topic_key">{{ review.topic }}</h6></a>
 										</td>
 										<td><span class=""><h5>{{ review.created_at }}</h5></span></td>
@@ -63,10 +63,7 @@ new Vue({
 	data : {
 		id:"",
 		review: "",
-		reviews: [],
-		inpDoctorid: "",
-		inpDoctor: "",
-		inpSpeciality: "",
+		reviews: [],  
 		inpDetails: "",  
 		inpeditname: "", 
 		searchquery: "",
@@ -78,7 +75,6 @@ new Vue({
 							.then(response => {this.reviews = response.data});
 	},
 	methods:{
-
 		     
 		filteredtopics:function(){
 
@@ -91,14 +87,12 @@ new Vue({
 				    	}
 
 					})
-				.then(response => {this.reviews = response.data});
-		
+				.then(response => {this.reviews = response.data});		
  
 		} 
 	}
 
 })
-
 
 </script> 
 

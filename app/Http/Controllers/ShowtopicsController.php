@@ -123,18 +123,17 @@ class ShowtopicsController extends Controller
 
         }else{
 
-            $topic = Topic::where('admin_status','=',1)->where('status','=',1)->where('key','=',$key)->where('type','=','public')->orderBy('updated_at','desc')->first(['id', 'key' ,'topic']);
-
+            $topic = Topic::where('admin_status','=',1)->where('status','=',1)->where('key','=',$key)->where('type','=','public')->orderBy('updated_at','desc')->first(['id', 'key' ,'topic' , 'details']);
 
             if($topic == null){
                 
             }else{
-                return view('showtopic',compact('topic'));    
+
+                return view('showtopic',compact('topic'));
+
             }
 
-        }
- 
-      
+        }      
    
     } 
 

@@ -24,7 +24,9 @@
 					<section class="panel">
 						<div class="panel-body">
 							<h4 class="text-weight-semibold mt-none text-center">{{ $topics->topic }}</h4>
-							<h6 class="text-weight-semibold mt-none text-center">{!! $topics->details !!}</h6> 					 			
+							<h6 class="text-weight-semibold mt-none ">
+									{!! nl2br($topics->details) !!}
+							</h6> 					 			
 						</div>
 						
 					</section>

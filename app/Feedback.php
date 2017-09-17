@@ -19,5 +19,11 @@ class Feedback extends Model
 		
 	}
 
+	public function getReviewAttribute($value){
+
+		return nl2br($value);
+		
+	}
+
  	
 }

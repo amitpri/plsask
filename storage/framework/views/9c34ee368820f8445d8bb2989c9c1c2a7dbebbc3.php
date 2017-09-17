@@ -108,7 +108,7 @@
 													<tr v-for="review in reviews">
 														<td>
 
-															<p><h5><strong>{{ review.review }}</strong></h5></p>
+															<p><h5><strong><div v-html="review.review"></div></strong></h5></p>
 															<p><h6><a :href="'/showtopics/' + review.topic_key">{{ review.topic }}</a></h6></p>
 
 														</td> 

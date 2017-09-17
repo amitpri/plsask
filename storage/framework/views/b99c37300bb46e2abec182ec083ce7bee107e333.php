@@ -43,9 +43,7 @@
 
 		<!-- Head Libs -->
 		<script src="/admin/assets/vendor/modernizr/modernizr.js"></script>
-
-		<!--
-		<script src="https://unpkg.com/vue@2.3.0"></script>   -->
+ 
 
 		<script src="/vue/vue.min.js"></script> 
 
@@ -53,9 +51,7 @@
 
         <script src="/toastr/toastr.min.js"></script> 
         <link href="/toastr/toastr.min.css" rel="stylesheet" type="text/css">
-
-         
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+ 
 
         <script src="/socket/socket.io.js"></script>
 

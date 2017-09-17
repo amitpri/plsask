@@ -32,7 +32,7 @@ class HomeController extends Controller
 
         $loggedinid = Auth::user()->id;  
 
-        $topic = Topic::where('id','=',$topic_id)->where('user_id','=',$loggedinid)->first(['id','topic','created_at']);
+        $topic = Topic::where('id','=',$topic_id)->where('user_id','=',$loggedinid)->first(['id','topic', 'details', 'created_at']);
 
         if($topic == null){
 
@@ -219,7 +219,7 @@ class HomeController extends Controller
         $loggedinid = Auth::user()->id;
         $currentmenu = 'reviews';
         
-        $topic = Topic::where('key','=',$id)->where('user_id','=',$loggedinid)->first(['id', 'key' , 'topic','created_at']); 
+        $topic = Topic::where('key','=',$id)->where('user_id','=',$loggedinid)->first(['id', 'key' , 'topic', 'details', 'created_at']); 
 
         if($topic == null){
 
@@ -228,9 +228,7 @@ class HomeController extends Controller
             return view('reviewstopics',compact('currentmenu','topic'));
                 
         }
-
-        
-   
+  
     } 
 
     public function reviewstopicsdefault(Request $request)
@@ -248,8 +246,6 @@ class HomeController extends Controller
         }else{
             
         }
-
-        
    
     } 
 
@@ -257,7 +253,6 @@ class HomeController extends Controller
     {
 
         return "done";
-
 
     }
 
