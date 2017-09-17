@@ -69,7 +69,7 @@
 								<p v-if="reviews.length < 1" class="text-center"><b>No Feedback</b></p>
 								<tbody>
 									<tr v-for="(review,index) in reviews"> 
-										<td><a href="/reviews">{{ review.review }}</a></td> 
+										<td><a href="/reviews"><div v-html="review.review"></div></a></td> 
 									</tr> 
 								</tbody>
 							</table>
