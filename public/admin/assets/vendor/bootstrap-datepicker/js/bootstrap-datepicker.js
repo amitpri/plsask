@@ -400,10 +400,11 @@
 			);
 
 			if (this.o.immediateUpdates) {
-				// Trigger input updates immediately on changed year/month
+				// Trigger input updates immediately on changed year/month 
 				this._events.push([this.element, {
 					'changeYear changeMonth': $.proxy(function(e){
 						this.update(e.date);
+
 					}, this)
 				}]);
 			}
@@ -1614,6 +1615,8 @@
 			if (i === -1)
 				return;
 
+
+
 			$.each(this.pickers, function(i, p){
 				if (!p.getUTCDate())
 					p.setUTCDate(new_date);
@@ -1632,6 +1635,8 @@
 				}
 			}
 			this.updateDates();
+
+			console.log(new_date);
 
 			delete this.updating;
 		},
@@ -2090,7 +2095,9 @@
 		}
 	);
 	$(function(){
+		console.log("First");
 		datepickerPlugin.call($('[data-provide="datepicker-inline"]'));
+		console.log("last");
 	});
 
 }));

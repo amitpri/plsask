@@ -66,7 +66,7 @@
 					<div class="navbar-header">
 
                     <strong><a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'PlsAsk') }}
+                        {{ config('app.name', 'iStayPartner') }}
                     </a></strong>
                 </div>
 					<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
@@ -75,7 +75,11 @@
 				</div>
 			 
 				<div class="header-right">
-			  
+			  	 
+ 					<a href="/reservations" class="mb-1 mt-1 mr-1 btn btn-default"><i class="fa fa-refresh"></i> View Reservations</a> 
+ 					<a href="/listings/active" class="mb-1 mt-1 mr-1 btn btn-default"><i class="fa fa-refresh"></i>  Active Listings </a> 
+					 			
+					<span class="separator"></span>
 			
 					<ul class="notifications" >
 						 
@@ -166,12 +170,7 @@
 						<div class="dropdown-menu">
 							<ul class="list-unstyled">
 								<li class="divider"></li>
-								<li>
-									<a role="menuitem" tabindex="-1" href="/profile"><i class="fa fa-user"></i> My Profile</a>
-								</li>
-								<li>
-									<a role="menuitem" tabindex="-1" href="/mypictures"><i class="fa fa-image"></i> My Pictures</a>
-								</li>
+								
 								<li>
 									<a role="menuitem" tabindex="-1" href="/settings" ><i class="fa fa-cog"></i> Settings</a>
 								</li>
@@ -202,7 +201,7 @@
 				
 					<div class="sidebar-header">
 						<div class="sidebar-title">
-							Navigation
+							&nbsp;
 						</div>
 						<div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
 							<i class="fa fa-bars" aria-label="Toggle sidebar"></i>
@@ -225,37 +224,38 @@
 										</a>
 									</li>
 
-								 
-								@if ( $currentmenu === 'profiles' )
-									<li class="nav-parent nav-active">
-								@else
-									<li class="nav-parent">
-								@endif
-										<a href="/profiles">
-											<i class="fa fa-user" aria-hidden="true"></i>
-											<span>Profiles</span>
-										</a>
-									</li>
-							
+ 
 								@if ( $currentmenu === 'groups' )
 									<li class="nav-parent nav-active">
 								@else
 									<li class="nav-parent">
 								@endif
-										<a href="/groups">
+										<a href="/hotel">
 											<i class="fa fa-group" aria-hidden="true"></i>
-											<span>Groups</span>
-										</a>
+											<span>Hotel</span>
+										</a> 
 									</li>
 
+								@if ( $currentmenu === 'groups' )
+									<li class="nav-parent nav-active">
+								@else
+									<li class="nav-parent">
+								@endif
+										<a href="/hotel/rooms">
+											<i class="fa fa-group" aria-hidden="true"></i>
+											<span> Listing</span>
+										</a> 
+									</li>
+ 
+ 
 								@if ( $currentmenu === 'topics' )
 									<li class="nav-parent nav-active">
 								@else
 									<li class="nav-parent">
 								@endif
-										<a href="/topics">
+										<a href="/payments">
 											<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-											<span>Topics</span>
+											<span>Payments</span>
 										</a>
 									</li>
 							
@@ -269,9 +269,6 @@
 											<span>Reviews</span>
 										</a>
 									</li>
-
-							 
-
 
 								</ul>
 							</nav>

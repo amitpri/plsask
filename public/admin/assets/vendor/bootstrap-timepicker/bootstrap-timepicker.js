@@ -1139,7 +1139,7 @@
     disableFocus: false,
     disableMousewheel: false,
     isOpen: false,
-    minuteStep: 15,
+    minuteStep: 30,
     modalBackdrop: false,
     orientation: { x: 'auto', y: 'auto'},
     secondStep: 15,

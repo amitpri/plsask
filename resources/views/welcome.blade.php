@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Please Ask - Private Anonymous Review Platform</title>
+        <title>iStayPartner - Last Minutes Hotels Booking</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -47,7 +47,7 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 72px;
             }
 
             .title2 {
@@ -73,27 +73,25 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height"> 
+            @if (Route::has('login'))
+                <div class="top-right links">
+                    @auth
+                        <a href="{{ url('/dashboard') }}">Dashboard</a>
+                    @else
+                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('register') }}">Register</a>
+                        <a href="{{ route('register') }}">Contact</a>
+                    @endauth
+                </div>
+            @endif
+
             <div class="content">
                 <div class="title m-b-md">
-                    <b>Please Ask</b>
+                    <b>iStayPartner </b>
                 </div>
                 <div class="title2 m-b-md2">
-                     Private Anonymous Review Platform
-                </div>
-
-                <div class="links">
-                    @if (Route::has('login'))
-                        @if (Auth::check())
-                            <a href="{{ url('/dashboard') }}">Home</a>
-                        @else
-                            <a href="{{ url('/register') }}">Register</a>
-                            <a href="{{ url('/login') }}">Login</a>                            
-                        @endif
-                    @endif
-                    <a href="/showtopics">Topics</a>
-                    <a href="/showreviews">Review</a>
-                    <a href="/help">Help</a>
-                </div>
+                    Publish your last moment available Hotel Rooms
+                </div> 
             </div>
         </div>
     </body>
